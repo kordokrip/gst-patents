@@ -147,54 +147,29 @@ git config --global user.email "your.email@example.com"
 git branch
 ```
 
-#### 1.3 .gitignore 파일 생성 및 설정
+#### 1.3 .gitignore 파일 확인 및 보안 설정
 
 ```bash
-# .gitignore 파일 생성
-cat > .gitignore << 'EOF'
-# macOS
-.DS_Store
-.AppleDouble
-.LSOverride
+# .gitignore 파일 확인 (이미 존재함)
+cat .gitignore
 
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-venv/
-env/
-*.egg-info/
-dist/
-build/
+# ⚠️ 중요: .env 파일이 .gitignore에 포함되어 있는지 확인
+grep -q "^.env$" .gitignore && echo "✓ .env 보호됨" || echo "⚠ .env를 .gitignore에 추가하세요"
 
-# IDEs
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
+# 환경 변수 파일 생성 (.env.example을 복사)
+cp .env.example .env
 
-# Node
-node_modules/
-npm-debug.log
-yarn-error.log
-
-# Environment variables
-.env
-.env.local
-.env.*.local
-
-# Logs
-logs/
-*.log
-
-# Temporary files
-*.tmp
-.cache/
-EOF
+# ⚠️ 실제 API 키를 .env 파일에 입력하세요
+# 편집기로 열어서 your_api_key_here를 실제 키로 변경
+nano .env
+# 또는
+code .env
 ```
+
+**🔒 보안 주의사항**:
+- `.env` 파일에는 실제 API 키를 저장하되, **절대 Git에 커밋하지 마세요**
+- `.env.example`만 Git에 포함되며, 이는 템플릿 역할만 합니다
+- API 키 보안 가이드는 `SECURITY.md` 참조
 
 #### 1.4 변경사항 스테이징 및 커밋
 
@@ -240,7 +215,7 @@ gh --version
 gh repo create gst-patents --private --source=. --remote=origin --push
 
 # 또는 공개 저장소로 생성
-# gh repo create gst-patents --public --source=. --remote=origin --push
+gh repo create gst-patents --public --source=. --remote=origin --push
 ```
 
 #### 1.6 원격 저장소 연결 및 푸시
@@ -691,4 +666,3 @@ npx serve .
 ---
 
 **배포 URL 예시**: `https://gst-patents.pages.dev` (실제 배포 시 업데이트 필요)
-# gst-patents
