@@ -1,0 +1,750 @@
+/* 글로벌 스탠다드 테크놀로지 특허 관리 시스템 커스텀 스타일 */
+
+/* 기본 스타일 재설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 한글 폰트 최적화 */
+body {
+    font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: #1f2937;
+    background-color: #f9fafb;
+}
+
+/* 커스텀 색상 변수 */
+:root {
+    --gst-blue: #1e40af;
+    --gst-light-blue: #3b82f6;
+    --gst-gray: #6b7280;
+    --gst-dark: #1f2937;
+    --gst-light-gray: #f3f4f6;
+    --gst-success: #10b981;
+    --gst-warning: #f59e0b;
+    --gst-danger: #ef4444;
+}
+
+/* 네비게이션 바 개선 */
+nav {
+    background: linear-gradient(135deg, var(--gst-blue) 0%, var(--gst-light-blue) 100%);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #93c5fd;
+    border-radius: 1px;
+}
+
+/* 특허 목록 스타일링 */
+.patent-item {
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.patent-item:hover {
+    background-color: #f8fafc !important;
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.patent-category {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* 특허 유형별 색상 정의 */
+.patent-category.gas-carrier {
+    background-color: #fef2f2;
+    color: #dc2626;
+}
+
+.patent-category.temperature-gauge {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.patent-category.special-gas {
+    background-color: #faf5ff;
+    color: #7c3aed;
+}
+
+/* 특허 항목 보더 색상 */
+.patent-item.gas-carrier {
+    border-left-color: #dc2626 !important;
+}
+
+.patent-item.temperature-gauge {
+    border-left-color: #6b7280 !important;
+}
+
+.patent-item.special-gas {
+    border-left-color: #7c3aed !important;
+}
+
+/* 연도 구분 헤더 */
+.year-section-header {
+    background: linear-gradient(135deg, var(--gst-dark) 0%, #374151 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    position: relative;
+}
+
+.year-section-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gst-blue) 0%, var(--gst-light-blue) 100%);
+}
+
+/* 특허 번호 스타일 */
+.patent-number {
+    font-family: 'Courier New', monospace;
+    font-size: 0.875rem;
+    color: var(--gst-gray);
+    background-color: #f1f5f9;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #e2e8f0;
+}
+
+/* 시간 표시 스타일 */
+.time-indicator {
+    font-size: 0.75rem;
+    color: var(--gst-gray);
+    white-space: nowrap;
+}
+
+/* 애니메이션 효과 */
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.patent-item {
+    animation: slideInRight 0.3s ease-out forwards;
+}
+
+.patent-item:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.patent-item:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.patent-item:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+/* 카드 스타일 개선 */
+.stats-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border-left: 4px solid var(--gst-blue);
+}
+
+.stats-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* 버튼 스타일 */
+.btn {
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--gst-blue);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--gst-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 64, 175, 0.4);
+}
+
+.btn-secondary {
+    background-color: var(--gst-light-gray);
+    color: var(--gst-gray);
+}
+
+.btn-secondary:hover {
+    background-color: #e5e7eb;
+    color: var(--gst-dark);
+}
+
+/* 입력 필드 스타일 */
+.form-input {
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--gst-blue);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* 테이블 스타일 */
+.data-table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.data-table thead {
+    background: linear-gradient(135deg, var(--gst-blue) 0%, var(--gst-light-blue) 100%);
+}
+
+.data-table th {
+    padding: 16px 24px;
+    font-weight: 600;
+    text-align: left;
+    color: white;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.data-table td {
+    padding: 16px 24px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+.data-table tbody tr:hover {
+    background-color: var(--gst-light-gray);
+}
+
+/* 상태 배지 */
+.status-badge {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.status-active {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-expired {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.status-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+/* 차트 컨테이너 */
+.chart-container {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.chart-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gst-dark);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.chart-title i {
+    margin-right: 8px;
+    color: var(--gst-blue);
+}
+
+/* 타임라인 스타일 */
+.timeline-container {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 40px;
+    padding-bottom: 32px;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 16px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #e5e7eb;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--gst-blue);
+}
+
+.timeline-item:last-child::before {
+    display: none;
+}
+
+.timeline-content {
+    background: var(--gst-light-gray);
+    padding: 16px;
+    border-radius: 8px;
+    border-left: 4px solid var(--gst-blue);
+}
+
+.timeline-date {
+    color: var(--gst-gray);
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.timeline-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--gst-dark);
+    margin-bottom: 8px;
+}
+
+.timeline-description {
+    color: var(--gst-gray);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* 검색 및 필터 영역 */
+.search-container {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.search-input-wrapper {
+    position: relative;
+}
+
+.search-input-wrapper i {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--gst-gray);
+}
+
+/* 페이지네이션 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    background: var(--gst-light-gray);
+    border-top: 1px solid #e5e7eb;
+}
+
+.pagination button {
+    padding: 8px 16px;
+    margin: 0 4px;
+    border: 1px solid #d1d5db;
+    background: white;
+    color: var(--gst-gray);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover {
+    background: var(--gst-light-gray);
+    color: var(--gst-dark);
+}
+
+.pagination button.active {
+    background: var(--gst-blue);
+    color: white;
+    border-color: var(--gst-blue);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    .container {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+    
+    .stats-card {
+        margin-bottom: 16px;
+    }
+    
+    .data-table {
+        font-size: 12px;
+    }
+    
+    .data-table th,
+    .data-table td {
+        padding: 12px 16px;
+    }
+    
+    .chart-container {
+        padding: 16px;
+    }
+    
+    .timeline-item {
+        padding-left: 32px;
+    }
+}
+
+@media (max-width: 640px) {
+    .data-table thead {
+        display: none;
+    }
+    
+    .data-table,
+    .data-table tbody,
+    .data-table tr,
+    .data-table td {
+        display: block;
+    }
+    
+    .data-table tr {
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        padding: 16px;
+        background: white;
+    }
+    
+    .data-table td {
+        border: none;
+        padding: 8px 0;
+        position: relative;
+        padding-left: 120px;
+    }
+    
+    .data-table td::before {
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 100px;
+        font-weight: 600;
+        color: var(--gst-dark);
+    }
+}
+
+/* 로딩 스피너 */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* 알림 메시지 */
+.alert {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    border-left: 4px solid;
+    background: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alert-success {
+    border-left-color: var(--gst-success);
+    background-color: #f0fdf4;
+    color: #166534;
+}
+
+.alert-warning {
+    border-left-color: var(--gst-warning);
+    background-color: #fffbeb;
+    color: #92400e;
+}
+
+.alert-error {
+    border-left-color: var(--gst-danger);
+    background-color: #fef2f2;
+    color: #991b1b;
+}
+
+.alert-info {
+    border-left-color: var(--gst-blue);
+    background-color: #eff6ff;
+    color: #1e40af;
+}
+
+/* 도구팁 */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: var(--gst-dark);
+    color: white;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 스크롤바 커스터마이징 */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gst-gray);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--gst-dark);
+}
+
+/* RAG 문서 섹션 스타일 */
+#rag-docs {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 100%;
+    overflow: hidden;
+    clear: both;
+}
+
+#rag-docs .grid > div {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+#rag-docs .grid > div::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+#rag-docs .grid > div:hover::before {
+    left: 100%;
+}
+
+#rag-docs .grid > div:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+}
+
+#rag-docs h3 {
+    color: var(--gst-dark);
+    font-weight: 600;
+}
+
+#rag-docs p {
+    color: var(--gst-gray);
+    line-height: 1.6;
+}
+
+#rag-docs a {
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 500;
+}
+
+#rag-docs a:hover {
+    color: var(--gst-dark);
+    text-decoration: none;
+}
+
+#rag-docs a i {
+    transition: transform 0.3s ease;
+}
+
+#rag-docs a:hover i {
+    transform: translateX(4px);
+}
+
+/* 애니메이션 효과 */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.5s ease-out;
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 차트 컨테이너 반응형 수정 */
+.chart-container canvas {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+/* 섹션 간 간격 및 겹침 방지 */
+section {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 4rem;
+    clear: both;
+}
+
+section#analytics {
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+
+section#timeline {
+    margin-top: 2rem;
+    padding-top: 2rem;
+}
+
+section#rag-docs {
+    margin-top: 3rem;
+    padding-top: 2rem;
+}
+
+/* 컨테이너 정리 */
+.container {
+    position: relative;
+    z-index: 1;
+}
+
+/* 특허 목록 섹션 정리 */
+#patents {
+    margin-bottom: 3rem;
+    overflow: hidden;
+}

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>시스템 아키텍처 - GST 특허관리시스템</title>
+    
+    <!-- External Libraries -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'korean': ['Noto Sans KR', 'sans-serif']
+                    },
+                    colors: {
+                        'gst-blue': '#1e40af',
+                        'gst-light-blue': '#3b82f6',
+                        'gst-gray': '#6b7280',
+                        'gst-dark': '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-korean bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-gst-blue shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <a href="../index.html" class="text-white text-xl font-bold flex items-center">
+                    <i class="fas fa-microscope mr-2"></i>
+                    GST 특허관리시스템
+                </a>
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="../index.html" class="text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-home mr-1"></i> 홈
+                    </a>
+                    <a href="api-docs.html" class="text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-code mr-1"></i> API 문서
+                    </a>
+                    <a href="roadmap.html" class="text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-road mr-1"></i> 로드맵
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- Breadcrumb -->
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="../index.html" class="text-gray-700 hover:text-blue-600 inline-flex items-center">
+                        <i class="fas fa-home mr-2"></i>
+                        홈
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-right text-gray-400 mr-2"></i>
+                        <span class="text-gray-500">시스템 아키텍처</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- Header -->
+        <header class="mb-10">
+            <h1 class="text-4xl font-bold text-gst-dark mb-4">
+                GST 특허관리시스템 아키텍처
+            </h1>
+            <p class="text-lg text-gst-gray max-w-4xl leading-relaxed">
+                이 문서는 특허 PDF 원본부터 대시보드 시각화, 그리고 RAG(검색 증강 생성) 확장까지 
+                GST 특허관리시스템이 데이터를 처리하고 서비스를 제공하는 전체 구조를 설명합니다. 
+                프런트엔드, 데이터 파이프라인, 배포 전략, 모니터링 전략을 한눈에 파악할 수 있습니다.
+            </p>
+        </header>
+
+        <!-- 1. Overview -->
+        <section id="overview" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-info-circle mr-3 text-gst-blue"></i>
+                    1. 시스템 개요
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+                        <h3 class="font-semibold text-blue-900 mb-3">
+                            <i class="fas fa-layer-group mr-2"></i>핵심 구성 요소
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li><strong>정적 프런트엔드:</strong> Tailwind + Vanilla JS 기반 대시보드</li>
+                            <li><strong>PatentManager:</strong> 검색/필터/페이지네이션을 담당하는 전역 상태 매니저</li>
+                            <li><strong>Local DB 파이프라인:</strong> PDF → JSON → 통합 인덱스 자동화</li>
+                            <li><strong>차트 &amp; 타임라인:</strong> Chart.js, ECharts, 커스텀 타임라인 매니저</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-lg">
+                        <h3 class="font-semibold text-green-900 mb-3">
+                            <i class="fas fa-rocket mr-2"></i>운영 목표
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>데이터 정합성과 최신성을 유지하면서 <strong>3초 이하</strong>의 초기 로딩 시간 달성</li>
+                            <li>사용자 필터링/검색 시 <strong>즉시 반응</strong>하는 대시보드 경험 제공</li>
+                            <li>향후 RAG 모듈과의 <strong>무중단 연동</strong>을 고려한 확장성 확보</li>
+                            <li>스크립트 기반 데이터 빌드로 <strong>반복 가능한 데이터 배포</strong> 지원</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg border border-gray-200 p-6">
+                    <h3 class="text-xl font-semibold text-gst-dark mb-4">
+                        전체 구조 요약
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div class="p-4 rounded-lg bg-white shadow-sm">
+                            <h4 class="font-semibold text-gray-900 mb-2"><i class="fas fa-file-import mr-2 text-gray-500"></i>① Ingestion</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                PDF 원본을 파싱해 페이지 텍스트, 이미지 메타, 특허 메타데이터를 추출합니다.
+                            </p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white shadow-sm">
+                            <h4 class="font-semibold text-gray-900 mb-2"><i class="fas fa-cubes mr-2 text-gray-500"></i>② Normalization</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                노드 스크립트가 JSON을 정규화하여 `patents-index.json`과 통계 정보를 생성합니다.
+                            </p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white shadow-sm">
+                            <h4 class="font-semibold text-gray-900 mb-2"><i class="fas fa-globe mr-2 text-gray-500"></i>③ Delivery</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                Cloudflare Pages가 정적 자산을 전 세계 PoP에 배포하고, 서비스 워커가 캐싱을 담당합니다.
+                            </p>
+                        </div>
+                        <div class="p-4 rounded-lg bg-white shadow-sm">
+                            <h4 class="font-semibold text-gray-900 mb-2"><i class="fas fa-chart-line mr-2 text-gray-500"></i>④ Experience</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">
+                                PatentManager가 데이터를 메모리에 적재하고 대시보드, 검색, 시각화를 구동합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Architecture Layers -->
+        <section id="architecture" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-sitemap mr-3 text-gst-blue"></i>
+                    2. 아키텍처 레이어
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <h3 class="text-xl font-semibold text-gst-dark mb-4">
+                            프런트엔드 &amp; 사용자 경험
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li><strong>PatentManager:</strong> URL 상태 복원, 페이징, 필터, 검색, 통계 갱신 통합</li>
+                            <li><strong>대시보드 카드:</strong> 필터링 결과를 실시간 반영 (총 특허, 활성 특허, 기술 분야, 등록 기간, 평균 중요도)</li>
+                            <li><strong>차트/타임라인:</strong> Chart.js와 ECharts로 범주 분포·연도 트렌드·기술 타임라인 시각화</li>
+                            <li><strong>접근성:</strong> aria 속성, 키보드 내비게이션, 라이브 리전 활용</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <h3 class="text-xl font-semibold text-gst-dark mb-4">
+                            데이터 파이프라인 &amp; 서비스 계층
+                        </h3>
+                        <ul class="space-y-3 text-sm text-gray-700">
+                            <li><strong>PDF 추출:</strong> `pdfminer.six`로 텍스트를 추출하고, 이미지/메타데이터 구조를 유지</li>
+                            <li><strong>정규화 빌드:</strong> Node 스크립트가 통계를 사전 계산하고 `data-source` 메타를 주입</li>
+                            <li><strong>캐싱 전략:</strong> 서비스 워커가 정적 자산을 캐시하고 JSON은 no-store 정책으로 갱신 유지</li>
+                            <li><strong>RAG 준비도:</strong> 임베딩·벡터 DB·LLM 호출을 위한 표준 API 형식을 명세</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 핵심 구성요소 -->
+        <section id="components" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-cubes mr-3 text-gst-blue"></i>
+                    3. 핵심 구성요소
+                </h2>
+
+                <div class="space-y-6">
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gst-dark mb-4 flex items-center">
+                            <i class="fas fa-database mr-3 text-gst-blue"></i> 데이터 파이프라인
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li><strong>update-patents-from-pdf.py:</strong> PDF → JSON 변환 및 텍스트 정제</li>
+                            <li><strong>build-local-db.js:</strong> JSON 통합, 통계 산출, `patents-index.json` 생성</li>
+                            <li><strong>검증:</strong> 스크립트 실행 시 성공/실패 로그와 분류 통계 출력</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gst-dark mb-4 flex items-center">
+                            <i class="fas fa-microchip mr-3 text-gst-blue"></i> PatentManager
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>로컬 DB → 메모리 로딩 후 검색/필터/페이지 상태를 단일 진실 소스로 유지</li>
+                            <li>`gst:patents-ready` &amp; `gst:patents-changed` 이벤트를 발행하여 대시보드, 차트, 타임라인과 동기화</li>
+                            <li>검색 제안, 디바운스, 가상 리스트(페이지네이션), 접근성 처리를 포함</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-xl font-semibold text-gst-dark mb-4 flex items-center">
+                            <i class="fas fa-chart-pie mr-3 text-gst-blue"></i> 분석 &amp; 시각화
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>Chart.js: 기술 분야 분포, 연도별 등록 추세</li>
+                            <li>ECharts: 카테고리별 기술 타임라인(산점도)</li>
+                            <li>동적 재계산: 필터 변경 → PatentManager → ChartManager/TImeLineManager 업데이트</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 데이터 플로우 -->
+        <section id="data-flow" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-project-diagram mr-3 text-gst-blue"></i>
+                    4. 데이터 플로우
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+                    <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg">
+                        <h3 class="font-semibold text-gray-900 mb-3">
+                            <span class="inline-flex items-center justify-center w-6 h-6 bg-gst-blue text-white text-xs rounded-full mr-2">1</span>
+                            Acquire
+                        </h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            특허 PDF 원본을 수집하여 `data/pdf/` 디렉터리에 저장합니다.
+                            수시로 원본이 업데이트되면 동일 디렉터리에 덮어쓰기만 하면 됩니다.
+                        </p>
+                    </div>
+                    <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg">
+                        <h3 class="font-semibold text-gray-900 mb-3">
+                            <span class="inline-flex items-center justify-center w-6 h-6 bg-gst-blue text-white text-xs rounded-full mr-2">2</span>
+                            Transform
+                        </h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            `python3 scripts/update-patents-from-pdf.py` 실행 → PDF를 JSON으로 변환, 
+                            페이지 텍스트/이미지/메타데이터 추출, 정상/실패 로그 출력.
+                        </p>
+                    </div>
+                    <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg">
+                        <h3 class="font-semibold text-gray-900 mb-3">
+                            <span class="inline-flex items-center justify-center w-6 h-6 bg-gst-blue text-white text-xs rounded-full mr-2">3</span>
+                            Normalize
+                        </h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            `node scripts/build-local-db.js` 실행 → JSON을 통합해 `data/patents-index.json` 생성, 
+                            통계/카테고리 분포 계산, 실패 항목을 리포팅.
+                        </p>
+                    </div>
+                    <div class="p-6 bg-gray-50 border border-gray-200 rounded-lg">
+                        <h3 class="font-semibold text-gray-900 mb-3">
+                            <span class="inline-flex items-center justify-center w-6 h-6 bg-gst-blue text-white text-xs rounded-full mr-2">4</span>
+                            Deliver &amp; Interact
+                        </h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            브라우저가 `data/patents-index.json`을 fetch → PatentManager가 로드 →
+                            검색/필터/차트/타임라인을 실시간으로 갱신합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. 벡터 데이터베이스 -->
+        <section id="vector-db" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-database mr-3 text-gst-blue"></i>
+                    5. 벡터 데이터베이스 설계 (준비중)
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gst-dark mb-4 flex items-center">
+                            <i class="fas fa-drafting-compass mr-2 text-gst-blue"></i>설계 원칙
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li><strong>컬렉션:</strong> 특허 단위 컬렉션(`gst_patents`)과 문단 단위 chunk 보관</li>
+                            <li><strong>임베딩 모델:</strong> upstage/solar-embedding-1-large (국내 특허 텍스트 대응)</li>
+                            <li><strong>메타데이터:</strong> 특허번호, 기술분야, 등록일, 페이지, 중요도 점수</li>
+                            <li><strong>검색 전략:</strong> cosine similarity + 키워드 필터링 하이브리드</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gst-dark mb-4 flex items-center">
+                            <i class="fas fa-tools mr-2 text-gst-blue"></i>구현 체크리스트
+                        </h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>1) `patents-index.json` → 임베딩 파이프라인 연결</li>
+                            <li>2) 임베딩 생성 &amp; 업서트 스크립트 작성 (`scripts/embed-patents.py` 예정)</li>
+                            <li>3) RAG API 호출 시 top-k 결과에 메타데이터 포함</li>
+                            <li>4) 검색 결과를 프런트엔드 채팅 UI와 연결</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. LLM Integration -->
+        <section id="llm-integration" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-robot mr-3 text-gst-blue"></i>
+                    6. LLM 통합 전략
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-gst-dark mb-3">
+                            <i class="fas fa-stream mr-2 text-gst-blue"></i>API 어댑터
+                        </h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            OpenAI, Claude, Upstage 등 멀티 벤더를 선택적으로 호출할 수 있는 추상화 계층을 제공하며,
+                            토큰/비용 계산 로직을 내장합니다.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-gst-dark mb-3">
+                            <i class="fas fa-align-left mr-2 text-gst-blue"></i>프롬프트 레이어
+                        </h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            특허 문서 서식을 반영한 시스템 프롬프트, 사용자 요청 분류,
+                            하이라이트 추출, 참고 문서 링크 삽입을 지원합니다.
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-gst-dark mb-3">
+                            <i class="fas fa-shield-alt mr-2 text-gst-blue"></i>안전장치
+                        </h3>
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            사용 목적 외 질의는 거부하고, 참조 문서를 항상 첨부하도록 가이드합니다.
+                            로깅/감사 기능은 서버 사이드 게이트웨이에서 수행 예정입니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Deployment -->
+        <section id="deployment" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-cloud mr-3 text-gst-blue"></i>
+                    7. 배포 및 운영 전략
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-gst-dark mb-3">Cloudflare Pages</h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• 정적 사이트 + API 프록시 구성</li>
+                            <li>• `_headers`, `_redirects`를 통한 CSP/HSTS 관리</li>
+                            <li>• 글로벌 CDN PoP로 200ms 내 응답 시간 확보</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-gst-dark mb-3">CI/CD &amp; 품질</h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• PDF/JSON/인덱스 변경 시 스크립트 재실행 후 커밋</li>
+                            <li>• Lighthouse, Core Web Vitals 수동 검증</li>
+                            <li>• 필요 시 GitHub Actions로 자동 빌드/배포 구성</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Monitoring -->
+        <section id="monitoring" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-eye mr-3 text-gst-blue"></i>
+                    8. 모니터링 &amp; 운영 체크리스트
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-gst-dark mb-3">데이터 품질</h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• 빌드 스크립트 로그의 성공/실패 항목 확인</li>
+                            <li>• `patents-index.json` 총 개수/카테고리 분포 검증</li>
+                            <li>• 비정상 항목은 PDF/JSON 소스부터 재처리</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-gst-dark mb-3">성능</h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• Lighthouse 95+/Best-Practice 90+ 유지</li>
+                            <li>• Core Web Vitals (LCP, FID, CLS) 주기적 측정</li>
+                            <li>• 검색/필터 응답 시간 200ms 이하 유지</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 border border-gray-200 rounded-lg p-6">
+                        <h3 class="font-semibold text-gst-dark mb-3">확장 계획</h3>
+                        <ul class="text-sm text-gray-700 space-y-2">
+                            <li>• 벡터 DB/LLM 연결 시 서버 게이트웨이 도입</li>
+                            <li>• 인증/권한 관리 추가 시 API 보호 계층 고려</li>
+                            <li>• 분석 로그 수집 시 Cloudflare Workers/Pages Functions 활용</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

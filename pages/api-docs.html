@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 명세서 - GST 특허관리시스템</title>
+    
+    <!-- 외부 라이브러리 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- 커스텀 스타일 -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Tailwind 설정 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'korean': ['Noto Sans KR', 'sans-serif']
+                    },
+                    colors: {
+                        'gst-blue': '#1e40af',
+                        'gst-light-blue': '#3b82f6',
+                        'gst-gray': '#6b7280',
+                        'gst-dark': '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-korean bg-gray-50">
+    <!-- 네비게이션 바 -->
+    <nav class="bg-gst-blue shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <a href="../index.html" class="text-white text-xl font-bold">
+                        <i class="fas fa-microscope mr-2"></i>
+                        GST 특허관리시스템
+                    </a>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="../index.html" class="text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-home mr-1"></i> 홈
+                    </a>
+                    <a href="architecture.html" class="text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-sitemap mr-1"></i> 아키텍처
+                    </a>
+                    <a href="roadmap.html" class="text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-road mr-1"></i> 로드맵
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 컨테이너 -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- 브레드크럼 -->
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="../index.html" class="text-gray-700 hover:text-blue-600 inline-flex items-center">
+                        <i class="fas fa-home mr-2"></i>
+                        홈
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-right text-gray-400 mr-2"></i>
+                        <span class="text-gray-500">API 명세서</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- 헤더 -->
+        <header class="mb-12">
+            <h1 class="text-4xl font-bold text-gst-dark mb-4">
+                API 명세서
+            </h1>
+            <p class="text-xl text-gst-gray max-w-4xl">
+                GST 특허 관리 시스템의 REST API, LLM API 연동 및 벡터 데이터베이스 인터페이스에 대한 
+                상세한 API 문서입니다.
+            </p>
+        </header>
+
+        <!-- 목차 -->
+        <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-semibold text-gst-dark mb-4">
+                <i class="fas fa-list mr-2 text-gst-blue"></i>
+                목차
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <ul class="space-y-2">
+                    <li><a href="#overview" class="text-blue-600 hover:text-blue-800">1. API 개요</a></li>
+                    <li><a href="#authentication" class="text-blue-600 hover:text-blue-800">2. 인증 및 보안</a></li>
+                    <li><a href="#patent-api" class="text-blue-600 hover:text-blue-800">3. 특허 API</a></li>
+                    <li><a href="#search-api" class="text-blue-600 hover:text-blue-800">4. 검색 API</a></li>
+                </ul>
+                <ul class="space-y-2">
+                    <li><a href="#llm-api" class="text-blue-600 hover:text-blue-800">5. LLM API</a></li>
+                    <li><a href="#vector-api" class="text-blue-600 hover:text-blue-800">6. 벡터 DB API</a></li>
+                    <li><a href="#analytics-api" class="text-blue-600 hover:text-blue-800">7. 분석 API</a></li>
+                    <li><a href="#examples" class="text-blue-600 hover:text-blue-800">8. 예제 코드</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 1. API 개요 -->
+        <section id="overview" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-info-circle mr-3 text-gst-blue"></i>
+                    1. API 개요
+                </h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">기본 정보</h3>
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <p><strong>Base URL:</strong> <code>https://api.gst-patents.com</code></p>
+                                    <p><strong>API Version:</strong> v1</p>
+                                    <p><strong>Protocol:</strong> HTTPS</p>
+                                </div>
+                                <div>
+                                    <p><strong>Content Type:</strong> application/json</p>
+                                    <p><strong>Charset:</strong> UTF-8</p>
+                                    <p><strong>Rate Limit:</strong> 1000 requests/hour</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">HTTP 상태 코드</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border border-gray-300 rounded-lg">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th class="px-4 py-3 text-left font-medium text-gray-900">코드</th>
+                                        <th class="px-4 py-3 text-left font-medium text-gray-900">의미</th>
+                                        <th class="px-4 py-3 text-left font-medium text-gray-900">설명</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr>
+                                        <td class="px-4 py-3"><code class="bg-green-100 text-green-800 px-2 py-1 rounded">200</code></td>
+                                        <td class="px-4 py-3">OK</td>
+                                        <td class="px-4 py-3">요청 성공</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3"><code class="bg-blue-100 text-blue-800 px-2 py-1 rounded">201</code></td>
+                                        <td class="px-4 py-3">Created</td>
+                                        <td class="px-4 py-3">리소스 생성 성공</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3"><code class="bg-red-100 text-red-800 px-2 py-1 rounded">400</code></td>
+                                        <td class="px-4 py-3">Bad Request</td>
+                                        <td class="px-4 py-3">잘못된 요청</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3"><code class="bg-red-100 text-red-800 px-2 py-1 rounded">401</code></td>
+                                        <td class="px-4 py-3">Unauthorized</td>
+                                        <td class="px-4 py-3">인증 필요</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3"><code class="bg-red-100 text-red-800 px-2 py-1 rounded">404</code></td>
+                                        <td class="px-4 py-3">Not Found</td>
+                                        <td class="px-4 py-3">리소스 없음</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="px-4 py-3"><code class="bg-red-100 text-red-800 px-2 py-1 rounded">500</code></td>
+                                        <td class="px-4 py-3">Internal Server Error</td>
+                                        <td class="px-4 py-3">서버 오류</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. 인증 및 보안 -->
+        <section id="authentication" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-shield-alt mr-3 text-gst-blue"></i>
+                    2. 인증 및 보안
+                </h2>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">API 키 인증</h3>
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                            <div class="flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-triangle text-yellow-400"></i>
+                                </div>
+                                <div class="ml-3">
+                                    <p class="text-sm text-yellow-700">
+                                        현재 정적 웹사이트 환경에서는 API 키 인증이 제한적입니다. 
+                                        실제 구현 시 JWT 토큰 기반 인증을 권장합니다.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <h4 class="font-semibold mb-2">헤더 설정</h4>
+                            <pre><code class="language-http">Authorization: Bearer YOUR_API_KEY
+Content-Type: application/json
+X-API-Version: v1</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Rate Limiting</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900">기본 사용자</h4>
+                                <p class="text-2xl font-bold text-blue-600">100</p>
+                                <p class="text-sm text-gray-600">요청/시간</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900">등록 사용자</h4>
+                                <p class="text-2xl font-bold text-green-600">1,000</p>
+                                <p class="text-sm text-gray-600">요청/시간</p>
+                            </div>
+                            <div class="border border-gray-200 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900">프리미엄</h4>
+                                <p class="text-2xl font-bold text-purple-600">10,000</p>
+                                <p class="text-sm text-gray-600">요청/시간</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. 특허 API -->
+        <section id="patent-api" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-file-alt mr-3 text-gst-blue"></i>
+                    3. 특허 API
+                </h2>
+                
+                <div class="space-y-8">
+                    <!-- GET /patents -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">특허 목록 조회</h3>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">GET</span>
+                        </div>
+                        
+                        <p class="text-gray-600 mb-4">등록된 모든 특허의 목록을 페이지네이션과 함께 반환합니다.</p>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold mb-2">Endpoint</h4>
+                            <code>GET /api/v1/patents</code>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">Query Parameters</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm border border-gray-300 rounded">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-3 py-2 text-left">매개변수</th>
+                                            <th class="px-3 py-2 text-left">타입</th>
+                                            <th class="px-3 py-2 text-left">필수</th>
+                                            <th class="px-3 py-2 text-left">설명</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-3 py-2"><code>page</code></td>
+                                            <td class="px-3 py-2">integer</td>
+                                            <td class="px-3 py-2">❌</td>
+                                            <td class="px-3 py-2">페이지 번호 (기본값: 1)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-3 py-2"><code>limit</code></td>
+                                            <td class="px-3 py-2">integer</td>
+                                            <td class="px-3 py-2">❌</td>
+                                            <td class="px-3 py-2">페이지당 항목 수 (기본값: 10, 최대: 100)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-3 py-2"><code>category</code></td>
+                                            <td class="px-3 py-2">string</td>
+                                            <td class="px-3 py-2">❌</td>
+                                            <td class="px-3 py-2">기술 분야 필터</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-3 py-2"><code>status</code></td>
+                                            <td class="px-3 py-2">string</td>
+                                            <td class="px-3 py-2">❌</td>
+                                            <td class="px-3 py-2">특허 상태 필터</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-3 py-2"><code>search</code></td>
+                                            <td class="px-3 py-2">string</td>
+                                            <td class="px-3 py-2">❌</td>
+                                            <td class="px-3 py-2">검색 키워드</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">응답 예시</h4>
+                            <div class="bg-gray-900 text-green-400 rounded-lg p-4 overflow-x-auto">
+                                <pre><code class="language-json">{
+  "data": [
+    {
+      "id": "1",
+      "patent_number": "10-0719225",
+      "title": "반도체 제조 공정용 온도조절 시스템",
+      "abstract": "반도체 제조 공정에서 정밀한 온도 제어를...",
+      "category": "temperature",
+      "technology_field": "온도제어",
+      "registration_date": "2007-05-18",
+      "status": "active",
+      "priority_score": 9,
+      "inventors": ["김철수", "이영희"],
+      "assignee": "글로벌 스탠다드 테크놀로지 주식회사"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 10,
+    "total": 78,
+    "pages": 8
+  },
+  "meta": {
+    "total_active": 65,
+    "total_expired": 10,
+    "total_pending": 3
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- GET /patents/{id} -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">특허 상세 조회</h3>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">GET</span>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold mb-2">Endpoint</h4>
+                            <code>GET /api/v1/patents/{patent_id}</code>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">Path Parameters</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm border border-gray-300 rounded">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-3 py-2 text-left">매개변수</th>
+                                            <th class="px-3 py-2 text-left">타입</th>
+                                            <th class="px-3 py-2 text-left">필수</th>
+                                            <th class="px-3 py-2 text-left">설명</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="px-3 py-2"><code>patent_id</code></td>
+                                            <td class="px-3 py-2">string</td>
+                                            <td class="px-3 py-2">✅</td>
+                                            <td class="px-3 py-2">특허 고유 ID</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- POST /patents -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">특허 등록</h3>
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium">POST</span>
+                        </div>
+                        
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-4">
+                            <div class="flex">
+                                <i class="fas fa-exclamation-triangle text-yellow-400 mt-1"></i>
+                                <div class="ml-3">
+                                    <p class="text-sm text-yellow-700">
+                                        <strong>주의:</strong> 특허 등록은 관리자 권한이 필요합니다.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold mb-2">Endpoint</h4>
+                            <code>POST /api/v1/patents</code>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">Request Body</h4>
+                            <div class="bg-gray-900 text-green-400 rounded-lg p-4 overflow-x-auto">
+                                <pre><code class="language-json">{
+  "patent_number": "10-1234567",
+  "title": "새로운 특허 제목",
+  "abstract": "특허 요약 내용...",
+  "category": "temperature",
+  "technology_field": "온도제어",
+  "application_date": "2023-01-15",
+  "registration_date": "2024-01-15",
+  "inventors": ["발명자1", "발명자2"],
+  "assignee": "글로벌 스탠다드 테크놀로지",
+  "main_claims": "주요 청구항 내용...",
+  "technical_keywords": ["키워드1", "키워드2"],
+  "priority_score": 8,
+  "file_path": "/patents/10-1234567.pdf"
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. 검색 API -->
+        <section id="search-api" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-search mr-3 text-gst-blue"></i>
+                    4. 검색 API
+                </h2>
+                
+                <div class="space-y-8">
+                    <!-- 일반 검색 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">일반 검색</h3>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">GET</span>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold mb-2">Endpoint</h4>
+                            <code>GET /api/v1/search</code>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">Query Parameters</h4>
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-sm border border-gray-300 rounded">
+                                    <thead class="bg-gray-50">
+                                        <tr>
+                                            <th class="px-3 py-2 text-left">매개변수</th>
+                                            <th class="px-3 py-2 text-left">타입</th>
+                                            <th class="px-3 py-2 text-left">필수</th>
+                                            <th class="px-3 py-2 text-left">설명</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="divide-y divide-gray-200">
+                                        <tr>
+                                            <td class="px-3 py-2"><code>q</code></td>
+                                            <td class="px-3 py-2">string</td>
+                                            <td class="px-3 py-2">✅</td>
+                                            <td class="px-3 py-2">검색 쿼리</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-3 py-2"><code>type</code></td>
+                                            <td class="px-3 py-2">string</td>
+                                            <td class="px-3 py-2">❌</td>
+                                            <td class="px-3 py-2">검색 타입 (title, abstract, full)</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="px-3 py-2"><code>limit</code></td>
+                                            <td class="px-3 py-2">integer</td>
+                                            <td class="px-3 py-2">❌</td>
+                                            <td class="px-3 py-2">결과 수 제한 (기본값: 10)</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">예시 요청</h4>
+                            <div class="bg-gray-50 rounded-lg p-4">
+                                <code>GET /api/v1/search?q=플라즈마 토치&type=title&limit=5</code>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 벡터 검색 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">벡터 유사도 검색</h3>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">POST</span>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold mb-2">Endpoint</h4>
+                            <code>POST /api/v1/search/vector</code>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">Request Body</h4>
+                            <div class="bg-gray-900 text-green-400 rounded-lg p-4 overflow-x-auto">
+                                <pre><code class="language-json">{
+  "query": "반도체 공정에서 온도 제어하는 방법",
+  "similarity_threshold": 0.7,
+  "max_results": 10,
+  "include_metadata": true,
+  "filters": {
+    "category": "temperature",
+    "status": "active"
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">응답 예시</h4>
+                            <div class="bg-gray-900 text-green-400 rounded-lg p-4 overflow-x-auto">
+                                <pre><code class="language-json">{
+  "results": [
+    {
+      "id": "1",
+      "patent_number": "10-0719225",
+      "title": "반도체 제조 공정용 온도조절 시스템",
+      "similarity_score": 0.89,
+      "matched_chunks": [
+        {
+          "content": "반도체 제조 장비의 온도를 실시간으로...",
+          "score": 0.92,
+          "chunk_id": "chunk_1_0"
+        }
+      ],
+      "metadata": {
+        "category": "temperature",
+        "registration_date": "2007-05-18",
+        "priority_score": 9
+      }
+    }
+  ],
+  "query_time": 0.045,
+  "total_results": 5
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. LLM API -->
+        <section id="llm-api" class="mb-12">
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h2 class="text-3xl font-semibold text-gst-dark mb-6">
+                    <i class="fas fa-brain mr-3 text-gst-blue"></i>
+                    5. LLM API
+                </h2>
+                
+                <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
+                    <div class="flex">
+                        <i class="fas fa-exclamation-triangle text-yellow-400 mt-1"></i>
+                        <div class="ml-3">
+                            <p class="text-sm text-yellow-700">
+                                <strong>참고:</strong> 현재 정적 웹사이트 환경에서는 LLM API 직접 연동이 제한됩니다. 
+                                실제 구현 시 서버사이드 프록시를 통해 LLM API를 호출해야 합니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="space-y-8">
+                    <!-- RAG 질의응답 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">RAG 질의응답</h3>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-medium">POST</span>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold mb-2">Endpoint</h4>
+                            <code>POST /api/v1/llm/chat</code>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">Request Body</h4>
+                            <div class="bg-gray-900 text-green-400 rounded-lg p-4 overflow-x-auto">
+                                <pre><code class="language-json">{
+  "message": "플라즈마를 이용한 가스 처리 방법에 대해 알려주세요",
+  "conversation_id": "conv_123456",
+  "model": "gpt-4",
+  "max_tokens": 1000,
+  "temperature": 0.7,
+  "include_sources": true,
+  "search_filters": {
+    "category": "plasma"
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">응답 예시</h4>
+                            <div class="bg-gray-900 text-green-400 rounded-lg p-4 overflow-x-auto">
+                                <pre><code class="language-json">{
+  "response": {
+    "message": "플라즈마를 이용한 가스 처리는...",
+    "conversation_id": "conv_123456",
+    "message_id": "msg_789012"
+  },
+  "sources": [
+    {
+      "patent_number": "10-0822048",
+      "title": "플라즈마 토치를 이용한 폐가스 처리장치",
+      "relevance_score": 0.95,
+      "chunk": "고온 플라즈마를 이용하여..."
+    }
+  ],
+  "metadata": {
+    "model_used": "gpt-4",
+    "tokens_used": 234,
+    "processing_time": 1.23,
+    "confidence": 0.87
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 스트리밍 채팅 -->
+                    <div class="border border-gray-200 rounded-lg p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">스트리밍 채팅</h3>
+                            <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-sm font-medium">SSE</span>
+                        </div>
+                        
+                        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                            <h4 class="font-semibold mb-2">Endpoint</h4>
+                            <code>GET /api/v1/llm/stream</code>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h4 class="font-semibold mb-2">JavaScript 예제</h4>
+                            <div class="bg-gray-900 text-green-400 rounded-lg p-4 overflow-x-auto">
+                                <pre><code class="language-javascript">const eventSource = new EventSource('/api/v1/llm/stream?message=' + encodeURIComponent(question));
+
+eventSource.onmessage = function(event) {
+  const data = JSON.parse(event.data);
+  
+  if (data.type === 'chunk') {
+    // 부분 응답 처리
+    appendToAnswer(data.content);
+  } else if (data.type === 'done') {
+    // 완료 처리
+    eventSource.close();
+    displaySources(data.sources);
+  }
+};
+
+eventSource.onerror = function(event) {
+  console.error('스트리밍 오류:', event);
+  eventSource.close();
+};</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6-8 섹션들도 비슷하게 구현 -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-lg">
+            <h3 class="text-lg font-semibold text-blue-900 mb-2">
+                <i class="fas fa-info-circle mr-2"></i>
+                추가 API 섹션 개발 중
+            </h3>
+            <p class="text-blue-700">
+                벡터 DB API, 분석 API, 예제 코드 섹션은 현재 개발 중입니다. 
+                완성되는 대로 업데이트될 예정입니다.
+            </p>
+            <div class="mt-4">
+                <ul class="list-disc list-inside text-blue-700 space-y-1">
+                    <li>벡터 데이터베이스 CRUD API</li>
+                    <li>특허 분석 및 통계 API</li>
+                    <li>Python, JavaScript, cURL 예제 코드</li>
+                    <li>WebSocket 실시간 통신 API</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="bg-gst-dark text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-lg font-semibold">글로벌 스탠다드 테크놀로지 Co. Ltd.</p>
+                    <p class="text-gray-300">API 명세서</p>
+                </div>
+                <div class="text-gray-300">
+                    <p>&copy; 2024 GST Patent Management System. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 코드 하이라이팅 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            hljs.highlightAll();
+            
+            // 부드러운 스크롤
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

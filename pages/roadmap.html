@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개발 로드맵 - GST 특허관리시스템</title>
+    
+    <!-- 외부 라이브러리 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- 커스텀 스타일 -->
+    <link rel="stylesheet" href="../css/style.css">
+    
+    <!-- Tailwind 설정 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'korean': ['Noto Sans KR', 'sans-serif']
+                    },
+                    colors: {
+                        'gst-blue': '#1e40af',
+                        'gst-light-blue': '#3b82f6',
+                        'gst-gray': '#6b7280',
+                        'gst-dark': '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-korean bg-gray-50">
+    <!-- 네비게이션 바 -->
+    <nav class="bg-gst-blue shadow-lg">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <a href="../index.html" class="text-white text-xl font-bold">
+                        <i class="fas fa-microscope mr-2"></i>
+                        GST 특허관리시스템
+                    </a>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="../index.html" class="text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-home mr-1"></i> 홈
+                    </a>
+                    <a href="architecture.html" class="text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-sitemap mr-1"></i> 아키텍처
+                    </a>
+                    <a href="api-docs.html" class="text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-code mr-1"></i> API 문서
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 컨테이너 -->
+    <div class="container mx-auto px-4 py-8">
+        <!-- 브레드크럼 -->
+        <nav class="flex mb-8" aria-label="Breadcrumb">
+            <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                <li class="inline-flex items-center">
+                    <a href="../index.html" class="text-gray-700 hover:text-blue-600 inline-flex items-center">
+                        <i class="fas fa-home mr-2"></i>
+                        홈
+                    </a>
+                </li>
+                <li>
+                    <div class="flex items-center">
+                        <i class="fas fa-chevron-right text-gray-400 mr-2"></i>
+                        <span class="text-gray-500">개발 로드맵</span>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <!-- 헤더 -->
+        <header class="mb-12">
+            <h1 class="text-4xl font-bold text-gst-dark mb-4">
+                개발 로드맵
+            </h1>
+            <p class="text-xl text-gst-gray max-w-4xl">
+                글로벌 스탠다드 테크놀로지 특허 관리 시스템의 향후 개발 계획과 단계별 구현 가이드를 제시합니다.
+                RAG 시스템 고도화부터 AI 기반 특허 분석까지의 전체 로드맵을 확인하세요.
+            </p>
+        </header>
+
+        <!-- 진행 상황 개요 -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-semibold text-gst-dark mb-6">
+                <i class="fas fa-chart-line mr-3 text-gst-blue"></i>
+                전체 진행 상황
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-check text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Phase 1</h3>
+                    <p class="text-sm text-gray-600">기본 시스템</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                        <div class="bg-green-600 h-2 rounded-full" style="width: 100%"></div>
+                    </div>
+                    <p class="text-xs text-green-600 mt-1">완료</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-cogs text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Phase 2</h3>
+                    <p class="text-sm text-gray-600">RAG 구현</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                        <div class="bg-blue-600 h-2 rounded-full" style="width: 75%"></div>
+                    </div>
+                    <p class="text-xs text-blue-600 mt-1">진행중 (75%)</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-brain text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Phase 3</h3>
+                    <p class="text-sm text-gray-600">AI 고도화</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                        <div class="bg-yellow-600 h-2 rounded-full" style="width: 25%"></div>
+                    </div>
+                    <p class="text-xs text-yellow-600 mt-1">계획 (25%)</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-rocket text-gray-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-900">Phase 4</h3>
+                    <p class="text-sm text-gray-600">배포 & 운영</p>
+                    <div class="w-full bg-gray-200 rounded-full h-2 mt-2">
+                        <div class="bg-gray-400 h-2 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">대기</p>
+                </div>
+            </div>
+            
+            <!-- 전체 진행률 -->
+            <div class="bg-gray-50 rounded-lg p-6">
+                <div class="flex justify-between items-center mb-2">
+                    <h3 class="font-semibold text-gray-900">전체 프로젝트 진행률</h3>
+                    <span class="text-lg font-bold text-blue-600">50%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-3">
+                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 h-3 rounded-full" style="width: 50%"></div>
+                </div>
+                <p class="text-sm text-gray-600 mt-2">예상 완료: 2024년 12월</p>
+            </div>
+        </div>
+
+        <!-- 상세 로드맵 -->
+        <div class="space-y-8">
+            <!-- Phase 1: 기본 시스템 구축 (완료) -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-green-500 text-white px-8 py-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">Phase 1: 기본 시스템 구축</h2>
+                            <p class="text-green-100">2024년 1월 - 2024년 3월 (완료)</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">100%</div>
+                            <div class="text-sm text-green-100">완료</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-gray-900">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                주요 성과
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span><strong>정적 웹사이트 구축:</strong> 78개 특허 데이터 시각화 시스템</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span><strong>대시보드 개발:</strong> 실시간 특허 통계 및 분석</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span><strong>검색 시스템:</strong> 다중 필터 및 키워드 검색</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span><strong>타임라인 시각화:</strong> 기술 발전 히스토리</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span><strong>반응형 UI:</strong> 모바일/데스크톱 최적화</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-gray-900">
+                                <i class="fas fa-code text-blue-500 mr-2"></i>
+                                구현 기술
+                            </h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-blue-50 rounded-lg p-4">
+                                    <h4 class="font-semibold text-blue-900">프론트엔드</h4>
+                                    <ul class="text-sm text-blue-700 mt-2 space-y-1">
+                                        <li>• HTML5, CSS3</li>
+                                        <li>• JavaScript (ES6+)</li>
+                                        <li>• Tailwind CSS</li>
+                                        <li>• Chart.js, ECharts</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-4">
+                                    <h4 class="font-semibold text-green-900">데이터</h4>
+                                    <ul class="text-sm text-green-700 mt-2 space-y-1">
+                                        <li>• RESTful Table API</li>
+                                        <li>• JSON 데이터 구조</li>
+                                        <li>• 로컬 스토리지</li>
+                                        <li>• 샘플 데이터 생성</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 2: RAG 시스템 구현 (진행중) -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-blue-500 text-white px-8 py-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">Phase 2: RAG 시스템 구현</h2>
+                            <p class="text-blue-100">2024년 4월 - 2024년 8월 (진행중)</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">75%</div>
+                            <div class="text-sm text-blue-100">진행중</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-gray-900">
+                                <i class="fas fa-tasks text-blue-500 mr-2"></i>
+                                완료된 작업 (75%)
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span><strong>문서 처리 파이프라인:</strong> PDF 텍스트 추출 및 청킹</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span><strong>임베딩 시스템:</strong> UpstageEmbedding 연동</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check text-green-500 mr-2 mt-1"></i>
+                                    <span><strong>벡터 DB 설계:</strong> Chroma, Pinecone 아키텍처</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-cog text-yellow-500 mr-2 mt-1"></i>
+                                    <span><strong>하이브리드 검색:</strong> 벡터 + BM25 검색 (구현중)</span>
+                                </li>
+                            </ul>
+                            
+                            <h3 class="text-xl font-semibold mb-4 mt-8 text-gray-900">
+                                <i class="fas fa-clock text-yellow-500 mr-2"></i>
+                                진행 예정 (25%)
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-yellow-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>LLM 통합:</strong> LLaMA 3.1-8B 파인튜닝</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-yellow-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>웹 인터페이스:</strong> Streamlit 채팅 UI</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-yellow-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>API 서버:</strong> FastAPI 백엔드</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-gray-900">
+                                <i class="fas fa-calendar-alt text-blue-500 mr-2"></i>
+                                세부 일정
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="border-l-4 border-green-500 pl-4">
+                                    <h4 class="font-medium text-green-700">4-5월: 문서 처리 (완료)</h4>
+                                    <p class="text-sm text-gray-600">PDF 파싱, 텍스트 전처리, 청킹 시스템</p>
+                                </div>
+                                <div class="border-l-4 border-green-500 pl-4">
+                                    <h4 class="font-medium text-green-700">5-6월: 벡터화 (완료)</h4>
+                                    <p class="text-sm text-gray-600">임베딩 모델 선택, 벡터 DB 구축</p>
+                                </div>
+                                <div class="border-l-4 border-yellow-500 pl-4">
+                                    <h4 class="font-medium text-yellow-700">7월: 검색 시스템 (진행중)</h4>
+                                    <p class="text-sm text-gray-600">하이브리드 검색, 성능 최적화</p>
+                                </div>
+                                <div class="border-l-4 border-gray-400 pl-4">
+                                    <h4 class="font-medium text-gray-700">8월: LLM 통합 (예정)</h4>
+                                    <p class="text-sm text-gray-600">모델 파인튜닝, 프롬프트 엔지니어링</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 bg-blue-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-blue-900 mb-2">핵심 기술 스택</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-xs">LangChain</span>
+                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded text-xs">Chroma DB</span>
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">UpstageEmbedding</span>
+                                    <span class="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">LLaMA 3.1-8B</span>
+                                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">FastAPI</span>
+                                    <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded text-xs">Streamlit</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 3: AI 시스템 고도화 (계획) -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-purple-500 text-white px-8 py-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">Phase 3: AI 시스템 고도화</h2>
+                            <p class="text-purple-100">2024년 9월 - 2024년 12월 (계획)</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">25%</div>
+                            <div class="text-sm text-purple-100">계획</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-gray-900">
+                                <i class="fas fa-lightbulb text-purple-500 mr-2"></i>
+                                핵심 기능
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>특허 유사성 분석:</strong> 자동 중복 검출 및 인용 관계 분석</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>트렌드 예측:</strong> 기술 발전 방향 및 신기술 예측</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>자동 분류:</strong> AI 기반 특허 카테고리 자동 분류</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>품질 평가:</strong> 특허 강도 및 가치 평가</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-purple-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>다국어 지원:</strong> 영문 특허 자동 번역 및 분석</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-gray-900">
+                                <i class="fas fa-chart-line text-purple-500 mr-2"></i>
+                                고급 분석 기능
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="bg-purple-50 rounded-lg p-4">
+                                    <h4 class="font-semibold text-purple-900">경쟁사 분석</h4>
+                                    <ul class="text-sm text-purple-700 mt-2 space-y-1">
+                                        <li>• 기술 영역별 경쟁 현황</li>
+                                        <li>• 특허 포트폴리오 비교</li>
+                                        <li>• 침해 위험도 분석</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-indigo-50 rounded-lg p-4">
+                                    <h4 class="font-semibold text-indigo-900">R&D 방향성</h4>
+                                    <ul class="text-sm text-indigo-700 mt-2 space-y-1">
+                                        <li>• 기술 갭 분석</li>
+                                        <li>• 신기술 기회 발굴</li>
+                                        <li>• 투자 우선순위 제안</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-4">
+                                    <h4 class="font-semibold text-green-900">자동 보고서</h4>
+                                    <ul class="text-sm text-green-700 mt-2 space-y-1">
+                                        <li>• 월간 특허 동향 보고서</li>
+                                        <li>• 기술별 상세 분석</li>
+                                        <li>• 경영진 요약 보고서</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Phase 4: 배포 및 운영 (대기) -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-gray-500 text-white px-8 py-4">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h2 class="text-2xl font-bold">Phase 4: 배포 및 운영</h2>
+                            <p class="text-gray-100">2025년 1월 - 계속 (대기)</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-3xl font-bold">0%</div>
+                            <div class="text-sm text-gray-100">대기</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-gray-900">
+                                <i class="fas fa-server text-gray-500 mr-2"></i>
+                                인프라 구축
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-gray-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>클라우드 배포:</strong> AWS/GCP 기반 스케일러블 아키텍처</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-gray-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>컨테이너화:</strong> Docker + Kubernetes 오케스트레이션</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-gray-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>데이터 보안:</strong> 암호화, 백업, 접근 제어</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-gray-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>모니터링:</strong> 실시간 성능 및 오류 추적</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div>
+                            <h3 class="text-xl font-semibold mb-4 text-gray-900">
+                                <i class="fas fa-users text-gray-500 mr-2"></i>
+                                운영 관리
+                            </h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-gray-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>사용자 관리:</strong> 권한별 접근 제어</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-gray-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>데이터 관리:</strong> 정기 업데이트 및 품질 관리</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-gray-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>성능 최적화:</strong> 지속적인 모델 및 시스템 개선</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-circle text-gray-500 mr-2 mt-1 text-xs"></i>
+                                    <span><strong>기술 지원:</strong> 사용자 교육 및 문의 대응</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 기술적 도전과제 -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mt-8">
+            <h2 class="text-2xl font-semibold text-gst-dark mb-6">
+                <i class="fas fa-exclamation-triangle mr-3 text-yellow-500"></i>
+                기술적 도전과제 및 해결 방안
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-red-600">
+                        <i class="fas fa-times-circle mr-2"></i>
+                        주요 도전과제
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-medium text-red-700">한국어 특허 문서 처리</h4>
+                            <p class="text-sm text-gray-600">전문 용어, 법적 표현의 정확한 이해</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-medium text-red-700">대용량 벡터 검색 성능</h4>
+                            <p class="text-sm text-gray-600">실시간 검색 속도 및 정확도 보장</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-medium text-red-700">LLM 응답 품질</h4>
+                            <p class="text-sm text-gray-600">환각(hallucination) 방지 및 신뢰성 확보</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-medium text-red-700">비용 최적화</h4>
+                            <p class="text-sm text-gray-600">LLM API 호출 비용 및 인프라 비용</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 text-green-600">
+                        <i class="fas fa-check-circle mr-2"></i>
+                        해결 방안
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-medium text-green-700">도메인 특화 임베딩</h4>
+                            <p class="text-sm text-gray-600">특허 도메인에 특화된 UpstageEmbedding 활용</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-medium text-green-700">하이브리드 검색</h4>
+                            <p class="text-sm text-gray-600">벡터 + BM25 검색으로 정확도 향상</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-medium text-green-700">RAG 기반 검증</h4>
+                            <p class="text-sm text-gray-600">소스 문서 기반 응답으로 신뢰성 확보</p>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-medium text-green-700">효율적 아키텍처</h4>
+                            <p class="text-sm text-gray-600">캐싱, 배치 처리로 비용 절감</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 성공 메트릭 -->
+        <div class="bg-white rounded-lg shadow-lg p-8 mt-8">
+            <h2 class="text-2xl font-semibold text-gst-dark mb-6">
+                <i class="fas fa-bullseye mr-3 text-gst-blue"></i>
+                성공 지표 (KPI)
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-blue-900 mb-4">기술 지표</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex justify-between">
+                            <span>검색 정확도:</span>
+                            <strong class="text-blue-700">90%+</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>응답 시간:</span>
+                            <strong class="text-blue-700">&lt; 3초</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>시스템 가용성:</span>
+                            <strong class="text-blue-700">99.5%</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>동시 사용자:</span>
+                            <strong class="text-blue-700">100명</strong>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-green-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-green-900 mb-4">사용자 지표</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex justify-between">
+                            <span>사용자 만족도:</span>
+                            <strong class="text-green-700">4.5/5</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>월간 활성 사용자:</span>
+                            <strong class="text-green-700">50명+</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>특허 조회 수:</span>
+                            <strong class="text-green-700">1000회/월</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>문의 해결률:</span>
+                            <strong class="text-green-700">95%</strong>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-purple-50 rounded-lg p-6">
+                    <h3 class="text-lg font-semibold text-purple-900 mb-4">비즈니스 지표</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex justify-between">
+                            <span>업무 효율성:</span>
+                            <strong class="text-purple-700">50% 향상</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>검색 시간 단축:</span>
+                            <strong class="text-purple-700">80% 감소</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>ROI:</span>
+                            <strong class="text-purple-700">200%+</strong>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>운영 비용:</span>
+                            <strong class="text-purple-700">30% 절감</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- 향후 확장 계획 -->
+        <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mt-8">
+            <h2 class="text-2xl font-semibold text-gst-dark mb-6">
+                <i class="fas fa-rocket mr-3 text-purple-500"></i>
+                향후 확장 계획 (2025년 이후)
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-globe text-blue-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">글로벌 확장</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• 다국어 지원 (영어, 중국어, 일본어)</li>
+                        <li>• 해외 특허 DB 연동</li>
+                        <li>• 국제 특허 분류 체계</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-robot text-green-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">AI 고도화</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• GPT-5, Claude-4 등 최신 LLM</li>
+                        <li>• 멀티모달 AI (이미지, 도표 분석)</li>
+                        <li>• 자율 특허 생성 어시스턴트</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-lg p-6 shadow-md">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fas fa-network-wired text-purple-600"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold">통합 플랫폼</h3>
+                    </div>
+                    <ul class="text-sm space-y-1">
+                        <li>• R&D 관리 시스템 연동</li>
+                        <li>• 법무팀 협업 도구</li>
+                        <li>• IP 포트폴리오 관리</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <footer class="bg-gst-dark text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-lg font-semibold">글로벌 스탠다드 테크놀로지 Co. Ltd.</p>
+                    <p class="text-gray-300">개발 로드맵</p>
+                </div>
+                <div class="text-gray-300">
+                    <p>&copy; 2024 GST Patent Management System. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 부드러운 스크롤
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // 진행률 바 애니메이션
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('[style*="width:"]');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'progressFill 1s ease-out';
+                    }
+                });
+            });
+            
+            progressBars.forEach(bar => observer.observe(bar));
+        });
+        
+        // CSS 애니메이션 추가
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes progressFill {
+                from { width: 0% !important; }
+                to { width: var(--target-width, 100%); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

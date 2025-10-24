@@ -1,0 +1,345 @@
+{
+  "doc_id": "POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD-a9a0b17a",
+  "title": "POWER SUPPLY DEVICE FOR CONTROLLING THERMOELECTRIC ELEMENT AND CONTROL METHOD",
+  "source_path": "/Users/sungho-kang/Downloads/GST_LLM_V2/POWER SUPPLY DEVICE FOR CONTROLLING THERMOELECTRIC ELEMENT AND CONTROL METHOD.pdf",
+  "created_at": "2025-10-19T09:39:53Z",
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p001_img01.png",
+          "width": 2480,
+          "height": 3508,
+          "md5": "7b0c178c67dce148589d4ea482234fc5",
+          "phash": "eb78fc81907ec04e",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 2,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p002_img01.png",
+          "width": 2480,
+          "height": 3508,
+          "md5": "d7905699ed9793d07313eedc655e2c7a",
+          "phash": "fa7a6a6ac1c1c1c5",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p003_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "dd9d7857e1ec17ecabd4aad165edbcb0",
+          "phash": "fa4a872ec36a91d8",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p004_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "f04d47537d7012b79b9cfc794655c481",
+          "phash": "fa7a870ec36ac3c0",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p005_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "2e386983232f2675c0bd34062aec22a7",
+          "phash": "ba9ec76ac31a846a",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 6,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p006_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "f81ce4a33e09e4c48b435e73fd0e94df",
+          "phash": "fa5ec73a9268815a",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 7,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p007_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "a801774d50b07f5eefe7ee9b691e63bd",
+          "phash": "fa6a879fc51a8648",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 8,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p008_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "3f897d6505491b055794b87d5690c5d3",
+          "phash": "fa3e856ac34ac25a",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 9,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p009_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "a2583ff07194b6c84eb11747c0d4e239",
+          "phash": "fa6a874ac39a866a",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 10,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p010_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "ded57f5ff3d015111c6740b711f0fe79",
+          "phash": "fa6a851e970ec233",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 11,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p011_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "4ca26a550dca80a3da9bfb5746071bd7",
+          "phash": "ba3a3a1a5a4a4ece",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 12,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p012_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "7f280cd9b2aa5bafb57052622ef5ff3e",
+          "phash": "f812866e8f5a8f68",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 13,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p013_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "075ca843b4eddb4562c2d6018ad5fcf2",
+          "phash": "ba3a3a0a8e8e8fc9",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 14,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p014_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "fc2089bfd232b235577c23021cc21753",
+          "phash": "bf3eca0bc8e14c0e",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 15,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p015_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "7eab465179917c3502eaa50e2eb5ac0f",
+          "phash": "bf3ec2cac0ca3871",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 16,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p016_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "7bd54c1f75a21c22907a74dbfd310674",
+          "phash": "be72c94ec61e181e",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 17,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p017_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "6267c78023cd132ebcf31321092a3fa1",
+          "phash": "ad3ad22fc2ca8ad2",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 18,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p018_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "ad8a2c077f9dc93841425589262087cd",
+          "phash": "be3ec3ce0e41c3c2",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 19,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p019_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "0763a7def39986a1adc621f92fa5ca07",
+          "phash": "bc6bc41cc3cad392",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 20,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p020_img01.png",
+          "width": 2478,
+          "height": 3507,
+          "md5": "2802d87d1b4a389389cf3903df7eba89",
+          "phash": "be3e1ec2c3c3c2c2",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 21,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p021_img01.png",
+          "width": 2479,
+          "height": 3507,
+          "md5": "ecf2ce460258cec3dfc2414f213a203c",
+          "phash": "bf718fc9d049c292",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 22,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p022_img01.png",
+          "width": 2479,
+          "height": 3507,
+          "md5": "5beb9117d8f78e460d5b378157367c62",
+          "phash": "db7a3a7839c1c1c1",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 23,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p023_img01.png",
+          "width": 2479,
+          "height": 3507,
+          "md5": "7beb54558818206944dc7e5ab4369b55",
+          "phash": "bf70cdc9d049c227",
+          "ocr_text": null
+        }
+      ]
+    },
+    {
+      "page_number": 24,
+      "text": "",
+      "images": [
+        {
+          "path": "images/POWER_SUPPLY_DEVICE_FOR_CONTROLLING_THERMOELECTRIC_ELEMENT_AND_CONTROL_METHOD_p024_img01.png",
+          "width": 2479,
+          "height": 3507,
+          "md5": "67f6ad7b91821e2f44ed303c88ba2426",
+          "phash": "df7a3a68c9c1c1c1",
+          "ocr_text": null
+        }
+      ]
+    }
+  ],
+  "chunks": []
+}

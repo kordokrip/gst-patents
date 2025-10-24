@@ -1,0 +1,124 @@
+# Cloudflare Pages Headers Configuration
+# GST Patent Management System - Enhanced Security & Performance
+
+# Global Security Headers
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()
+  
+  # Content Security Policy (Enhanced)
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://unpkg.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://api.openai.com https://api.anthropic.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+
+# HTML Files - Cache with validation
+/*.html
+  Cache-Control: public, max-age=3600, must-revalidate
+  Content-Type: text/html; charset=utf-8
+  X-Robots-Tag: index, follow
+
+# CSS Files - Long-term caching with versioning
+/css/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: text/css; charset=utf-8
+  X-Content-Type-Options: nosniff
+
+# JavaScript Files - Long-term caching with versioning  
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/javascript; charset=utf-8
+  X-Content-Type-Options: nosniff
+
+# Service Worker - No cache
+/sw.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Content-Type: application/javascript; charset=utf-8
+  Service-Worker-Allowed: /
+
+# API Routes - Dynamic content
+/tables/*
+  Cache-Control: no-cache, no-store, must-revalidate
+  Content-Type: application/json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With
+
+# Static Assets - Aggressive caching
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Images - Medium-term caching
+/images/*
+  Cache-Control: public, max-age=2592000
+  Vary: Accept-Encoding
+
+# Fonts - Long-term caching
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+  Access-Control-Allow-Origin: *
+
+# Manifest and Icons
+/manifest.json
+  Cache-Control: public, max-age=86400
+  Content-Type: application/manifest+json
+
+/favicon.ico
+  Cache-Control: public, max-age=2592000
+  Content-Type: image/x-icon
+
+# Robots and Sitemap
+/robots.txt
+  Cache-Control: public, max-age=86400
+  Content-Type: text/plain
+
+/sitemap.xml
+  Cache-Control: public, max-age=86400
+  Content-Type: application/xml
+
+# Error Pages
+/404.html
+  Cache-Control: public, max-age=3600
+
+# Compression Settings (Cloudflare handles this, but explicit for other CDNs)
+*.js
+  Content-Encoding: gzip
+  Vary: Accept-Encoding
+
+*.css  
+  Content-Encoding: gzip
+  Vary: Accept-Encoding
+
+*.html
+  Content-Encoding: gzip
+  Vary: Accept-Encoding
+
+# CORS for API endpoints
+/api/*
+  Access-Control-Allow-Origin: *
+  Access-Control-Allow-Methods: GET, POST, PUT, PATCH, DELETE, OPTIONS
+  Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With
+  Access-Control-Max-Age: 86400
+
+# Performance Hints
+/*
+  Link: </css/style.css>; rel=preload; as=style
+  Link: </js/main.js>; rel=preload; as=script
+  Link: <https://fonts.googleapis.com>; rel=preconnect
+  Link: <https://fonts.gstatic.com>; rel=preconnect; crossorigin
+  Link: <https://cdn.jsdelivr.net>; rel=preconnect
+
+# Main page performance optimization
+/index.html
+  Link: </js/main.js>; rel=modulepreload
+  Link: </js/enhanced-search.js>; rel=modulepreload
+  Link: </css/style.css>; rel=preload; as=style
+  
+# PWA Support Headers  
+/manifest.json
+  Access-Control-Allow-Origin: *
+  
+# Security for sensitive endpoints
+/admin/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store, no-cache, must-revalidate

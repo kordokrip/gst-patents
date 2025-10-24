@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="글로벌 스탠다드 테크놀로지의 반도체 유해가스 정화장비 특허 관리 및 분석 시스템">
+    <meta name="keywords" content="특허관리,반도체,유해가스,정화장비,글로벌스탠다드테크놀로지,RAG,LLM,AI특허분석">
+    <meta name="author" content="GST (Global Standard Technology)">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="GST 특허관리시스템 - AI 기반 특허 분석">
+    <meta property="og:description" content="반도체 유해가스 정화장비 78개 특허를 AI로 관리하고 분석하는 통합 플랫폼">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="GST 특허관리시스템">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1e40af">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="GST 특허">
+    
+    <!-- Manifest & Icons -->
+    <link rel="manifest" href="/manifest.json">
+    <title>글로벌 스탠다드 테크놀로지 - 특허 관리 시스템</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    
+    <!-- Critical CSS - Load first -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- External Libraries CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" 
+          rel="stylesheet">
+    
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iIzFlNDBhZiIvPgo8cGF0aCBkPSJNOCAxMkgxMlYyMEg4VjEyWiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMTQgOEgxOFYyNEgxNFY4WiIgZmlsbD0id2hpdGUiLz4KPHA+aCBkPSJNMjAgMTBIMjRWMjJIMjBWMTBaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K">
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgwIiBoZWlnaHQ9IjE4MCIgdmlld0JveD0iMCAwIDE4MCAxODAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxODAiIGhlaWdodD0iMTgwIiByeD0iNDAiIGZpbGw9IiMxZTQwYWYiLz4KPHBhdGggZD0iTTQwIDYwSDcwVjEyMEg0MFY2MFoiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik04MCA0MEgxMTBWMTQwSDgwVjQwWiIgZmlsbD0id2hpdGUiLz4KPHBhdGggZD0iTTEyMCA1MEgxNTBWMTMwSDEyMFY1MFoiIGZpbGw9IndoaXRlIi8+Cjwvc3ZnPgo=">
+    
+    <!-- Tailwind 설정 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'korean': ['Noto Sans KR', 'sans-serif']
+                    },
+                    colors: {
+                        'gst-blue': '#1e40af',
+                        'gst-light-blue': '#3b82f6',
+                        'gst-gray': '#6b7280',
+                        'gst-dark': '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-korean bg-gray-50">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:top-4 focus:left-4 bg-gst-blue text-white px-4 py-2 rounded-md transition shadow-lg">본문 바로가기</a>
+    <!-- 네비게이션 바 -->
+    <nav class="bg-gst-blue shadow-lg" aria-label="주요 내비게이션">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-4">
+                    <div class="text-white text-xl font-bold" aria-label="GST 특허관리시스템 홈">
+                        <i class="fas fa-microscope mr-2" aria-hidden="true"></i>
+                        GST 특허관리시스템
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#dashboard" class="nav-link text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-chart-dashboard mr-1" aria-hidden="true"></i> 대시보드
+                    </a>
+                    <a href="#patents" class="nav-link text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-file-text mr-1" aria-hidden="true"></i> 특허 목록
+                    </a>
+                    <a href="#analytics" class="nav-link text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-chart-bar mr-1" aria-hidden="true"></i> 분석
+                    </a>
+                    <a href="#timeline" class="nav-link text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-timeline mr-1" aria-hidden="true"></i> 타임라인
+                    </a>
+                    <a href="#rag-docs" class="nav-link text-white hover:text-blue-200 transition-colors">
+                        <i class="fas fa-book mr-1" aria-hidden="true"></i> RAG 문서
+                    </a>
+                    <a href="pages/data-import.html" class="nav-link text-white hover:text-blue-200 transition-colors" title="JSON 파일에서 특허 데이터 가져오기">
+                        <i class="fas fa-file-import mr-1" aria-hidden="true"></i> 데이터 가져오기
+                    </a>
+                    <a href="pages/auto-import.html" class="nav-link text-white bg-green-600 hover:bg-green-700 px-3 py-1 rounded transition-colors" title="81개 JSON 파일 자동 임포트">
+                        <i class="fas fa-rocket mr-1" aria-hidden="true"></i> 자동 임포트
+                    </a>
+                    <a id="ai-chat-toggle" class="nav-link text-white hover:text-blue-200 transition-colors" href="http://localhost:8501" target="_blank" rel="noopener" aria-label="AI 채팅 열기">
+                        <i class="fas fa-robot mr-1" aria-hidden="true"></i> AI 질의
+                    </a>
+                </div>
+                <button class="md:hidden text-white" id="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="모바일 메뉴 열기">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+            
+            <!-- 모바일 메뉴 -->
+            <div class="md:hidden hidden" id="mobile-menu">
+                <div class="py-2 space-y-2" role="menu" aria-label="모바일 내비게이션">
+                    <a href="#dashboard" class="block text-white hover:text-blue-200 py-2" role="menuitem">대시보드</a>
+                    <a href="#patents" class="block text-white hover:text-blue-200 py-2" role="menuitem">특허 목록</a>
+                    <a href="#analytics" class="block text-white hover:text-blue-200 py-2" role="menuitem">분석</a>
+                    <a href="#timeline" class="block text-white hover:text-blue-200 py-2" role="menuitem">타임라인</a>
+                    <a href="#rag-docs" class="block text-white hover:text-blue-200 py-2" role="menuitem">RAG 문서</a>
+                    <a href="pages/data-import.html" class="block text-white hover:text-blue-200 py-2" role="menuitem">
+                        <i class="fas fa-file-import mr-2" aria-hidden="true"></i>데이터 가져오기
+                    </a>
+                    <a href="pages/auto-import.html" class="block text-white bg-green-600 hover:bg-green-700 py-2 rounded px-2 my-1" role="menuitem">
+                        <i class="fas fa-rocket mr-2" aria-hidden="true"></i>자동 임포트 (81개 파일)
+                    </a>
+                    <a id="ai-chat-toggle-mobile" class="block text-white hover:text-blue-200 py-2 text-left w-full" href="http://localhost:8501" target="_blank" rel="noopener" role="menuitem">
+                        <i class="fas fa-robot mr-2" aria-hidden="true"></i>AI 질의
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 메인 컨테이너 -->
+    <main id="main-content" tabindex="-1">
+        <div class="container mx-auto px-4 py-8">
+        <!-- 헤더 섹션 -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gst-dark mb-4">
+                반도체 유해가스 정화장비 특허 관리 시스템
+            </h1>
+            <p class="text-xl text-gst-gray max-w-3xl mx-auto">
+                글로벌 스탠다드 테크놀로지의 81개 특허를 체계적으로 관리하고 분석하는 
+                통합 플랫폼입니다.
+            </p>
+        </header>
+
+        <!-- 대시보드 섹션 -->
+        <section id="dashboard" class="mb-16">
+            <h2 class="text-3xl font-semibold text-gst-dark mb-8 flex items-center">
+                <i class="fas fa-chart-dashboard mr-3 text-gst-blue"></i>
+                대시보드 개요
+            </h2>
+            
+            <!-- 통계 카드 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-gst-blue">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-file-alt text-3xl text-gst-blue"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gst-gray">총 특허 수</p>
+                            <p class="text-2xl font-semibold text-gst-dark" id="total-patents">81</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-green-500">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-cogs text-3xl text-green-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gst-gray">기술 분야</p>
+                            <p class="text-2xl font-semibold text-gst-dark" id="tech-categories">5</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-yellow-500">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-calendar text-3xl text-yellow-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gst-gray">등록 기간</p>
+                            <p class="text-2xl font-semibold text-gst-dark" id="registration-range">—</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-red-500">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-search text-3xl text-red-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gst-gray">활성 특허</p>
+                            <p class="text-2xl font-semibold text-gst-dark" id="active-patents">65</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6 border-l-4 border-purple-500">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-star text-3xl text-purple-500"></i>
+                        </div>
+                        <div class="ml-4">
+                            <p class="text-sm font-medium text-gst-gray">평균 중요도 점수</p>
+                            <p class="text-2xl font-semibold text-gst-dark" id="avg-priority-score">0.0</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 특허 목록 섹션 -->
+        <section id="patents" class="mb-20 clearfix">
+            <h2 class="text-3xl font-semibold text-gst-dark mb-8 flex items-center">
+                <i class="fas fa-file-text mr-3 text-gst-blue" aria-hidden="true"></i>
+                특허 목록 및 검색
+            </h2>
+
+            <noscript>
+                <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 px-4 py-3 rounded mb-6" role="alert">
+                    <p class="font-semibold">JavaScript가 비활성화되어 있습니다.</p>
+                    <p class="text-sm">실시간 검색과 분석 기능을 사용하려면 브라우저에서 JavaScript를 활성화하세요.</p>
+                </div>
+            </noscript>
+            
+            <!-- 검색 및 필터 영역 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label for="search-input" class="block text-sm font-medium text-gst-gray mb-2">
+                            특허 검색
+                        </label>
+                        <div class="relative" role="combobox" aria-haspopup="listbox" aria-owns="search-suggestions" aria-expanded="false">
+                            <input type="search" id="search-input" 
+                                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent"
+                                   placeholder="특허 번호, 제목, 키워드 검색..."
+                                   autocomplete="off"
+                                   role="searchbox"
+                                   aria-controls="search-suggestions"
+                                   aria-autocomplete="list"
+                                   aria-describedby="search-hint">
+                            <i class="fas fa-search absolute right-3 top-3 text-gst-gray" aria-hidden="true"></i>
+                            <div id="search-suggestions" class="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg overflow-hidden hidden" role="listbox"></div>
+                        </div>
+                        <p id="search-hint" class="mt-2 text-xs text-gst-gray">두 글자 이상 입력하면 실시간 제안이 표시됩니다.</p>
+                    </div>
+                    
+                    <div>
+                        <label for="category-filter" class="block text-sm font-medium text-gst-gray mb-2">
+                            기술 분야
+                        </label>
+                        <select id="category-filter" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue">
+                            <option value="">전체</option>
+                            <option value="scrubber">스크러버</option>
+                            <option value="chiller">칠러</option>
+                            <option value="plasma">플라즈마</option>
+                            <option value="temperature">온도제어</option>
+                            <option value="gas-treatment">가스처리</option>
+                        </select>
+                    </div>
+                    
+                    <div>
+                        <label for="status-filter" class="block text-sm font-medium text-gst-gray mb-2">
+                            특허 상태
+                        </label>
+                        <select id="status-filter" 
+                                class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue">
+                            <option value="">전체</option>
+                            <option value="active">활성</option>
+                            <option value="expired">만료</option>
+                            <option value="pending">심사중</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="mt-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+                    <div class="flex items-center gap-3">
+                        <button id="search-button" type="button" class="bg-gst-blue text-white px-6 py-2 rounded-lg hover:bg-gst-dark transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gst-blue">
+                            <i class="fas fa-search mr-2" aria-hidden="true"></i>검색
+                        </button>
+                        <button id="reset-button" type="button" class="text-gst-gray hover:text-gst-dark transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gst-blue">
+                            <i class="fas fa-rotate-left mr-2" aria-hidden="true"></i>초기화
+                        </button>
+                    </div>
+                    <span class="text-xs text-gst-gray" aria-live="polite">필터 조합을 바꿔 다양한 시나리오를 탐색하세요.</span>
+                </div>
+            </div>
+            
+            <!-- 특허 목록 리스트 -->
+            <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <!-- 최신 특허 목록 -->
+                <div class="p-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                        <h3 class="text-lg font-semibold text-gst-dark flex items-center">
+                            <i class="fas fa-clock mr-2 text-gst-blue" aria-hidden="true"></i>
+                            최신 특허 등록 현황
+                        </h3>
+                        <div class="flex items-center gap-2 text-sm text-gst-gray" aria-live="polite">
+                            <i class="fas fa-database" aria-hidden="true"></i>
+                            <span id="data-source-indicator">데이터 소스 확인 중...</span>
+                        </div>
+                    </div>
+                    
+                    <div id="patents-loading" class="space-y-3" aria-hidden="true">
+                        <div class="animate-pulse bg-gray-100 h-16 rounded-lg"></div>
+                        <div class="animate-pulse bg-gray-100 h-16 rounded-lg"></div>
+                        <div class="animate-pulse bg-gray-100 h-16 rounded-lg"></div>
+                    </div>
+
+                    <div id="patents-list-container" class="space-y-3 hidden" role="list" aria-live="polite"></div>
+                    <div id="patents-empty-state" class="hidden text-center py-8 text-gst-gray">
+                        <i class="fas fa-search text-4xl mb-4 block" aria-hidden="true"></i>
+                        <p class="text-lg font-medium">조건에 맞는 특허가 없습니다.</p>
+                        <p class="text-sm">필터를 조정하거나 다른 키워드를 입력해 보세요.</p>
+                    </div>
+                </div>
+
+                <!-- 연도별 특허 등록 구분은 JavaScript에서 동적으로 채워집니다. -->
+                <div id="patent-year-groups" class="bg-gray-50 border-t border-gray-200">
+                    <!-- 동적 콘텐츠 -->
+                </div>
+                
+                <!-- 페이지네이션 -->
+                <div class="bg-gray-50 px-6 py-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-t" aria-live="polite">
+                    <div class="text-sm text-gst-gray">
+                        총 <span id="total-count">0</span>개 중 <span id="start-count">0</span>-<span id="end-count">0</span>개 표시
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button id="prev-page" type="button" class="px-3 py-2 border border-gray-300 rounded-md text-gst-gray hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gst-blue" aria-label="이전 페이지">
+                            이전
+                        </button>
+                        <select id="page-size" class="px-3 py-2 border border-gray-300 rounded-md text-gst-gray focus:outline-none focus:ring-2 focus:ring-gst-blue" aria-label="페이지당 항목 수">
+                            <option value="10">10개</option>
+                            <option value="20">20개</option>
+                            <option value="30">30개</option>
+                        </select>
+                        <button id="next-page" type="button" class="px-3 py-2 border border-gray-300 rounded-md text-gst-gray hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gst-blue" aria-label="다음 페이지">
+                            다음
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 분석 및 시각화 섹션 -->
+        <section id="analytics" class="mb-20 clearfix">
+            <h2 class="text-3xl font-semibold text-gst-dark mb-8 flex items-center">
+                <i class="fas fa-chart-bar mr-3 text-gst-blue"></i>
+                특허 분석 및 시각화
+            </h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- 기술 분야별 분포 차트 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gst-dark mb-4">기술 분야별 특허 분포</h3>
+                    <div style="height: 400px;">
+                        <canvas id="tech-distribution-chart"></canvas>
+                    </div>
+                </div>
+                
+                <!-- 연도별 등록 현황 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gst-dark mb-4">연도별 특허 등록 현황</h3>
+                    <div style="height: 400px;">
+                        <canvas id="yearly-registration-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 타임라인 섹션 -->
+        <section id="timeline" class="mb-20 clearfix">
+            <h2 class="text-3xl font-semibold text-gst-dark mb-8 flex items-center">
+                <i class="fas fa-timeline mr-3 text-gst-blue"></i>
+                기술 발전 타임라인
+            </h2>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <div id="timeline-container" style="height: 600px;"></div>
+            </div>
+        </section>
+
+        <!-- RAG 문서 섹션 - 페이지 최하단 -->
+        <section id="rag-docs" class="mb-20 clearfix">
+            <h2 class="text-3xl font-semibold text-gst-dark mb-8 flex items-center">
+                <i class="fas fa-book mr-3 text-gst-blue"></i>
+                RAG 시스템 설계 문서
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <h3 class="text-lg font-semibold text-gst-dark mb-3">
+                        <i class="fas fa-sitemap mr-2 text-gst-blue"></i>
+                        아키텍처 설계
+                    </h3>
+                    <p class="text-gst-gray mb-4">RAG 시스템의 전체 아키텍처와 컴포넌트 구조</p>
+                    <a href="pages/architecture.html" class="text-gst-blue hover:text-gst-dark font-medium">
+                        자세히 보기 <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <h3 class="text-lg font-semibold text-gst-dark mb-3">
+                        <i class="fas fa-code mr-2 text-gst-blue"></i>
+                        API 명세서
+                    </h3>
+                    <p class="text-gst-gray mb-4">벡터 데이터베이스 및 LLM API 연동 가이드</p>
+                    <a href="pages/api-docs.html" class="text-gst-blue hover:text-gst-dark font-medium">
+                        자세히 보기 <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow">
+                    <h3 class="text-lg font-semibold text-gst-dark mb-3">
+                        <i class="fas fa-road mr-2 text-gst-blue"></i>
+                        개발 로드맵
+                    </h3>
+                    <p class="text-gst-gray mb-4">향후 개발 계획과 단계별 구현 가이드</p>
+                    <a href="pages/roadmap.html" class="text-gst-blue hover:text-gst-dark font-medium">
+                        자세히 보기 <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+        </div>
+    </main>
+
+
+
+    <!-- AI Chat Interface (RAG/LLM 통합 준비) -->
+    <aside id="ai-chat-panel" class="fixed right-0 top-0 h-full w-full md:w-96 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 z-50" aria-hidden="true" role="complementary" aria-labelledby="ai-chat-title">
+        <div class="flex flex-col h-full">
+            <!-- Chat Header -->
+            <header class="bg-gradient-to-r from-gst-blue to-gst-light-blue text-white p-4 flex justify-between items-center">
+                <h2 id="ai-chat-title" class="text-lg font-semibold flex items-center">
+                    <i class="fas fa-robot mr-2" aria-hidden="true"></i>
+                    AI 특허 분석 도우미
+                </h2>
+                <button id="ai-chat-close" type="button" class="text-white hover:text-gray-200 transition-colors" aria-label="채팅 닫기">
+                    <i class="fas fa-times text-xl" aria-hidden="true"></i>
+                </button>
+            </header>
+            
+            <!-- RAG Status Indicator -->
+            <div id="rag-status" class="bg-yellow-50 border-b border-yellow-200 p-3 text-sm" role="status" aria-live="polite">
+                <div class="flex items-center gap-2 text-yellow-800">
+                    <i class="fas fa-info-circle" aria-hidden="true"></i>
+                    <span><strong>RAG/LLM 준비 모드:</strong> 벡터 DB 연동 대기 중</span>
+                </div>
+            </div>
+            
+            <!-- Chat Messages Area -->
+            <div id="ai-chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50" role="log" aria-live="polite" aria-atomic="false">
+                <!-- Welcome Message -->
+                <div class="flex items-start gap-3">
+                    <div class="flex-shrink-0 w-8 h-8 bg-gst-blue rounded-full flex items-center justify-center">
+                        <i class="fas fa-robot text-white text-sm" aria-hidden="true"></i>
+                    </div>
+                    <div class="flex-1 bg-white rounded-lg p-3 shadow-sm">
+                        <p class="text-sm text-gray-700">
+                            안녕하세요! GST 특허 분석 AI 도우미입니다. 🤖<br>
+                            특허 검색, 기술 동향 분석, 유사 특허 찾기 등을 도와드립니다.<br><br>
+                            <strong>현재 준비 중인 기능:</strong><br>
+                            • 자연어 특허 검색<br>
+                            • 특허 요약 및 분석<br>
+                            • 유사 특허 추천<br>
+                            • 기술 동향 인사이트<br><br>
+                            <em class="text-xs text-gray-500">* RAG 벡터 DB와 LLM API 연동 후 정식 서비스 예정</em>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Input Area -->
+            <footer class="border-t border-gray-200 p-4 bg-white">
+                <form id="ai-chat-form" class="flex gap-2">
+                    <input 
+                        type="text" 
+                        id="ai-chat-input" 
+                        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent" 
+                        placeholder="특허에 대해 질문해보세요..."
+                        autocomplete="off"
+                        aria-label="AI에게 질문 입력"
+                        disabled
+                    >
+                    <button 
+                        type="submit" 
+                        class="bg-gst-blue text-white px-4 py-2 rounded-lg hover:bg-gst-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        aria-label="메시지 전송"
+                        disabled
+                    >
+                        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                    </button>
+                </form>
+                <div class="mt-2 text-xs text-gray-500 text-center">
+                    <i class="fas fa-lightbulb mr-1" aria-hidden="true"></i>
+                    예시: "스크러버 관련 특허 찾아줘", "2023년 등록된 특허는?"
+                </div>
+            </footer>
+        </div>
+    </aside>
+    
+    <!-- Chat Overlay -->
+    <div id="ai-chat-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" aria-hidden="true"></div>
+
+    <!-- JavaScript -->
+    <script src="js/enhanced-search.js" defer></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/patents.js" defer></script>
+    <script src="js/charts.js" defer></script>
+    <script src="js/timeline.js" defer></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function(registration) {
+                        console.log('✅ Service Worker 등록 성공:', registration.scope);
+                    })
+                    .catch(function(error) {
+                        console.log('⚠️ Service Worker 등록 실패:', error);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

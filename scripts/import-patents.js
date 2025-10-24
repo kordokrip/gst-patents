@@ -1,0 +1,98 @@
+/**
+ * GST Patent Data Import Script
+ * 81개 JSON 파일에서 특허 데이터를 추출하여 데이터베이스에 저장
+ */
+
+// JSON 파일 목록 (AI Drive blob URLs)
+const JSON_FILES = [
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/cb75cb7b-c656-46cf-a845-697726d5bb5c',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/8d8ebf3d-1452-484f-a430-f2cd376190d0',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/a19f2ee5-adbb-4db4-842c-6fb1b26e6391',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/6dafaae2-5b80-47ed-8f89-9fff5b73e228',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/9b27ddf9-e289-4e8e-af3f-6fc73038910e',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/fa76f3d2-a24d-41ee-b191-6a59b254d9c8',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/7384dd21-d8c5-4d7a-bafe-9f18637e9d11',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/2a198553-41c7-4156-901a-818bb452ef7b',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/6771c68d-cda5-4cd9-9296-8a695130a5cd',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/df70ddef-5dd9-4f52-8666-645d8ac8b75f',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/10f56aae-d10b-4f83-b5ef-19299eef1894',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/32ce3fcc-28f6-4de5-bf40-4ee8da1b2aae',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/1cb767e7-de43-4aca-adb3-6609a4bf30f6',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/dc385aa5-28cc-4594-98da-54fea1b8f536',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/a0997094-3719-4669-8b78-b0dd9d2bebf3',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/ddcc65fe-77b9-4779-a2de-05bfda0024d0',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/a95aea99-bfa2-4957-8501-83e84520579a',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/6fea8693-7045-42cf-aeda-16732aeb8b58',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/c1ca1e4a-cbff-4ea6-9c64-04b3e2748cf3',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/957e5060-e86d-48b2-9e9d-225db9faba81',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/28b7c15a-7ba2-443f-a8a9-b7088c628d70',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/5885b37f-e5f7-4082-941f-cf5d9443c176',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/61017162-157e-43c2-9a72-091077ae8f27',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/fda8d1d5-15c3-443a-ae7d-6d182310c957',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/65ea7b05-ee42-4897-9c12-5dc1b044d51f',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/6bf94a1b-76a0-4c0b-adb7-c29f3b1e406c',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/917aa6f4-60ae-4e76-9e4f-29a13c728bf2',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/e58f784e-9a20-48fd-9801-a5971d611c10',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/1335c3eb-56ec-430e-b649-534ace7f93b3',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/38517238-3074-4164-9d4d-ea528aacd5f7',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/e78ea0d1-32da-401b-a734-d90a5115c695',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/97d475ec-74b6-42d7-b1e6-118387bf94ee',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/1a44777e-b072-4247-bd54-b8122d74ce8b',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/6b6efc12-b486-48e7-88a4-06c31495edb5',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/f7ade271-1c72-4bdd-b953-f49ec01452f4',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/78726df0-1778-4499-a1f4-62e217f61962',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/603829f4-0ee8-4a98-a388-8782243fc2ba',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/6e72486e-8a06-4d35-a996-13fd00737a86',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/ed82309c-ffaf-4b35-b393-c9b3cff4d657',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/88db14ac-b8e6-485e-b895-454bb4cf86a7',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/a16dd429-6ded-4e54-b3da-6ca5bc863988',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/05119707-8b86-43ad-8a25-c4b7736c585c',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/514acce8-42cb-46f4-b486-63369505827a',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/a15acd52-209d-4db5-9059-4f03ab55a843',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/efffd5bd-3152-4612-b53e-e7686d73b2fe',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/c4890cfc-818a-493d-a142-3f3f0df40ca1',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/169cd366-1776-4f43-bc74-c1966fbc0b3c',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/92f68c2c-b644-49e3-9e79-8d3896825d2d',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/766ec137-b1ab-4081-b47e-361b9ef58670',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/123f8c6a-5f1e-4e85-94af-34c6cdfebcc4',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/cdb72c54-e7d9-48bb-8b23-cf1e6d05f278',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/af278fd8-e9aa-407d-bb14-0ca290afacf6',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/5b344400-ad88-4d52-8ca2-515f38300a04',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/717e66d6-c210-4ecf-be6f-c02ae2007dea',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/48cd7eb7-88f3-4d6d-8277-a64f6c5ac41a',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/1ecf9f0e-1c06-4838-acbf-6194a8682507',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/2cd4eefb-81fb-479b-9e82-98921ea9077e',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/69878b5e-c889-490a-896f-03e637054b7f',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/0981a748-4b53-40c4-aee0-f1fad40d2d12',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/889daa1f-b8be-496c-b1b2-04e514971473',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/fcffc1c1-3b5d-4c73-8a1e-f3deed7e631f',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/0718467c-730c-462c-a997-e71a94ddd68f',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/af9f5b3f-4439-41f8-8e4a-5c434aafce47',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/81ea9bb0-8bfc-4ab6-a7b0-13f8cdab5263',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/91e369bf-2e99-4d51-8eca-669a905ddccc',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/f2f20b49-b014-400b-86e6-413a2e7bbacc',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/c9f43d53-75db-4817-b60c-d8d7c8bc79c3',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/3bcc6f42-920b-4cb6-837a-5d4ce9ee0f35',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/99e36d5b-b810-4744-9927-b5cf929d95fb',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/42a23bc0-08a2-4c07-8b0c-705b8ee6e62b',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/0940a2a9-8244-40c4-979a-b780774fd5f5',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/2a03e3ca-d491-4f4f-aefe-9d5fef042fb5',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/c53f7d07-b814-4a60-a9a1-9b79efb227db',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/e4c2b4e2-de04-44cc-b283-6be5eced31ff',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/f2083532-a861-408d-9812-5707c8b11663',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/866cf170-41ec-468b-9c89-8aed44deeac9',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/dd7ac20d-9633-4591-b780-f71b131154bb',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/dafcfb0f-f7fc-4a0b-9268-d3642789fcbd',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/3cc71078-ac60-49e8-9add-5359bdc4c31e',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/dd6ce037-ee30-4761-8119-b6977be68003',
+    'https://gensparkstorageprodwest.blob.core.windows.net/web-drive/83d35741-5847-48e7-a7ce-5f573ee31fd2/102a6be7-4095-455b-a42a-689d072175c5'
+];
+
+console.log(`📊 총 ${JSON_FILES.length}개 JSON 파일 처리 시작...`);
+console.log('⏳ 데이터베이스 저장은 사용자가 data-import.html 페이지에서 수행합니다.');
+console.log('\n💡 사용 방법:');
+console.log('1. 웹 브라우저에서 pages/data-import.html 열기');
+console.log('2. 위 81개 JSON 파일 URL 복사');
+console.log('3. 브라우저에서 파일 업로드 또는 URL 붙여넣기');
+console.log('4. "데이터 파싱" 버튼 클릭');
+console.log('5. "데이터베이스 저장" 버튼 클릭');
