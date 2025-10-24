@@ -691,3 +691,4 @@ npx serve .
 ---
 
 **배포 URL 예시**: `https://gst-patents.pages.dev` (실제 배포 시 업데이트 필요)
+# gst-patents
