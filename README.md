@@ -123,23 +123,403 @@
 
 ## 🚀 **배포 및 실행**
 
-### ⚡ **Cloudflare Pages 배포**
+### 📦 **1단계: GitHub 리포지토리 생성 및 푸시**
+
+#### 1.1 사전 준비 사항
+- GitHub 계정 보유 확인
+- Git 설치 확인: `git --version`
+- 프로젝트 디렉터리에서 작업 진행
+
+#### 1.2 로컬 Git 저장소 초기화
 
 ```bash
-# 1. GitHub 리포지토리 생성 및 푸시
-git init
-git add .
-git commit -m "GST 특허관리시스템 배포 준비"
-git remote add origin https://github.com/YOUR_USERNAME/gst-patents.git
-git push -u origin main
+# 현재 프로젝트 폴더로 이동
+cd /Users/sungho-kang/GST_patent
 
-# 2. Cloudflare Pages 연결
-# - dash.cloudflare.com에서 Pages 선택
-# - GitHub 리포지토리 연결
-# - 자동 배포 완료
+# Git 저장소 초기화 (이미 초기화되어 있다면 생략)
+git init
+
+# Git 사용자 정보 설정 (최초 1회)
+git config --global user.name "Your Name"
+git config --global user.email "your.email@example.com"
+
+# 현재 브랜치 확인 (main 또는 master)
+git branch
 ```
 
-**배포 URL**: `https://gst-patents.pages.dev`
+#### 1.3 .gitignore 파일 생성 및 설정
+
+```bash
+# .gitignore 파일 생성
+cat > .gitignore << 'EOF'
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+*.tmp
+.cache/
+EOF
+```
+
+#### 1.4 변경사항 스테이징 및 커밋
+
+```bash
+# 모든 파일 추가 (단, .gitignore에 명시된 파일 제외)
+git add .
+
+# 스테이징된 파일 확인
+git status
+
+# 초기 커밋 생성
+git commit -m "Initial commit: GST 특허관리시스템 v0.9.0
+
+- 반응형 대시보드 및 특허 목록 UI
+- 실시간 검색 및 퍼지 매칭 기능
+- Chart.js 기반 통계 시각화
+- PWA 및 Service Worker 구현
+- RAG/LLM 통합 준비 인터페이스
+- Cloudflare Pages 배포 최적화"
+
+# 브랜치 이름 main으로 변경 (필요시)
+git branch -M main
+```
+
+#### 1.5 GitHub 원격 저장소 생성
+
+**방법 1: GitHub 웹사이트에서 생성**
+1. https://github.com 접속 및 로그인
+2. 우측 상단 `+` 버튼 → `New repository` 클릭
+3. 저장소 정보 입력:
+   - **Repository name**: `gst-patents`
+   - **Description**: `GST 특허관리시스템 - 반도체 유해가스 정화장비 특허 관리 및 분석 시스템`
+   - **Visibility**: `Private` (권장) 또는 `Public`
+   - **Initialize this repository**: 모두 체크 해제 (이미 로컬에 파일이 있으므로)
+4. `Create repository` 클릭
+
+**방법 2: GitHub CLI 사용 (선택사항)**
+```bash
+# GitHub CLI 설치 확인
+gh --version
+
+# GitHub CLI로 저장소 생성
+gh repo create gst-patents --private --source=. --remote=origin --push
+
+# 또는 공개 저장소로 생성
+# gh repo create gst-patents --public --source=. --remote=origin --push
+```
+
+#### 1.6 원격 저장소 연결 및 푸시
+
+```bash
+# 원격 저장소 URL 연결 (GitHub 웹에서 생성한 경우)
+git remote add origin https://github.com/kordokrip/gst-patents.git
+
+# 원격 저장소 확인
+git remote -v
+
+# main 브랜치를 원격 저장소로 푸시
+git push -u origin main
+
+# 푸시 성공 확인
+# Enumerating objects: 100, done.
+# ...
+# To https://github.com/kordokrip/gst-patents.git
+#  * [new branch]      main -> main
+```
+
+#### 1.7 브랜치 보호 설정 (선택사항)
+
+GitHub 웹사이트에서 저장소 → Settings → Branches → Add rule:
+- **Branch name pattern**: `main`
+- **Require pull request reviews before merging**: 체크 (팀 협업 시 권장)
+- **Require status checks to pass before merging**: 체크 (CI/CD 설정 시)
+
+---
+
+### ⚡ **2단계: Cloudflare Pages 배포**
+
+#### 2.1 Cloudflare 계정 설정
+
+1. **Cloudflare 계정 생성/로그인**
+   - https://dash.cloudflare.com 접속
+   - 계정이 없으면 무료 가입 (이메일 인증 필요)
+   - 로그인 후 대시보드로 이동
+
+2. **Pages 서비스 접근**
+   - 좌측 메뉴에서 `Workers & Pages` 클릭
+   - 상단 탭에서 `Pages` 선택
+
+#### 2.2 GitHub 연동 및 프로젝트 생성
+
+1. **새 프로젝트 생성**
+   ```
+   Pages 대시보드 → Create application → Connect to Git 클릭
+   ```
+
+2. **GitHub 계정 연동**
+   - `Connect GitHub` 버튼 클릭
+   - GitHub 로그인 및 권한 승인
+   - Cloudflare Pages가 저장소에 접근할 수 있도록 허용
+   - 특정 저장소만 선택: `gst-patents` 선택
+
+3. **저장소 및 브랜치 선택**
+   - **Select a repository**: `kordokrip/gst-patents` 선택
+   - **Production branch**: `main` 선택
+   - `Begin setup` 클릭
+
+#### 2.3 빌드 설정 구성
+
+**중요**: 이 프로젝트는 순수 정적 사이트이므로 빌드 프로세스가 필요하지 않습니다.
+
+```yaml
+# Build Settings 페이지에서 다음과 같이 설정
+
+Project name: gst-patents
+  (자동 생성 URL: https://gst-patents.pages.dev)
+
+Production branch: main
+
+Build settings:
+  Framework preset: None (정적 사이트)
+  Build command: (비워둠 또는 "echo 'No build required'")
+  Build output directory: / (루트 디렉터리)
+  
+Root directory: (비워둠 - 프로젝트 루트)
+
+Environment variables: (현재 필요 없음)
+  (향후 RAG/LLM API 키 추가 시 사용)
+```
+
+#### 2.4 고급 설정 (선택사항)
+
+**빌드 설정 커스터마이징**:
+```bash
+# wrangler.toml 파일 생성 (프로젝트 루트에)
+cat > wrangler.toml << 'EOF'
+name = "gst-patents"
+compatibility_date = "2025-01-17"
+
+[site]
+bucket = "./"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+EOF
+```
+
+**환경 변수 설정** (향후 필요 시):
+- Settings → Environment variables 이동
+- `Add variable` 클릭
+  - `OPENAI_API_KEY`: (LLM 연동 시)
+  - `CHROMA_API_KEY`: (벡터 DB 연동 시)
+
+#### 2.5 배포 실행
+
+1. **초기 배포 시작**
+   ```
+   Save and Deploy 버튼 클릭
+   → 자동으로 첫 배포 시작
+   ```
+
+2. **배포 진행 상황 모니터링**
+   - Deployments 탭에서 실시간 로그 확인
+   - 빌드 단계:
+     ```
+     ✓ Cloning repository
+     ✓ Installing dependencies (없으므로 생략)
+     ✓ Building application (정적 파일 복사)
+     ✓ Deploying to Cloudflare network
+     ✓ Success! Deployed to https://gst-patents.pages.dev
+     ```
+
+3. **배포 완료 확인**
+   - 배포 소요 시간: 약 1-3분
+   - 상태: `Active` 표시
+   - URL 클릭하여 사이트 정상 작동 확인
+
+#### 2.6 배포 URL 및 도메인 설정
+
+**1. 기본 Cloudflare Pages URL**
+```
+https://gst-patents.pages.dev
+```
+
+**2. 커스텀 도메인 연결 (선택사항)**
+
+프로젝트 대시보드 → Custom domains → Set up a custom domain
+
+```bash
+# 예시: 회사 도메인 사용
+# patents.gst-tech.com 으로 연결
+
+1. Add custom domain 클릭
+2. 도메인 입력: patents.gst-tech.com
+3. DNS 레코드 추가 (Cloudflare DNS 사용 시 자동):
+   - Type: CNAME
+   - Name: patents
+   - Target: gst-patents.pages.dev
+   - Proxy status: Proxied (권장)
+
+4. Activate domain 클릭
+5. DNS 전파 대기 (최대 24시간, 보통 5-10분)
+```
+
+#### 2.7 자동 배포 설정 확인
+
+Cloudflare Pages는 GitHub와 자동 연동되어 있어 별도 설정 없이 자동 배포됩니다:
+
+```yaml
+자동 배포 트리거:
+  ✓ main 브랜치에 push → 프로덕션 배포
+  ✓ PR(Pull Request) 생성 → 프리뷰 배포
+  ✓ 브랜치 push → 브랜치별 프리뷰 배포
+
+배포 알림:
+  - GitHub Commit 상태 체크 자동 업데이트
+  - 이메일 알림 (Settings에서 설정 가능)
+  - Slack/Discord 웹훅 연동 가능
+```
+
+#### 2.8 배포 후 검증 체크리스트
+
+```bash
+# 1. 메인 페이지 로드 확인
+curl -I https://gst-patents.pages.dev/
+# HTTP/2 200 OK 확인
+
+# 2. Service Worker 등록 확인
+# 브라우저 개발자 도구 → Application → Service Workers
+# Status: activated and is running
+
+# 3. PWA 설치 가능 여부 확인
+# 주소창 우측 설치 아이콘 표시 확인
+
+# 4. API 엔드포인트 확인 (향후)
+curl https://gst-patents.pages.dev/api/patents
+
+# 5. 404 리다이렉션 확인
+curl -I https://gst-patents.pages.dev/non-existent-page
+# → index.html로 리다이렉트 (SPA 라우팅)
+```
+
+#### 2.9 성능 최적화 확인
+
+**Lighthouse 검사 실행**:
+```bash
+# Chrome DevTools → Lighthouse → Generate report
+
+목표 점수:
+- Performance: 90+ 점
+- Accessibility: 95+ 점
+- Best Practices: 90+ 점
+- SEO: 85+ 점
+- PWA: 최적 배지 획득
+```
+
+**Cloudflare Analytics 활성화**:
+- 프로젝트 대시보드 → Analytics 탭
+- 무료 플랜에서도 기본 분석 제공:
+  - 페이지뷰
+  - 고유 방문자 수
+  - 대역폭 사용량
+  - 요청 수 및 응답 시간
+
+#### 2.10 지속적 배포 워크플로우
+
+```bash
+# 로컬에서 개발 및 테스트
+git checkout -b feature/new-feature
+# ...코드 수정...
+npm run test  # 또는 로컬 서버 테스트
+
+# 커밋 및 푸시
+git add .
+git commit -m "feat: 새로운 검색 필터 추가"
+git push origin feature/new-feature
+
+# GitHub에서 PR 생성
+# → Cloudflare Pages가 자동으로 프리뷰 배포 생성
+# → 프리뷰 URL로 테스트: https://abc123.gst-patents.pages.dev
+
+# PR 승인 및 main 브랜치 병합
+# → 자동으로 프로덕션 배포
+# → https://gst-patents.pages.dev 업데이트
+```
+
+---
+
+### 🔒 **3단계: 보안 및 최적화 설정**
+
+#### 3.1 보안 헤더 검증
+
+프로젝트의 `_headers` 파일이 정상 적용되었는지 확인:
+
+```bash
+# 보안 헤더 확인
+curl -I https://gst-patents.pages.dev/ | grep -i "content-security-policy\|x-frame-options\|x-content-type"
+
+# 예상 결과:
+# Content-Security-Policy: default-src 'self'; ...
+# X-Frame-Options: DENY
+# X-Content-Type-Options: nosniff
+```
+
+#### 3.2 캐싱 전략 확인
+
+```bash
+# 정적 자산 캐싱 확인
+curl -I https://gst-patents.pages.dev/css/style.css | grep -i "cache-control"
+
+# Service Worker 캐싱 확인
+# 브라우저 → DevTools → Application → Cache Storage
+# 프리캐시된 파일 목록 확인
+```
+
+#### 3.3 HTTPS 및 SSL 인증서
+
+Cloudflare Pages는 기본적으로 무료 SSL 인증서를 제공합니다:
+- 자동 갱신: Let's Encrypt
+- TLS 1.2/1.3 지원
+- HSTS 자동 설정 (프로덕션 권장)
+
+---
 
 ### 🔧 **로컬 개발환경**
 
