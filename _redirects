@@ -42,5 +42,6 @@ http://www.gst-patents.com/*    https://gst-patents.com/:splat       301!
 https://www.gst-patents.com/*   https://gst-patents.com/:splat       301!
 
 # SPA catch-all - MUST BE LAST
-# All unmatched routes serve index.html (client-side routing)
-/*  /index.html  200
+# Only catch routes WITHOUT file extensions (client-side routing)
+# Static files (.js, .css, .json, etc.) should NOT fallback to index.html
+/  /index.html  200
