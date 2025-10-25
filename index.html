@@ -468,19 +468,38 @@
     <div id="ai-chat-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" aria-hidden="true"></div>
 
     <!-- JavaScript -->
-    <script src="js/enhanced-search.js?v=3.2.0" defer></script>
-    <script src="js/main.js?v=3.2.0" defer></script>
-    <script src="js/patents-refactored.js?v=3.2.0" defer></script>
-    <script src="js/charts.js?v=3.2.0" defer></script>
-    <script src="js/timeline.js?v=3.2.0" defer></script>
+    <script src="js/enhanced-search.js?v=3.3.0" defer></script>
+    <script src="js/main.js?v=3.3.0" defer></script>
+    <script src="js/patents-refactored.js?v=3.3.0" defer></script>
+    <script src="js/charts.js?v=3.3.0" defer></script>
+    <script src="js/timeline.js?v=3.3.0" defer></script>
     
     <!-- Service Worker Registration -->
     <script>
         if ('serviceWorker' in navigator) {
+            // Service Worker 메시지 수신 (강제 새로고침)
+            navigator.serviceWorker.addEventListener('message', event => {
+                if (event.data && event.data.type === 'FORCE_RELOAD') {
+                    console.log('🔄 Service Worker requested force reload');
+                    window.location.reload(true);
+                }
+            });
+            
             window.addEventListener('load', function() {
                 navigator.serviceWorker.register('/sw.js')
                     .then(function(registration) {
                         console.log('✅ Service Worker 등록 성공:', registration.scope);
+                        
+                        // 업데이트 감지 시 즉시 활성화
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'activated') {
+                                    console.log('🆕 New Service Worker activated - reloading...');
+                                    window.location.reload(true);
+                                }
+                            });
+                        });
                     })
                     .catch(function(error) {
                         console.log('⚠️ Service Worker 등록 실패:', error);

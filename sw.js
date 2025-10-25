@@ -3,9 +3,9 @@
  * Cloudflare 배포 최적화 및 오프라인 지원
  */
 
-const CACHE_NAME = 'gst-patents-v3.2.0';
-const STATIC_CACHE = 'gst-static-v3.2.0';
-const DYNAMIC_CACHE = 'gst-dynamic-v3.2.0';
+const CACHE_NAME = 'gst-patents-v3.2.0-force';
+const STATIC_CACHE = 'gst-static-v3.2.0-force';
+const DYNAMIC_CACHE = 'gst-dynamic-v3.2.0-force';
 
 // 캐시할 정적 리소스
 const STATIC_ASSETS = [
@@ -75,25 +75,29 @@ self.addEventListener('install', event => {
 
 // 활성화 이벤트 - 이전 캐시 정리
 self.addEventListener('activate', event => {
-    console.log('🚀 Service Worker activating...');
+    console.log('🚀 Service Worker activating - FORCE CLEAR ALL CACHES');
     
     event.waitUntil(
         caches.keys().then(cacheNames => {
+            console.log('📋 Found caches:', cacheNames);
+            // **모든 캐시 강제 삭제** (v3.2.0-force 포함)
             return Promise.all(
                 cacheNames.map(cacheName => {
-                    // 현재 버전이 아닌 캐시 삭제
-                    if (cacheName !== STATIC_CACHE && 
-                        cacheName !== DYNAMIC_CACHE && 
-                        cacheName !== CACHE_NAME) {
-                        console.log(`🗑️ Deleting old cache: ${cacheName}`);
-                        return caches.delete(cacheName);
-                    }
+                    console.log(`🗑️ FORCE DELETING cache: ${cacheName}`);
+                    return caches.delete(cacheName);
                 })
             );
         }).then(() => {
-            console.log('✅ Service Worker activated');
-            // 모든 클라이언트 제어
-            return self.clients.claim();
+            console.log('✅ ALL CACHES DELETED - Service Worker activated');
+            // 모든 클라이언트 즉시 제어 + 새로고침
+            return self.clients.claim().then(() => {
+                console.log('🔄 Forcing reload of all clients...');
+                return self.clients.matchAll().then(clients => {
+                    clients.forEach(client => {
+                        client.postMessage({ type: 'FORCE_RELOAD' });
+                    });
+                });
+            });
         })
     );
 });
