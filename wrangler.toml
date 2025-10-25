@@ -1,0 +1,52 @@
+name = "gst-patents"
+main = "functions/_worker.js"
+compatibility_date = "2025-01-24"
+compatibility_flags = ["nodejs_compat"]
+
+# Cloudflare Pages 연동
+pages_build_output_dir = "./"
+
+# D1 데이터베이스 바인딩
+[[d1_databases]]
+binding = "DB"
+database_name = "gst_patents_db"
+database_id = "YOUR_DATABASE_ID"  # wrangler d1 create 후 여기에 입력
+migrations_dir = "migrations"
+
+# KV 네임스페이스 (캐싱용, 선택사항)
+[[kv_namespaces]]
+binding = "CACHE"
+id = "YOUR_KV_ID"  # 선택사항
+
+# 환경 변수
+[vars]
+ENVIRONMENT = "production"
+
+# 커스텀 도메인 설정
+[env.production]
+name = "gst-patents"
+routes = [
+  { pattern = "gst-patents.com/*", zone_name = "gst-patents.com" },
+  { pattern = "www.gst-patents.com/*", zone_name = "gst-patents.com" }
+]
+
+[env.production.vars]
+DOMAIN = "gst-patents.com"
+
+# 개발 환경
+[env.development]
+name = "gst-patents-dev"
+
+# 빌드 설정
+[build]
+command = "echo 'Static site, no build needed'"
+
+# 업로드 제외 파일
+[site]
+bucket = "./"
+
+# 업로드 제외 규칙
+[[rules]]
+type = "Text"
+globs = ["**/*.js", "**/*.html", "**/*.css", "**/*.json"]
+fallthrough = false
