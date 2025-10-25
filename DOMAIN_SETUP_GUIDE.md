@@ -140,27 +140,49 @@ wrangler pages domain list --project-name=gst-patents
 
 ---
 
-## 📊 6단계: D1 바인딩 설정 (중요!)
+## 📊 6단계: D1 바인딩 확인
 
-도메인 연결 후 D1 데이터베이스 바인딩도 확인해야 합니다.
+### ✅ wrangler.toml을 통한 바인딩 관리
 
-### Cloudflare Dashboard에서 설정
+Cloudflare Pages 프로젝트는 `wrangler.toml` 파일을 통해 바인딩을 관리합니다.
 
-1. **Pages 프로젝트** → **Settings** → **Functions**
-2. **D1 database bindings** 섹션:
-   - Variable name: `DB`
-   - D1 database: `gst_patents_db` 선택
-3. **Save** 클릭
+**현재 설정 (이미 완료됨)**:
 
-### wrangler.toml 파일 확인
-
-현재 설정:
 ```toml
+# 전역 D1 바인딩
 [[d1_databases]]
 binding = "DB"
 database_name = "gst_patents_db"
 database_id = "3497fe7d-998f-4f1c-8bc4-912eb4b05028"
+
+# Production 환경
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "gst_patents_db"
+database_id = "3497fe7d-998f-4f1c-8bc4-912eb4b05028"
+
+# Preview 환경
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "gst_patents_db"
+database_id = "3497fe7d-998f-4f1c-8bc4-912eb4b05028"
 ```
+
+### 바인딩 확인 방법
+
+1. **로컬에서 확인**:
+   ```bash
+   cat wrangler.toml | grep -A 3 "d1_databases"
+   ```
+
+2. **Cloudflare Dashboard에서 확인**:
+   - Pages 프로젝트 → **Settings** → **Functions**
+   - "이 프로젝트의 바인딩은 wrangler.toml을 통해 관리됩니다" 메시지 확인
+   - 바인딩 목록에 `DB: gst_patents_db` 표시됨
+
+3. **배포 후 자동 적용**:
+   - `wrangler pages deploy` 실행 시 자동으로 바인딩 적용
+   - Dashboard에서 별도 설정 불필요
 
 ---
 
