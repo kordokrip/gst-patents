@@ -28,6 +28,8 @@ export async function onRequest(context) {
       return handleSearchAPI(request, env, corsHeaders);
     } else if (path.startsWith('/api/stats')) {
       return handleStatsAPI(request, env, corsHeaders);
+    } else if (path.startsWith('/api/auth')) {
+      return handleAuthAPI(request, env, corsHeaders);
     } else if (path.startsWith('/api/health')) {
       return new Response(JSON.stringify({ status: 'ok', timestamp: Date.now() }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
@@ -262,4 +264,261 @@ async function handleStatsAPI(request, env, corsHeaders) {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });
   }
+}
+
+/**
+ * 인증 API 핸들러
+ */
+async function handleAuthAPI(request, env, corsHeaders) {
+  const url = new URL(request.url);
+  const path = url.pathname;
+
+  try {
+    // 회원가입 신청
+    if (path === '/api/auth/register' && request.method === 'POST') {
+      const { email, password, name, company, reason } = await request.json();
+
+      // 이메일 도메인 검증
+      if (!email.endsWith('@gst-in.com')) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          error: '@gst-in.com 이메일만 가입할 수 있습니다.' 
+        }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      // 비밀번호 강도 검증 (8자 이상, 영문/숫자/특수문자 포함)
+      const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+      if (!passwordRegex.test(password)) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          error: '비밀번호는 8자 이상이며 영문, 숫자, 특수문자를 모두 포함해야 합니다.' 
+        }), {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      // 간단한 해시 생성 (실제 배포 시 bcrypt 사용 권장)
+      const passwordHash = await simpleHash(password);
+
+      // 중복 확인
+      const existingUser = await env.DB.prepare(
+        'SELECT email FROM users WHERE email = ?'
+      ).bind(email).first();
+
+      const existingPending = await env.DB.prepare(
+        'SELECT email FROM pending_registrations WHERE email = ? AND status = "pending"'
+      ).bind(email).first();
+
+      if (existingUser || existingPending) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          error: '이미 등록된 이메일이거나 승인 대기 중입니다.' 
+        }), {
+          status: 409,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      // 가입 신청 저장
+      await env.DB.prepare(`
+        INSERT INTO pending_registrations (email, password_hash, name, company, reason)
+        VALUES (?, ?, ?, ?, ?)
+      `).bind(email, passwordHash, name, company || '', reason || '').run();
+
+      return new Response(JSON.stringify({ 
+        success: true, 
+        message: '가입 신청이 완료되었습니다. 관리자 승인을 기다려주세요.' 
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // 로그인
+    if (path === '/api/auth/login' && request.method === 'POST') {
+      const { email, password } = await request.json();
+
+      const user = await env.DB.prepare(
+        'SELECT * FROM users WHERE email = ? AND status = "active"'
+      ).bind(email).first();
+
+      if (!user) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          error: '이메일 또는 비밀번호가 올바르지 않습니다.' 
+        }), {
+          status: 401,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      // 비밀번호 검증
+      const passwordHash = await simpleHash(password);
+      if (passwordHash !== user.password_hash) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          error: '이메일 또는 비밀번호가 올바르지 않습니다.' 
+        }), {
+          status: 401,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      // 마지막 로그인 시간 업데이트
+      await env.DB.prepare(
+        'UPDATE users SET last_login_at = datetime("now") WHERE id = ?'
+      ).bind(user.id).run();
+
+      return new Response(JSON.stringify({ 
+        success: true, 
+        user: {
+          email: user.email,
+          name: user.name,
+          company: user.company,
+          role: user.role
+        }
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // 승인 대기 목록 조회 (관리자 전용)
+    if (path === '/api/auth/pending' && request.method === 'GET') {
+      const authHeader = request.headers.get('Authorization');
+      const adminEmail = authHeader?.replace('Bearer ', '');
+
+      // 관리자 권한 확인
+      const admin = await env.DB.prepare(
+        'SELECT role FROM users WHERE email = ? AND role = "admin" AND status = "active"'
+      ).bind(adminEmail).first();
+
+      if (!admin) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          error: '관리자 권한이 필요합니다.' 
+        }), {
+          status: 403,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      const pending = await env.DB.prepare(`
+        SELECT id, email, name, company, reason, created_at 
+        FROM pending_registrations 
+        WHERE status = 'pending'
+        ORDER BY created_at DESC
+      `).all();
+
+      return new Response(JSON.stringify({ 
+        success: true, 
+        pending: pending.results 
+      }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+      });
+    }
+
+    // 가입 승인/거부 (관리자 전용)
+    if (path === '/api/auth/approve' && request.method === 'POST') {
+      const authHeader = request.headers.get('Authorization');
+      const adminEmail = authHeader?.replace('Bearer ', '');
+      const { id, action, rejectReason } = await request.json();
+
+      // 관리자 권한 확인
+      const admin = await env.DB.prepare(
+        'SELECT email FROM users WHERE email = ? AND role = "admin" AND status = "active"'
+      ).bind(adminEmail).first();
+
+      if (!admin) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          error: '관리자 권한이 필요합니다.' 
+        }), {
+          status: 403,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      // 신청 정보 조회
+      const registration = await env.DB.prepare(
+        'SELECT * FROM pending_registrations WHERE id = ? AND status = "pending"'
+      ).bind(id).first();
+
+      if (!registration) {
+        return new Response(JSON.stringify({ 
+          success: false, 
+          error: '해당 신청을 찾을 수 없습니다.' 
+        }), {
+          status: 404,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+
+      if (action === 'approve') {
+        // 사용자 계정 생성
+        await env.DB.prepare(`
+          INSERT INTO users (email, password_hash, name, company, role, status)
+          VALUES (?, ?, ?, ?, 'user', 'active')
+        `).bind(
+          registration.email, 
+          registration.password_hash, 
+          registration.name, 
+          registration.company
+        ).run();
+
+        // 신청 상태 업데이트
+        await env.DB.prepare(`
+          UPDATE pending_registrations 
+          SET status = 'approved', processed_at = datetime('now'), processed_by = ?
+          WHERE id = ?
+        `).bind(adminEmail, id).run();
+
+        return new Response(JSON.stringify({ 
+          success: true, 
+          message: '가입이 승인되었습니다.' 
+        }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      } else if (action === 'reject') {
+        // 신청 거부
+        await env.DB.prepare(`
+          UPDATE pending_registrations 
+          SET status = 'rejected', processed_at = datetime('now'), processed_by = ?, reject_reason = ?
+          WHERE id = ?
+        `).bind(adminEmail, rejectReason || '관리자에 의해 거부됨', id).run();
+
+        return new Response(JSON.stringify({ 
+          success: true, 
+          message: '가입이 거부되었습니다.' 
+        }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        });
+      }
+    }
+
+    return new Response(JSON.stringify({ error: 'Not found' }), {
+      status: 404,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    return new Response(JSON.stringify({ error: error.message }), {
+      status: 500,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
+}
+
+/**
+ * 간단한 비밀번호 해싱 (SHA-256)
+ * 실제 프로덕션에서는 bcrypt 사용 권장
+ */
+async function simpleHash(text) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(text);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  return hashHex;
 }
