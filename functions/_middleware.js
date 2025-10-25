@@ -4,9 +4,25 @@
  */
 
 export async function onRequest(context) {
-  const { request, env } = context;
+  const { request, env, next } = context;
   const url = new URL(request.url);
   const path = url.pathname;
+
+  // 정적 파일 요청은 middleware 건너뛰기
+  const staticExtensions = ['.js', '.css', '.json', '.html', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot', '.pdf'];
+  const staticPaths = ['/js/', '/css/', '/images/', '/assets/', '/fonts/', '/data/', '/db/', '/pdf/', '/pages/'];
+  
+  const isStaticFile = staticExtensions.some(ext => path.endsWith(ext)) || 
+                       staticPaths.some(prefix => path.startsWith(prefix)) ||
+                       path === '/sw.js' || 
+                       path === '/manifest.json' ||
+                       path === '/favicon.ico' ||
+                       path === '/robots.txt';
+  
+  if (isStaticFile) {
+    // 정적 파일은 middleware를 우회하고 직접 서빙
+    return next();
+  }
 
   // CORS 헤더
   const corsHeaders = {
@@ -36,8 +52,8 @@ export async function onRequest(context) {
       });
     }
 
-    // API 경로가 아니면 정적 파일로 처리
-    return env.ASSETS.fetch(request);
+    // 다른 요청은 다음 핸들러로 전달
+    return next();
   } catch (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
