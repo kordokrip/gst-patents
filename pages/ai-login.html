@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AI 질의 로그인 - GST 특허관리시스템</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'korean': ['Noto Sans KR', 'sans-serif']
+                    },
+                    colors: {
+                        'gst-blue': '#1e40af',
+                        'gst-light-blue': '#3b82f6',
+                        'gst-gray': '#6b7280',
+                        'gst-dark': '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
+</head>
+<body class="font-korean flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- 로그인 카드 -->
+        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <!-- 헤더 -->
+            <div class="bg-gradient-to-r from-gst-blue to-gst-light-blue p-8 text-white text-center">
+                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-robot text-4xl text-gst-blue"></i>
+                </div>
+                <h1 class="text-2xl font-bold mb-2">AI 특허 분석 도우미</h1>
+                <p class="text-blue-100 text-sm">인증된 사용자만 접근할 수 있습니다</p>
+            </div>
+            
+            <!-- 로그인 폼 -->
+            <div class="p-8">
+                <form id="login-form" class="space-y-6">
+                    <!-- 사용자 ID -->
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gst-gray mb-2">
+                            <i class="fas fa-user mr-2"></i>사용자 ID
+                        </label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent transition-all"
+                            placeholder="사용자 ID를 입력하세요"
+                            autocomplete="username"
+                            required
+                        >
+                    </div>
+                    
+                    <!-- 비밀번호 -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gst-gray mb-2">
+                            <i class="fas fa-lock mr-2"></i>비밀번호
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent transition-all pr-12"
+                                placeholder="비밀번호를 입력하세요"
+                                autocomplete="current-password"
+                                required
+                            >
+                            <button 
+                                type="button" 
+                                id="toggle-password"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-gst-gray hover:text-gst-dark transition-colors"
+                                aria-label="비밀번호 표시/숨김"
+                            >
+                                <i class="fas fa-eye" id="eye-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 오류 메시지 -->
+                    <div id="error-message" class="hidden bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-circle text-red-500 mr-3"></i>
+                            <p class="text-sm text-red-700" id="error-text"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- 로그인 버튼 -->
+                    <button 
+                        type="submit" 
+                        id="login-button"
+                        class="w-full bg-gradient-to-r from-gst-blue to-gst-light-blue text-white py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center"
+                    >
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        로그인
+                    </button>
+                </form>
+                
+                <!-- 안내 문구 -->
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-info-circle text-blue-500 mt-1 mr-3"></i>
+                            <div class="text-sm text-blue-800">
+                                <p class="font-semibold mb-1">접근 안내</p>
+                                <p class="text-xs">AI 특허 분석 서비스는 토큰 사용량 관리를 위해 인증된 사용자만 이용할 수 있습니다. 접근 권한이 필요하신 경우 관리자에게 문의하세요.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 홈으로 돌아가기 -->
+                <div class="mt-6 text-center">
+                    <a href="../index.html" class="text-gst-blue hover:text-gst-dark text-sm font-medium transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>홈으로 돌아가기
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 푸터 -->
+        <div class="text-center mt-8 text-white text-sm">
+            <p>&copy; 2025 글로벌 스탠다드 테크놀로지. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // 비밀번호 표시/숨김 토글
+        const togglePassword = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eye-icon');
+        
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+        });
+        
+        // 로그인 폼 처리
+        const loginForm = document.getElementById('login-form');
+        const errorMessage = document.getElementById('error-message');
+        const errorText = document.getElementById('error-text');
+        const loginButton = document.getElementById('login-button');
+        
+        // 인증 정보 (실제 환경에서는 서버 측에서 처리해야 합니다)
+        // 현재는 클라이언트 측 간단 인증 (데모용)
+        const VALID_CREDENTIALS = {
+            'gst-admin': 'GST2025!',
+            'patent-user': 'Patent@123',
+            'demo': 'demo1234'
+        };
+        
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            // 로딩 상태
+            loginButton.disabled = true;
+            loginButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>로그인 중...';
+            errorMessage.classList.add('hidden');
+            
+            // 인증 확인 (500ms 지연으로 실제 서버 요청 시뮬레이션)
+            setTimeout(() => {
+                if (VALID_CREDENTIALS[username] && VALID_CREDENTIALS[username] === password) {
+                    // 로그인 성공
+                    sessionStorage.setItem('ai_access_token', btoa(username + ':' + Date.now()));
+                    sessionStorage.setItem('ai_user', username);
+                    
+                    // 성공 애니메이션
+                    loginButton.innerHTML = '<i class="fas fa-check mr-2"></i>로그인 성공!';
+                    loginButton.classList.remove('from-gst-blue', 'to-gst-light-blue');
+                    loginButton.classList.add('bg-green-500');
+                    
+                    // Streamlit 앱으로 리다이렉트
+                    setTimeout(() => {
+                        window.location.href = 'https://gst-patents.streamlit.app/';
+                    }, 1000);
+                } else {
+                    // 로그인 실패
+                    errorText.textContent = '사용자 ID 또는 비밀번호가 올바르지 않습니다.';
+                    errorMessage.classList.remove('hidden');
+                    
+                    // 입력 필드 흔들기 애니메이션
+                    loginForm.classList.add('animate-shake');
+                    setTimeout(() => {
+                        loginForm.classList.remove('animate-shake');
+                    }, 500);
+                    
+                    // 버튼 복구
+                    loginButton.disabled = false;
+                    loginButton.innerHTML = '<i class="fas fa-sign-in-alt mr-2"></i>로그인';
+                    
+                    // 비밀번호 초기화
+                    passwordInput.value = '';
+                    passwordInput.focus();
+                }
+            }, 500);
+        });
+        
+        // 페이지 로드 시 이미 로그인되어 있는지 확인
+        window.addEventListener('load', () => {
+            const token = sessionStorage.getItem('ai_access_token');
+            if (token) {
+                // 이미 로그인됨 - 바로 리다이렉트
+                window.location.href = 'https://gst-patents.streamlit.app/';
+            }
+        });
+    </script>
+    
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.5s;
+        }
+    </style>
+</body>
+</html>
