@@ -1,0 +1,4941 @@
+[
+  {
+    "id": "KR6930125",
+    "patent_number": "6930125",
+    "title": "E3 WAVE",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "DCS",
+    "registration_date": "2025-05-20",
+    "application_date": "2025-03-27",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": []
+  },
+  {
+    "id": "KR102795314",
+    "patent_number": "10-2795314",
+    "title": "이종 가스 제거를 위한 흡착필터, 이를 포함하는 흄 처리장치, 및 이를 이용한 이종 가스 제거방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2025-04-09",
+    "application_date": "2022-08-24",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 16,
+    "source_path": "이종 가스 제거를 위한 흡착필터, 이를 포함하는 흄 처리장치, 및 이를 이용한 이종 가스 제거방법.pdf",
+    "inventors": [
+      "남기복",
+      "황인혁",
+      "김재환",
+      "안세훈"
+    ],
+    "technical_keywords": [
+      "이종",
+      "가스",
+      "제거를",
+      "흡착필터",
+      "포함하는",
+      "처리장치",
+      "이용한",
+      "제거방법"
+    ]
+  },
+  {
+    "id": "KR102793590",
+    "patent_number": "10-2793590",
+    "title": "유해 가스 제거용 스크러버의 가변 운전 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2025-04-04",
+    "application_date": "2022-05-17",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 15,
+    "source_path": "유해 가스 제거용 스크러버의 가변 운전 시스템.pdf",
+    "inventors": [
+      "이정우",
+      "김형관",
+      "이성욱",
+      "김재환"
+    ],
+    "technical_keywords": [
+      "유해",
+      "가스",
+      "제거용",
+      "스크러버의",
+      "가변",
+      "운전",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR102720342",
+    "patent_number": "10-2720342",
+    "title": "릴레이 모듈",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": "2024-10-17",
+    "application_date": "2022-03-23",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 18,
+    "source_path": "릴레이 모듈.pdf",
+    "inventors": [
+      "김기범. 최익성"
+    ],
+    "technical_keywords": [
+      "릴레이",
+      "모듈"
+    ]
+  },
+  {
+    "id": "KR102720343",
+    "patent_number": "10-2720343",
+    "title": "열전소자 모듈 모니터링 시스템 및 방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": "2024-10-17",
+    "application_date": "2022-02-24",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 19,
+    "source_path": "열전소자 모듈 모니터링 시스템 및 방법.pdf",
+    "inventors": [
+      "이진영",
+      "이현진",
+      "김기범"
+    ],
+    "technical_keywords": [
+      "열전소자",
+      "모듈",
+      "모니터링",
+      "시스템",
+      "방법"
+    ]
+  },
+  {
+    "id": "KRZL201980040233.5",
+    "patent_number": "ZL201980040233.5",
+    "title": "배기가스를 포함하는 유체의 흐름을 제어하기 위한 매니폴드",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2024-09-27",
+    "application_date": "2019-06-14",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최익성",
+      "정재윤",
+      "김덕준"
+    ],
+    "technical_keywords": [
+      "배기가스를",
+      "포함하는",
+      "유체의",
+      "흐름을",
+      "제어하기",
+      "매니폴드"
+    ]
+  },
+  {
+    "id": "KRI826817",
+    "patent_number": "I826817",
+    "title": "스크류실린더를 이용한 가스처리설비용 파우더제거장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2023-12-21",
+    "application_date": "2021-08-19",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박종민",
+      "글로벌스탠다드테크놀로지"
+    ],
+    "technical_keywords": [
+      "스크류실린더를",
+      "이용한",
+      "가스처리설비용",
+      "파우더제거장치"
+    ]
+  },
+  {
+    "id": "KR102603815",
+    "patent_number": "10-2603815",
+    "title": "유해물질 가스 제거 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2023-11-14",
+    "application_date": "2021-04-21",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 19,
+    "source_path": "유해물질 가스 제거 시스템.pdf",
+    "inventors": [
+      "정종국",
+      "이성욱",
+      "윤성철",
+      "전동근"
+    ],
+    "technical_keywords": [
+      "유해물질",
+      "가스",
+      "제거",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR11759832",
+    "patent_number": "11759832",
+    "title": "스크류실린더를 이용한 가스처리설비용 파우더제거장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2023-09-19",
+    "application_date": "2021-08-18",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박종민",
+      "글로벌스탠다드테크놀로지"
+    ],
+    "technical_keywords": [
+      "스크류실린더를",
+      "이용한",
+      "가스처리설비용",
+      "파우더제거장치"
+    ]
+  },
+  {
+    "id": "KR102562306",
+    "patent_number": "10-2562306",
+    "title": "온도제어모듈의 수분응축 방지장치",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2023-07-27",
+    "application_date": "2020-10-23",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 15,
+    "source_path": "온도제어모듈의 수분응축 방지장치.pdf",
+    "inventors": [
+      "안세훈",
+      "양승진",
+      "이희진.",
+      "허재석",
+      "이재훈"
+    ],
+    "technical_keywords": [
+      "온도제어모듈의",
+      "수분응축",
+      "방지장치"
+    ]
+  },
+  {
+    "id": "KR102548072",
+    "patent_number": "10-2548072",
+    "title": "하이브리드 스크러버의 가변 운전 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2023-06-22",
+    "application_date": "2021-05-26",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "하이브리드 스크러버의 가변 운전 시스템.pdf",
+    "inventors": [
+      "이정우 김형관 정종국 이성욱"
+    ],
+    "technical_keywords": [
+      "하이브리드",
+      "스크러버의",
+      "가변",
+      "운전",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR102398681",
+    "patent_number": "10-2398681",
+    "title": "Nox 흡착제 제조방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2022-05-11",
+    "application_date": "2020-05-21",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 22,
+    "source_path": "NOx 흡착제 제조방법.pdf",
+    "inventors": [
+      "김재환",
+      "오주형",
+      "정종국",
+      "이상준"
+    ],
+    "technical_keywords": [
+      "흡착제",
+      "제조방법"
+    ]
+  },
+  {
+    "id": "KR102379932",
+    "patent_number": "10-2379932",
+    "title": "동기식 벅 컨버터가 적용된 출력극성 가변형 전원공급장치 및 제어방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": "2022-03-31",
+    "application_date": "2020-05-13",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 10,
+    "source_path": "동기식 벅 컨버터가 적용된 출력극성 가변형 전원공급장치 및 제어방법.pdf",
+    "inventors": [
+      "김기범"
+    ],
+    "technical_keywords": [
+      "동기식",
+      "컨버터가",
+      "적용된",
+      "출력극성",
+      "가변형",
+      "전원공급장치",
+      "제어방법"
+    ]
+  },
+  {
+    "id": "KR102379933",
+    "patent_number": "10-2379933",
+    "title": "능동 역률제어가 가능한 고승압비의 다단계 벅 부스트 PFC 컨버터 및 부스트 PFC 컨버터",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": "2022-03-31",
+    "application_date": "2020-02-18",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 13,
+    "source_path": "능동 역률제어가 가능한 고승압비의 다단계 벅 부스트 PFC 컨버터 및 부스트 PFC 컨버터.pdf",
+    "inventors": [
+      "조은석",
+      "김기범",
+      "이현진"
+    ],
+    "technical_keywords": [
+      "부스트",
+      "컨버터",
+      "능동",
+      "역률제어가",
+      "가능한",
+      "고승압비의",
+      "다단계"
+    ]
+  },
+  {
+    "id": "KR102381543",
+    "patent_number": "10-2381543",
+    "title": "인터락 장치를 구비한 밸브",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2022-03-29",
+    "application_date": "2020-10-22",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 9,
+    "source_path": "인터락 장치를 구비한 밸브.pdf",
+    "inventors": [
+      "김덕준",
+      "최익성"
+    ],
+    "technical_keywords": [
+      "인터락",
+      "장치를",
+      "밸브"
+    ]
+  },
+  {
+    "id": "KR1020200019791",
+    "patent_number": "10-2020-0019791",
+    "title": "열전소자를 활용한 온도제어 시스템 및 온도제어 시스템의 선형 가변 파라미터 PID 제어 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "전원공급장치",
+    "registration_date": "2021-09-16",
+    "application_date": "2020-02-18",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "열전소자를 활용한 온도제어 시스템 및 온도제어 시스템의 선형 가변 파라미터 PID제어 방법.pdf",
+    "inventors": [
+      "조은석",
+      "김기범",
+      "이현진"
+    ],
+    "technical_keywords": [
+      "온도제어",
+      "열전소자를",
+      "활용한",
+      "시스템",
+      "시스템의",
+      "선형",
+      "가변",
+      "파라미터",
+      "제어",
+      "방법"
+    ]
+  },
+  {
+    "id": "KR102254518",
+    "patent_number": "10-2254518",
+    "title": "흡착 로터, 산화촉매, 열교환기를 이용한 모듈화 VOCs 제거 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2021-05-14",
+    "application_date": "2019-05-16",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 17,
+    "source_path": "흡착 로터, 산화촉매, 열교환기를 이용한 모듈화 VOCs 제거 시스템.pdf",
+    "inventors": [
+      "정종국",
+      "오현석",
+      "오주형",
+      "이용만",
+      "김정길"
+    ],
+    "technical_keywords": [
+      "흡착",
+      "로터",
+      "산화촉매",
+      "열교환기를",
+      "이용한",
+      "모듈화",
+      "제거",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR102251369",
+    "patent_number": "10-2251369",
+    "title": "플라즈마 및 유전가열 촉매 기반의 유해가스 처리 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2021-05-03",
+    "application_date": "2019-01-03",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 15,
+    "source_path": "플라즈마 및 유전가열 촉매 기반의 유해가스 처리 시스템.pdf",
+    "inventors": [
+      "정종국",
+      "김영민"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "유전가열",
+      "촉매",
+      "기반의",
+      "유해가스",
+      "처리",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KRZL201910484514.1",
+    "patent_number": "ZL201910484514.1",
+    "title": "폐가스 소각용 버너",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2021-04-13",
+    "application_date": "2019-06-05",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "임재범",
+      "Jay Jung",
+      "이상준",
+      "김재환",
+      "한재식"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "소각용",
+      "버너"
+    ]
+  },
+  {
+    "id": "KR102349738",
+    "patent_number": "10-2349738",
+    "title": "니켈계 활성 촉매 제조방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2021-01-06",
+    "application_date": "2020-03-10",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 17,
+    "source_path": "니켈계 활성 촉매 제조방법.pdf",
+    "inventors": [
+      "정종국",
+      "오주형",
+      "이상문(경기대)",
+      "김성수(경기대)",
+      "장영희(경기대)"
+    ],
+    "technical_keywords": [
+      "니켈계",
+      "활성",
+      "촉매",
+      "제조방법"
+    ]
+  },
+  {
+    "id": "KR102194627",
+    "patent_number": "10-2194627",
+    "title": "하이브리드 방식의 플라즈마 점화방법 및 그 장치",
+    "abstract": "",
+    "category": "plasma",
+    "technology_field": "전원공급장치",
+    "registration_date": "2020-12-17",
+    "application_date": "2019-07-02",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 14,
+    "source_path": "하이브리드 방식의 플라즈마 점화 장치 및 그 방법.pdf",
+    "inventors": [
+      "조은석"
+    ],
+    "technical_keywords": [
+      "하이브리드",
+      "방식의",
+      "플라즈마",
+      "점화방법",
+      "장치"
+    ]
+  },
+  {
+    "id": "KR102187036",
+    "patent_number": "10-2187036",
+    "title": "흡착 ROTOR와 산화촉매를 이용한 모듈화 VOCs 제거 시스템 및 그 방법",
+    "abstract": "",
+    "category": "gas-treatment",
+    "technology_field": "VOCAS",
+    "registration_date": "2020-11-30",
+    "application_date": "2018-08-31",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 15,
+    "source_path": "흡착 Rotor 와 산화촉매를 이용한 모듈화 VOCs 제거 시스템 및 그 방법.pdf",
+    "inventors": [
+      "정종국",
+      "오현석",
+      "오주형"
+    ],
+    "technical_keywords": [
+      "흡착",
+      "산화촉매를",
+      "이용한",
+      "모듈화",
+      "제거",
+      "시스템",
+      "방법"
+    ]
+  },
+  {
+    "id": "KR102168514",
+    "patent_number": "10-2168514",
+    "title": "돌입전류 방지기능을 가진 3상 전파정류장치",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": "2020-10-15",
+    "application_date": "2018-09-17",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "돌입전류 방지기능을 가진 3상 전파정류장치.pdf",
+    "inventors": [
+      "이현진",
+      "조은석",
+      "김기범"
+    ],
+    "technical_keywords": [
+      "돌입전류",
+      "방지기능을",
+      "가진",
+      "전파정류장치"
+    ]
+  },
+  {
+    "id": "KR102158616",
+    "patent_number": "10-2158616",
+    "title": "능동형 PFC가 적용된 출력극성 가변형 벅컨버터 시스템 및 그 제어 방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": "2020-09-16",
+    "application_date": "2018-08-22",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 19,
+    "source_path": "능동형 PFC가 적용된 출력극성 가변형 벅컨버터 시스템 및 그 제어 방법.pdf",
+    "inventors": [
+      "조은석",
+      "이현진",
+      "김기범"
+    ],
+    "technical_keywords": [
+      "능동형",
+      "적용된",
+      "출력극성",
+      "가변형",
+      "벅컨버터",
+      "시스템",
+      "제어",
+      "방법"
+    ]
+  },
+  {
+    "id": "KR10692748",
+    "patent_number": "10692748",
+    "title": "반도체 제조설비의 고도화 온도제어장치",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2020-06-23",
+    "application_date": "2017-12-01",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김종배 양승진 허재석 최치원 김제민 김형관 최용호"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조설비의",
+      "고도화",
+      "온도제어장치"
+    ]
+  },
+  {
+    "id": "KR102117255",
+    "patent_number": "10-2117255",
+    "title": "폐가스 소각용 버너",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2020-05-26",
+    "application_date": "2019-05-16",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 16,
+    "source_path": "폐가스 소각용 버너.pdf",
+    "inventors": [
+      "임재범",
+      "Jay Jung",
+      "이상준",
+      "김재환",
+      "한재식"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "소각용",
+      "버너"
+    ]
+  },
+  {
+    "id": "KR102090873",
+    "patent_number": "10-2090873",
+    "title": "흡착제를 이용하여 폐가스에 포함된 질소산화물을 제거하는 장치 및 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2020-03-12",
+    "application_date": "2018-08-31",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 14,
+    "source_path": "흡착제를 이용하여 폐가스에 포함된 질소산화물을 제거하는 장치.pdf",
+    "inventors": [
+      "정종국",
+      "오주형",
+      "이은미",
+      "채명기"
+    ],
+    "technical_keywords": [
+      "흡착제를",
+      "이용하여",
+      "폐가스에",
+      "포함된",
+      "질소산화물을",
+      "제거하는",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "KR102073202",
+    "patent_number": "10-2073202",
+    "title": "자체 세정이 가능한 전기 집진기 방전봉 및 이를 이용한 전기 집진기 방전봉 세정 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2020-01-29",
+    "application_date": "2019-04-19",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "자체 세정이 가능한 전기 집진기 방전봉 및 이를 이용한 전기 집진기 방전봉 세정 방법.pdf",
+    "inventors": [
+      "최익성",
+      "김영민",
+      "김재환",
+      "이상준",
+      "김덕준"
+    ],
+    "technical_keywords": [
+      "전기",
+      "집진기",
+      "방전봉",
+      "자체",
+      "세정이",
+      "가능한",
+      "이용한",
+      "세정",
+      "방법"
+    ]
+  },
+  {
+    "id": "KR102063855",
+    "patent_number": "10-2063855",
+    "title": "배관의 막힘을 방지하는 스크래퍼가 부가된 밸브",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2020-01-02",
+    "application_date": "2019-03-15",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 19,
+    "source_path": "배관의 막힘을 방지하는 스크래퍼가 부가된 밸브.pdf",
+    "inventors": [
+      "최익성",
+      "정종국",
+      "이상준",
+      "김덕준"
+    ],
+    "technical_keywords": [
+      "배관의",
+      "막힘을",
+      "방지하는",
+      "스크래퍼가",
+      "부가된",
+      "밸브"
+    ]
+  },
+  {
+    "id": "KR102046097",
+    "patent_number": "10-2046097",
+    "title": "배기가스를 포함하는 유체의 흐름을 제어하기 위한 매니폴드",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2019-11-12",
+    "application_date": "2019-06-14",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 14,
+    "source_path": "배기가스를 포함하는 유체의 흐름을 제어하기 위한 매니폴드.pdf",
+    "inventors": [
+      "최익성",
+      "정재윤"
+    ],
+    "technical_keywords": [
+      "배기가스를",
+      "포함하는",
+      "유체의",
+      "흐름을",
+      "제어하기",
+      "매니폴드"
+    ]
+  },
+  {
+    "id": "KR102036697",
+    "patent_number": "10-2036697",
+    "title": "입자를 포함하는 유체의 흐름을 제어하기 위한 매니폴드를 포함하는 미모 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2019-10-21",
+    "application_date": "2018-06-15",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 13,
+    "source_path": "입자를 포함하는 유체의 흐름을 제어하기 위한 매니폴드를 포함하는 미모 시스템.pdf",
+    "inventors": [
+      "최익성"
+    ],
+    "technical_keywords": [
+      "포함하는",
+      "입자를",
+      "유체의",
+      "흐름을",
+      "제어하기",
+      "매니폴드를",
+      "미모",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR6546253",
+    "patent_number": "6546253",
+    "title": "반도체 제조설비의 고도화 온도제어장치",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2019-06-28",
+    "application_date": "2017-11-29",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김종배 양승진 허재석 최치원 김제민 김형관 최용호"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조설비의",
+      "고도화",
+      "온도제어장치"
+    ]
+  },
+  {
+    "id": "KR101959874",
+    "patent_number": "10-1959874",
+    "title": "온도제어모듈의 응축방지시스템",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2019-03-13",
+    "application_date": "2017-05-15",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 11,
+    "source_path": "온도제어모듈의 응축방지시스템.pdf",
+    "inventors": [
+      "안세훈",
+      "김병호",
+      "김성완"
+    ],
+    "technical_keywords": [
+      "온도제어모듈의",
+      "응축방지시스템"
+    ]
+  },
+  {
+    "id": "KR101959868",
+    "patent_number": "10-1959868",
+    "title": "열전소자모듈의 열교환기",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2019-03-13",
+    "application_date": "2017-05-15",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 11,
+    "source_path": "열전소자모듈의 열교환기.pdf",
+    "inventors": [
+      "안세훈",
+      "김병호",
+      "김성완"
+    ],
+    "technical_keywords": [
+      "열전소자모듈의",
+      "열교환기"
+    ]
+  },
+  {
+    "id": "KRI652756",
+    "patent_number": "I652756",
+    "title": "반도체 제조설비의 고도화 온도제어장치",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2019-03-01",
+    "application_date": "2017-10-16",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김종배 양승진 허재석 최치원 김제민 김형관 최용호"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조설비의",
+      "고도화",
+      "온도제어장치"
+    ]
+  },
+  {
+    "id": "KR101910347",
+    "patent_number": "10-1910347",
+    "title": "반도체 제조설비의 고도화 온도제어장치",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2018-10-16",
+    "application_date": "2016-12-05",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 14,
+    "source_path": "반도체 제조설비의 고도화 온도제어장치.pdf",
+    "inventors": [
+      "김종배 양승진 허재석 최치원 김제민 김형관 최용호"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조설비의",
+      "고도화",
+      "온도제어장치"
+    ]
+  },
+  {
+    "id": "KR101860633",
+    "patent_number": "10-1860633",
+    "title": "플라즈마와 촉매를 적용한 하이브리드 건식 유해가스 처리 시스템 및 이의 운전 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2018-05-16",
+    "application_date": "2016-05-25",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 11,
+    "source_path": "플라즈마와 촉매를 적용한 하이브리드 건식 유해가스 처리 시스템 및 이의 운전방법.pdf",
+    "inventors": [
+      "정종국",
+      "이기용",
+      "모선희",
+      "이은미"
+    ],
+    "technical_keywords": [
+      "플라즈마와",
+      "촉매를",
+      "적용한",
+      "하이브리드",
+      "건식",
+      "유해가스",
+      "처리",
+      "시스템",
+      "이의",
+      "운전"
+    ]
+  },
+  {
+    "id": "KR9956525",
+    "patent_number": "9956525",
+    "title": "통합형 반도체 폐가스 정화장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2018-05-01",
+    "application_date": "2016-01-12",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김덕준",
+      "박상준",
+      "전동근",
+      "이기용",
+      "신현욱",
+      "문규동"
+    ],
+    "technical_keywords": [
+      "통합형",
+      "반도체",
+      "폐가스",
+      "정화장치"
+    ]
+  },
+  {
+    "id": "KR101780254",
+    "patent_number": "10-1780254",
+    "title": "폐가스 정화장치용 측면화염버너장치(사이드연소 방식 버너장치)",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2017-09-14",
+    "application_date": "2015-07-07",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 13,
+    "source_path": "폐가스정화장치용 측면화염버너장치.pdf",
+    "inventors": [
+      "장순기",
+      "박종민",
+      "박진만",
+      "박상준",
+      "김종윤",
+      "성창현",
+      "이근환",
+      "모선회",
+      "김경민"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화장치용",
+      "측면화염버너장치",
+      "사이드연소",
+      "방식",
+      "버너장치"
+    ]
+  },
+  {
+    "id": "KR101774710",
+    "patent_number": "10-1774710",
+    "title": "플라즈마와 촉매를 이용한 하이브리드 건식 유해가스 처리 장치 및 이의 운전방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2017-08-29",
+    "application_date": "2016-10-27",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "플라즈마와 촉매를 이용한 하이브리드 건식 유해가스 처리 장치 및 이의 운전방법.pdf",
+    "inventors": [
+      "정종국",
+      "이기용",
+      "모선희",
+      "이은미"
+    ],
+    "technical_keywords": [
+      "플라즈마와",
+      "촉매를",
+      "이용한",
+      "하이브리드",
+      "건식",
+      "유해가스",
+      "처리",
+      "장치",
+      "이의",
+      "운전방법"
+    ]
+  },
+  {
+    "id": "KR101720987",
+    "patent_number": "10-1720987",
+    "title": "난분해성 유해가스의 처리 장치 및 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2017-03-23",
+    "application_date": null,
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 11,
+    "source_path": "난분해성 유해가스의 처리장치 및 방법.pdf",
+    "inventors": [
+      "정종국",
+      "이기용",
+      "김도훈"
+    ],
+    "technical_keywords": [
+      "난분해성",
+      "유해가스의",
+      "처리",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "KR101720086",
+    "patent_number": "10-1720086",
+    "title": "통합형 반도체 폐가스 정화장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2017-03-21",
+    "application_date": "2015-09-04",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 11,
+    "source_path": "통합형 반도체 폐가스 정화장치.pdf",
+    "inventors": [
+      "김덕준",
+      "박상준",
+      "전동근",
+      "이기용",
+      "신현욱",
+      "문규동"
+    ],
+    "technical_keywords": [
+      "통합형",
+      "반도체",
+      "폐가스",
+      "정화장치"
+    ]
+  },
+  {
+    "id": "KR101717103",
+    "patent_number": "10-1717103",
+    "title": "전원 공급 장치와 그에 사용되는 전력제어부 및 그의 전원 제어방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": "2017-03-10",
+    "application_date": "2015-09-01",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 11,
+    "source_path": "전원 공급 장치와 그에 사용되는 전력제어부 및 그의 전원 제어 방법.pdf",
+    "inventors": [
+      "이현진",
+      "이인희"
+    ],
+    "technical_keywords": [
+      "전원",
+      "공급",
+      "장치와",
+      "그에",
+      "사용되는",
+      "전력제어부",
+      "그의",
+      "제어방법"
+    ]
+  },
+  {
+    "id": "KR101698417",
+    "patent_number": "10-1698417",
+    "title": "반응기 내부에 수막이 형성되는 플라즈마 버너용 스크러버",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2017-01-16",
+    "application_date": "2014-12-16",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 9,
+    "source_path": "반응기 내부에 수막이 형성되는 플라즈마 버너용 스크러버.pdf",
+    "inventors": [
+      "박상준",
+      "전동근",
+      "이기용",
+      "신현욱"
+    ],
+    "technical_keywords": [
+      "반응기",
+      "내부에",
+      "수막이",
+      "형성되는",
+      "플라즈마",
+      "버너용",
+      "스크러버"
+    ]
+  },
+  {
+    "id": "KR6047652/JP",
+    "patent_number": "6047652/JP",
+    "title": "통합형 반도체 폐가스 정화장치 (일본 )",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2016-11-25",
+    "application_date": "2015-12-25",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김덕준",
+      "박상준",
+      "전동근",
+      "이기용",
+      "신현욱",
+      "문규동"
+    ],
+    "technical_keywords": [
+      "통합형",
+      "반도체",
+      "폐가스",
+      "정화장치",
+      "일본"
+    ]
+  },
+  {
+    "id": "KR101666069",
+    "patent_number": "10-1666069",
+    "title": "반도체 폐가스 처리용 스크러버의 출력 저감방법 및 장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2016-10-07",
+    "application_date": "2015-03-20",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김원기",
+      "전동근",
+      "문규동",
+      "진용호",
+      "이창환"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "폐가스",
+      "처리용",
+      "스크러버의",
+      "출력",
+      "저감방법",
+      "장치"
+    ]
+  },
+  {
+    "id": "KR101657468",
+    "patent_number": "10-1657468",
+    "title": "난분해성 유해가스의 소각처리를 위한 배가스 전처리 장치 및 그 전처리장치를 이용한 배가스 전처리 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2016-09-08",
+    "application_date": "2015-01-23",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 11,
+    "source_path": "난분해성 유해가스의 소각처리를 위한 배가스 전처리 장치 및 그 전처리장치를 이용한 배가스 전처리 방법.pdf",
+    "inventors": [
+      "정종국",
+      "이기용"
+    ],
+    "technical_keywords": [
+      "배가스",
+      "전처리",
+      "난분해성",
+      "유해가스의",
+      "소각처리를",
+      "장치",
+      "전처리장치를",
+      "이용한",
+      "방법"
+    ]
+  },
+  {
+    "id": "KR101652911",
+    "patent_number": "10-1652911",
+    "title": "스크러버의 수처리 탱크용 순환펌프",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2016-08-25",
+    "application_date": "2015-03-03",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 9,
+    "source_path": "스크러버의 수처리 탱크용 순환펌프.pdf",
+    "inventors": [
+      "박상준",
+      "박진만",
+      "전동근",
+      "이기용"
+    ],
+    "technical_keywords": [
+      "스크러버의",
+      "수처리",
+      "탱크용",
+      "순환펌프"
+    ]
+  },
+  {
+    "id": "KR101640395",
+    "patent_number": "10-1640395",
+    "title": "보조진공수단이 구비된 스크러버 /우선권 주장",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2016-07-12",
+    "application_date": "2015-02-09",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "전동근",
+      "신현욱",
+      "진용호",
+      "김원기",
+      "문규동",
+      "모선희"
+    ],
+    "technical_keywords": [
+      "보조진공수단이",
+      "구비된",
+      "스크러버",
+      "우선권",
+      "주장"
+    ]
+  },
+  {
+    "id": "KR101635064",
+    "patent_number": "10-1635064",
+    "title": "스크러버의 버너",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2016-06-24",
+    "application_date": "2014-12-31",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 11,
+    "source_path": "스크러버의 버너.pdf",
+    "inventors": [
+      "전동근",
+      "이성욱",
+      "채명기",
+      "신현욱"
+    ],
+    "technical_keywords": [
+      "스크러버의",
+      "버너"
+    ]
+  },
+  {
+    "id": "KR101635065",
+    "patent_number": "10-1635065",
+    "title": "사전 수처리 장치를 포함하는 스크러버",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2016-06-24",
+    "application_date": "2014-12-16",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "장순기",
+      "박종민.",
+      "박진만. 박상준. 채명기. 김종윤",
+      "이근환",
+      "모선희.",
+      "김경민"
+    ],
+    "technical_keywords": [
+      "사전",
+      "수처리",
+      "장치를",
+      "포함하는",
+      "스크러버"
+    ]
+  },
+  {
+    "id": "KR101617691",
+    "patent_number": "10-1617691",
+    "title": "화학기상증착공정(CVD)으로부터 발생되는 폐가스 정화장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2016-04-27",
+    "application_date": "2015-09-09",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "화학기상증착공정(CVD)으로부터 발생되는 폐가스 정화장치.pdf",
+    "inventors": [
+      "정종국",
+      "이기용",
+      "김도훈"
+    ],
+    "technical_keywords": [
+      "화학기상증착공정",
+      "으로부터",
+      "발생되는",
+      "폐가스",
+      "정화장치"
+    ]
+  },
+  {
+    "id": "KR101576212",
+    "patent_number": "10-1576212",
+    "title": "사전 수처리 기능을 가지는 스크러버",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2015-12-03",
+    "application_date": "2014-03-14",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 10,
+    "source_path": "사전 수처리 기능을 가지는 스크러버.pdf",
+    "inventors": [
+      "박상준 / 채명기 /장순기"
+    ],
+    "technical_keywords": [
+      "사전",
+      "수처리",
+      "기능을",
+      "가지는",
+      "스크러버"
+    ]
+  },
+  {
+    "id": "KR9182120",
+    "patent_number": "9182120",
+    "title": "CO,Nox 개별 제어 방식을 이용한 저공해 연소방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2015-11-10",
+    "application_date": "2012-11-28",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김종철/정종국/이성욱/   노완기/김선호/강석호"
+    ],
+    "technical_keywords": [
+      "개별",
+      "제어",
+      "방식을",
+      "이용한",
+      "저공해",
+      "연소방법"
+    ]
+  },
+  {
+    "id": "KR101470921",
+    "patent_number": "10-1470921",
+    "title": "기판 합착장치 및 기판 합착방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": "2014-12-03",
+    "application_date": "2012-10-16",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박필석/김병극/이정보/문장수"
+    ],
+    "technical_keywords": [
+      "기판",
+      "합착장치",
+      "합착방법"
+    ]
+  },
+  {
+    "id": "KR5620461",
+    "patent_number": "5620461",
+    "title": "CO,Nox 개별 제어 방식을 이용한 저공해 연소방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2014-09-26",
+    "application_date": "2012-12-13",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김종철/정종국/이성욱/노완기/김선호/강석호"
+    ],
+    "technical_keywords": [
+      "개별",
+      "제어",
+      "방식을",
+      "이용한",
+      "저공해",
+      "연소방법"
+    ]
+  },
+  {
+    "id": "KR101435371",
+    "patent_number": "10-1435371",
+    "title": "CO,Nox 개별 제어 방식을 이용한 저공해 연소방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2014-08-22",
+    "application_date": "2012-10-16",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 16,
+    "source_path": "CO, NOx 개별 제어 방식을 이용한 저공해 연소방법.pdf",
+    "inventors": [
+      "김종철/정종국/이성욱/노완기/김선호/강석호"
+    ],
+    "technical_keywords": [
+      "개별",
+      "제어",
+      "방식을",
+      "이용한",
+      "저공해",
+      "연소방법"
+    ]
+  },
+  {
+    "id": "KR101427217",
+    "patent_number": "10-1427217",
+    "title": "폐가스 정화처리용 순환수 공급 및 배출시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2014-07-31",
+    "application_date": "2012-11-29",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 13,
+    "source_path": "폐가스 정화처리용 순환수 공급 및 배출 시스템.pdf",
+    "inventors": [
+      "김종철/장순기/최윤경/    이재복/채명기"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리용",
+      "순환수",
+      "공급",
+      "배출시스템"
+    ]
+  },
+  {
+    "id": "KR101406065",
+    "patent_number": "10-1406065",
+    "title": "선회류 예혼합 저공해 연소장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2014-06-03",
+    "application_date": "2012-03-16",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 13,
+    "source_path": "선회류 예혼합 저공해 연소장치.pdf",
+    "inventors": [
+      "김종철/정종국/이성욱/김선호/김원기/노완기"
+    ],
+    "technical_keywords": [
+      "선회류",
+      "예혼합",
+      "저공해",
+      "연소장치"
+    ]
+  },
+  {
+    "id": "KR101401350",
+    "patent_number": "10-1401350",
+    "title": "반도체 제조설비의 온도제어 장치 및 그 제어방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2014-05-23",
+    "application_date": "2012-08-24",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최기봉/안세훈/김병호"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조설비의",
+      "온도제어",
+      "장치",
+      "제어방법"
+    ]
+  },
+  {
+    "id": "KR101401349",
+    "patent_number": "10-1401349",
+    "title": "반도체 제조설비의 칠러장치 및 그 제어방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2014-05-23",
+    "application_date": "2012-07-06",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최기봉/김병호/허재석"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조설비의",
+      "칠러장치",
+      "제어방법"
+    ]
+  },
+  {
+    "id": "KR101387611",
+    "patent_number": "10-1387611",
+    "title": "과불화 화합물 처리 장치 및 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2014-04-15",
+    "application_date": "2012-04-23",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 19,
+    "source_path": "유해물질 가스 제거 시스템.pdf",
+    "inventors": [
+      "정종국/채명기/전재두/김종철"
+    ],
+    "technical_keywords": [
+      "과불화",
+      "화합물",
+      "처리",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "KR101374813",
+    "patent_number": "10-1374813",
+    "title": "판재 자세 조절 장치",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": "2014-03-10",
+    "application_date": "2012-03-28",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박필석/김병극"
+    ],
+    "technical_keywords": [
+      "판재",
+      "자세",
+      "조절",
+      "장치"
+    ]
+  },
+  {
+    "id": "KR5451856",
+    "patent_number": "5451856",
+    "title": "선회류 예혼합 저공해 연소장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2014-01-10",
+    "application_date": "2012-10-31",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김종철/정종국/이성욱/김선호/김원기/노완기"
+    ],
+    "technical_keywords": [
+      "선회류",
+      "예혼합",
+      "저공해",
+      "연소장치"
+    ]
+  },
+  {
+    "id": "KR101323720",
+    "patent_number": "10-1323720",
+    "title": "폐가스 처리용 화염 회전 연소 버너",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2013-10-24",
+    "application_date": "2011-12-15",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "채명기/전재두/정종국"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "처리용",
+      "화염",
+      "회전",
+      "연소",
+      "버너"
+    ]
+  },
+  {
+    "id": "KR101314723",
+    "patent_number": "10-1314723",
+    "title": "공정냉각시스템용 열교환기",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2013-09-27",
+    "application_date": "2011-07-27",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 14,
+    "source_path": "공정냉각시스템용 열교환기.pdf",
+    "inventors": [
+      "최기봉/안세훈"
+    ],
+    "technical_keywords": [
+      "공정냉각시스템용",
+      "열교환기"
+    ]
+  },
+  {
+    "id": "KR101314187",
+    "patent_number": "10-1314187",
+    "title": "스크러버 장비의 에너지 저감용 제어 장치 및 그 방법과 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2013-09-26",
+    "application_date": "2012-02-17",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 13,
+    "source_path": "스크러버 장비의 에너지 저감용 제어 장치 및 그 방법과 시스템.pdf",
+    "inventors": [
+      "이재복/이정우/전재두/노완기/채명기"
+    ],
+    "technical_keywords": [
+      "스크러버",
+      "장비의",
+      "에너지",
+      "저감용",
+      "제어",
+      "장치",
+      "방법과",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR101312051",
+    "patent_number": "10-1312051",
+    "title": "글래스의 크기 변경에 따른 진공흡착판의 진공구역 조절장치",
+    "abstract": "",
+    "category": "gas-treatment",
+    "technology_field": "",
+    "registration_date": "2013-09-09",
+    "application_date": "2012-03-30",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박필석/김병극"
+    ],
+    "technical_keywords": [
+      "글래스의",
+      "크기",
+      "변경에",
+      "따른",
+      "진공흡착판의",
+      "진공구역",
+      "조절장치"
+    ]
+  },
+  {
+    "id": "KR101253698",
+    "patent_number": "10-1253698",
+    "title": "폐 가스 정화용 연소장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2013-04-05",
+    "application_date": "2010-08-06",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "이영춘/장순기/이재복/노완기"
+    ],
+    "technical_keywords": [
+      "가스",
+      "정화용",
+      "연소장치"
+    ]
+  },
+  {
+    "id": "KR101221036",
+    "patent_number": "10-1221036",
+    "title": "슬릿 코터를 이용하는 디스플레이 패널용 커버 부재 접합 장치",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": "2013-01-04",
+    "application_date": "2011-12-09",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박필석/김병극"
+    ],
+    "technical_keywords": [
+      "슬릿",
+      "코터를",
+      "이용하는",
+      "디스플레이",
+      "패널용",
+      "커버",
+      "부재",
+      "접합",
+      "장치"
+    ]
+  },
+  {
+    "id": "KR101200977",
+    "patent_number": "10-1200977",
+    "title": "폐 가스 연소장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2012-11-07",
+    "application_date": "2010-08-06",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 13,
+    "source_path": "폐 가스 연소장치.pdf",
+    "inventors": [
+      "이영춘/장순기/이재복/   노완기"
+    ],
+    "technical_keywords": [
+      "가스",
+      "연소장치"
+    ]
+  },
+  {
+    "id": "KR4956672",
+    "patent_number": "4956672",
+    "title": "반도체 제조 장비의 온도 조절 시스템",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2012-03-23",
+    "application_date": "2010-04-16",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "조봉현 은창우 최현석 이상곤 이광명 이인주 최용호 안승국 박철오"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조",
+      "장비의",
+      "온도",
+      "조절",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR101033012",
+    "patent_number": "10-1033012",
+    "title": "산소발생기, 산소농도 조절기 및 이를 구비한 스크러버장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2011-04-27",
+    "application_date": "2008-12-11",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김태현/이정우"
+    ],
+    "technical_keywords": [
+      "산소발생기",
+      "산소농도",
+      "조절기",
+      "스크러버장치"
+    ]
+  },
+  {
+    "id": "KR100955466",
+    "patent_number": "10-0955466",
+    "title": "누수방식의 전기 집진기",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2010-04-22",
+    "application_date": "2008-01-22",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 10,
+    "source_path": "누수방식의 전기집진기.pdf",
+    "inventors": [
+      "김태현/유국열/성창현"
+    ],
+    "technical_keywords": [
+      "누수방식의",
+      "전기",
+      "집진기"
+    ]
+  },
+  {
+    "id": "KR100925236",
+    "patent_number": "10-0925236",
+    "title": "반도체 제조 장비의 온도 조절 시스템",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2009-10-29",
+    "application_date": "2007-10-18",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 10,
+    "source_path": "반도체 제조 장비의 온도 조절 시스템.pdf",
+    "inventors": [
+      "조봉현 은창우 최현석 이상곤 이광명 이인주 최용호 안승국 박철오"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조",
+      "장비의",
+      "온도",
+      "조절",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR100875287",
+    "patent_number": "10-0875287",
+    "title": "반도체 제조장비용 잠열재 파이프",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2008-12-15",
+    "application_date": "2007-01-12",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "송경호/오지은"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조장비용",
+      "잠열재",
+      "파이프"
+    ]
+  },
+  {
+    "id": "KR100860598",
+    "patent_number": "10-0860598",
+    "title": "폐가스연소장치의 가스분사노즐",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2008-09-22",
+    "application_date": "2007-07-27",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "이성욱 박진만 박종민 김태현 김선호 박용근 채명기 이재복"
+    ],
+    "technical_keywords": [
+      "폐가스연소장치의",
+      "가스분사노즐"
+    ]
+  },
+  {
+    "id": "KR100860599",
+    "patent_number": "10-0860599",
+    "title": "플라즈마 토치를 이용한 폐가스연소장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2008-09-22",
+    "application_date": "2007-07-27",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "이성욱 박진만 박종민 김태현 김선호 박용근 채명기 이재복"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "토치를",
+      "이용한",
+      "폐가스연소장치"
+    ]
+  },
+  {
+    "id": "KR100858529",
+    "patent_number": "10-0858529",
+    "title": "반도체 제조장비의 온도제어장치",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2008-09-08",
+    "application_date": "2007-04-19",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "송경호/최현석"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조장비의",
+      "온도제어장치"
+    ]
+  },
+  {
+    "id": "KR100858528",
+    "patent_number": "10-0858528",
+    "title": "반도체 제조장비의 웨이퍼척 냉각시스템",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2008-09-08",
+    "application_date": "2007-01-05",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "조 봉 현"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조장비의",
+      "웨이퍼척",
+      "냉각시스템"
+    ]
+  },
+  {
+    "id": "KR4160977",
+    "patent_number": "4160977",
+    "title": "폐가스 정화처리 장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2008-07-25",
+    "application_date": "2005-12-09",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리",
+      "장치"
+    ]
+  },
+  {
+    "id": "KR100844531",
+    "patent_number": "10-0844531",
+    "title": "폐가스 정화 처리 장치 (Device for purifying exhausted gas)",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2008-07-01",
+    "application_date": "2007-05-28",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "폐가스 정화 처리 장치.pdf",
+    "inventors": [
+      "이정우/김태현"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화",
+      "처리",
+      "장치"
+    ]
+  },
+  {
+    "id": "KR100844530",
+    "patent_number": "10-0844530",
+    "title": "폐가스 정화 처리 장치 및 폐가스 정화 처리 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2008-07-01",
+    "application_date": "2007-05-28",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "폐가스 정화 처리 장치 및 폐가스 정화 처리 방법.pdf",
+    "inventors": [
+      "이정우"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화",
+      "처리",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "KR7394041",
+    "patent_number": "7394041",
+    "title": "플라즈마 토치를 이용한 폐가스 처리장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2008-07-01",
+    "application_date": "2006-06-26",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "토치를",
+      "이용한",
+      "폐가스",
+      "처리장치"
+    ]
+  },
+  {
+    "id": "KR300492761",
+    "patent_number": "30-0492761",
+    "title": "잠열재 파이프",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2008-05-26",
+    "application_date": "2007-11-19",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "오지은"
+    ],
+    "technical_keywords": [
+      "잠열재",
+      "파이프"
+    ]
+  },
+  {
+    "id": "KR100832851",
+    "patent_number": "10-0832851",
+    "title": "상변환물질을 이용한 잠열 축열식 연료전지용 열저장 시스템",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2008-05-21",
+    "application_date": "2007-03-19",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "송경호/홍성철/전범수"
+    ],
+    "technical_keywords": [
+      "상변환물질을",
+      "이용한",
+      "잠열",
+      "축열식",
+      "연료전지용",
+      "열저장",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR100822048",
+    "patent_number": "10-0822048",
+    "title": "플라즈마 토치를 이용한 폐가스 처리장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2008-04-07",
+    "application_date": "2006-06-07",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 9,
+    "source_path": "플라즈마 토치를 이용한 폐가스 처리장치.pdf",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "토치를",
+      "이용한",
+      "폐가스",
+      "처리장치"
+    ]
+  },
+  {
+    "id": "KR100773474",
+    "patent_number": "10-0773474",
+    "title": "반도체 제조장비의 칠러 시스템",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2007-10-30",
+    "application_date": "2007-01-03",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 7,
+    "source_path": "반도체 제조장비의 칠러 시스템.pdf",
+    "inventors": [
+      "송경호/조봉현"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조장비의",
+      "칠러",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR100719225",
+    "patent_number": "10-0719225",
+    "title": "반도체 제조 공정용 온도조절 시스템",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": "2007-05-11",
+    "application_date": "2005-12-21",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 10,
+    "source_path": "반도체 제조 장비의 온도 조절 시스템.pdf",
+    "inventors": [
+      "송 경 호"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조",
+      "공정용",
+      "온도조절",
+      "시스템"
+    ]
+  },
+  {
+    "id": "KR100711941",
+    "patent_number": "10-0711941",
+    "title": "폐가스 정화처리장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2007-04-20",
+    "application_date": "2005-10-27",
+    "status": "취소",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리장치"
+    ]
+  },
+  {
+    "id": "KR100711940",
+    "patent_number": "10-0711940",
+    "title": "폐가스 정화처리장치용 습식 유닛",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": "2007-04-20",
+    "application_date": "2005-10-27",
+    "status": "등록",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 7,
+    "source_path": "폐가스 정화처리장치용 습식유닛.pdf",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리장치용",
+      "습식",
+      "유닛"
+    ]
+  },
+  {
+    "id": "KRI274129",
+    "patent_number": "I274129",
+    "title": "폐가스 정화처리장치(대만)",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2007-02-21",
+    "application_date": "2005-12-06",
+    "status": "취소",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최운선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리장치",
+      "대만"
+    ]
+  },
+  {
+    "id": "KR100650937",
+    "patent_number": "10-0650937",
+    "title": "폐가스 정화처리장치의 버너조립체",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2006-11-22",
+    "application_date": "2005-11-09",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리장치의",
+      "버너조립체"
+    ]
+  },
+  {
+    "id": "KR100650277",
+    "patent_number": "10-0650277",
+    "title": "폐가스 정화처리장치에 사용하는 버너조립체의 챔버구조",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2006-11-21",
+    "application_date": "2005-11-09",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 13,
+    "source_path": "폐 가스 연소장치.pdf",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리장치에",
+      "사용하는",
+      "버너조립체의",
+      "챔버구조"
+    ]
+  },
+  {
+    "id": "KR200425668",
+    "patent_number": "20-0425668",
+    "title": "맥동방지장치",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": "2006-08-30",
+    "application_date": "2006-06-08",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최 윤 경"
+    ],
+    "technical_keywords": [
+      "맥동방지장치"
+    ]
+  },
+  {
+    "id": "KR20425109",
+    "patent_number": "20-425109",
+    "title": "플라즈마 토치",
+    "abstract": "",
+    "category": "plasma",
+    "technology_field": "",
+    "registration_date": "2006-08-23",
+    "application_date": "2006-06-07",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최운선"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "토치"
+    ]
+  },
+  {
+    "id": "KR200425108",
+    "patent_number": "20-0425108",
+    "title": "플라즈마 토치의 워킹 가스 공급기",
+    "abstract": "",
+    "category": "plasma",
+    "technology_field": "",
+    "registration_date": "2006-08-23",
+    "application_date": "2006-06-07",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "토치의",
+      "워킹",
+      "가스",
+      "공급기"
+    ]
+  },
+  {
+    "id": "KR200424378",
+    "patent_number": "20-0424378",
+    "title": "플라즈마 토치를 이용한 폐가스 처리장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2006-08-11",
+    "application_date": "2006-06-07",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최운선"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "토치를",
+      "이용한",
+      "폐가스",
+      "처리장치"
+    ]
+  },
+  {
+    "id": "KR200407845",
+    "patent_number": "20-0407845",
+    "title": "폐가스 정화처리 장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2006-01-27",
+    "application_date": "2005-11-09",
+    "status": "취소",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리",
+      "장치"
+    ]
+  },
+  {
+    "id": "KR20405303",
+    "patent_number": "20-405303",
+    "title": "폐가스 정화처리 장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2005-12-30",
+    "application_date": "2005-10-27",
+    "status": "취소",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최운선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리",
+      "장치"
+    ]
+  },
+  {
+    "id": "KR200405302",
+    "patent_number": "20-0405302",
+    "title": "폐가스 정화처리장치의 연소챔버부",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2005-12-30",
+    "application_date": "2005-10-27",
+    "status": "취소",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리장치의",
+      "연소챔버부"
+    ]
+  },
+  {
+    "id": "KR200405301",
+    "patent_number": "20-0405301",
+    "title": "폐가스 정화처리장치에 사용되는 헤드 유닛 및 그 제어장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2005-12-30",
+    "application_date": "2005-10-27",
+    "status": "취소",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최 운 선"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리장치에",
+      "사용되는",
+      "헤드",
+      "유닛",
+      "제어장치"
+    ]
+  },
+  {
+    "id": "KR20385461",
+    "patent_number": "20-385461",
+    "title": "폐가스 정화 처리장치의 가스 버너 노즐",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2005-05-21",
+    "application_date": "2005-01-06",
+    "status": "취소",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": [
+      "폐가스",
+      "정화",
+      "처리장치의",
+      "가스",
+      "버너",
+      "노즐"
+    ]
+  },
+  {
+    "id": "KR20383760",
+    "patent_number": "20-383760",
+    "title": "습식 전기집진을 이용한 폐가스 정화처리장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": "2005-04-30",
+    "application_date": "2005-01-06",
+    "status": "취소",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최운선"
+    ],
+    "technical_keywords": [
+      "습식",
+      "전기집진을",
+      "이용한",
+      "폐가스",
+      "정화처리장치"
+    ]
+  },
+  {
+    "id": "KR100479935",
+    "patent_number": "10-0479935",
+    "title": "이중 진공배관 및 그 제조방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": "2005-03-22",
+    "application_date": "2002-06-11",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김 덕 준"
+    ],
+    "technical_keywords": [
+      "이중",
+      "진공배관",
+      "제조방법"
+    ]
+  },
+  {
+    "id": "KR20349617",
+    "patent_number": "20-349617",
+    "title": "체결장치를 구비한 단열재",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": "2004-04-27",
+    "application_date": "2003-12-30",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김덕준",
+      "김영덕"
+    ],
+    "technical_keywords": [
+      "체결장치를",
+      "단열재"
+    ]
+  },
+  {
+    "id": "KR200341827",
+    "patent_number": "20-0341827",
+    "title": "반도체 제조 설비의 온도 제어 대응속도 개선 구조",
+    "abstract": "",
+    "category": "temperature",
+    "technology_field": "",
+    "registration_date": "2004-02-03",
+    "application_date": "2003-11-06",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": [
+      "반도체",
+      "제조",
+      "설비의",
+      "온도",
+      "제어",
+      "대응속도",
+      "개선",
+      "구조"
+    ]
+  },
+  {
+    "id": "GST0221",
+    "patent_number": "",
+    "title": "삼성전자㈜",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": null,
+    "status": "unknown",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": [
+      "삼성전자"
+    ]
+  },
+  {
+    "id": "GST0220",
+    "patent_number": "",
+    "title": "사용인",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": null,
+    "status": "unknown",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": [
+      "사용인"
+    ]
+  },
+  {
+    "id": "GST0218",
+    "patent_number": "",
+    "title": "",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": null,
+    "status": "unknown",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": []
+  },
+  {
+    "id": "GST0211",
+    "patent_number": "",
+    "title": "플라즈마 토치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2025-08-01",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최다은",
+      "최준원",
+      "남기복",
+      "이건용",
+      "이슬",
+      "한재식",
+      "이승수"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "토치"
+    ]
+  },
+  {
+    "id": "GST0210",
+    "patent_number": "",
+    "title": "개선된 캐소드를 구비한 스크러버용 플라즈마 토치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2025-07-29",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최준원",
+      "이슬",
+      "남기복",
+      "최다은",
+      "이건용",
+      "한재식",
+      "이승수"
+    ],
+    "technical_keywords": [
+      "개선된",
+      "캐소드를",
+      "스크러버용",
+      "플라즈마",
+      "토치"
+    ]
+  },
+  {
+    "id": "GST0209",
+    "patent_number": "",
+    "title": "스크러버용 플라즈마 토치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2025-07-29",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "남기복",
+      "최준원",
+      "최다은",
+      "이건용",
+      "이슬",
+      "한재식",
+      "이승수"
+    ],
+    "technical_keywords": [
+      "스크러버용",
+      "플라즈마",
+      "토치"
+    ]
+  },
+  {
+    "id": "GST0208",
+    "patent_number": "",
+    "title": "온도 제어 장치 및 그 제어 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": null,
+    "application_date": null,
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "안세훈",
+      "이희진",
+      "허재석",
+      "권유진",
+      "임상록",
+      "정호연",
+      "박영재",
+      "고두희",
+      "한삼권",
+      "강민정",
+      "이준식"
+    ],
+    "technical_keywords": [
+      "제어",
+      "온도",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0207",
+    "patent_number": "",
+    "title": "온도 제어 장치 및 그 제어 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": null,
+    "application_date": null,
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "안세훈",
+      "이희진",
+      "허재석",
+      "권유진",
+      "임상록",
+      "정호연",
+      "박영재",
+      "고두희",
+      "한삼권",
+      "강민정",
+      "이준식"
+    ],
+    "technical_keywords": [
+      "제어",
+      "온도",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0206",
+    "patent_number": "",
+    "title": "온도 제어 장치 및 그 제어 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": null,
+    "application_date": "2025-07-17",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "안세훈",
+      "이희진",
+      "허재석",
+      "권유진",
+      "임상록",
+      "정호연",
+      "박영재",
+      "고두희",
+      "한삼권",
+      "강민정",
+      "이준식"
+    ],
+    "technical_keywords": [
+      "제어",
+      "온도",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0205",
+    "patent_number": "",
+    "title": "히팅 파이프",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2025-06-05",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 16,
+    "source_path": "히팅 파이프.pdf",
+    "inventors": [
+      "김진남",
+      "최찬우",
+      "김혜선",
+      "최현규"
+    ],
+    "technical_keywords": [
+      "히팅",
+      "파이프"
+    ]
+  },
+  {
+    "id": "GST0204",
+    "patent_number": "",
+    "title": "습식 스크러버",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2025-06-04",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김진남",
+      "이동우"
+    ],
+    "technical_keywords": [
+      "습식",
+      "스크러버"
+    ]
+  },
+  {
+    "id": "GST0203",
+    "patent_number": "",
+    "title": "스크러버용 플라즈마 토치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2025-05-19",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최준원",
+      "남기복",
+      "이건용",
+      "이슬",
+      "한재식",
+      "최다은",
+      "이승수"
+    ],
+    "technical_keywords": [
+      "스크러버용",
+      "플라즈마",
+      "토치"
+    ]
+  },
+  {
+    "id": "GST0202",
+    "patent_number": "",
+    "title": "액침 냉각 장치 및 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "DCS",
+    "registration_date": null,
+    "application_date": null,
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": [
+      "액침",
+      "냉각",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0201",
+    "patent_number": "",
+    "title": "액침 냉각 장치 및 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "DCS",
+    "registration_date": null,
+    "application_date": null,
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": [
+      "액침",
+      "냉각",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0200",
+    "patent_number": "",
+    "title": "액침 냉각 장치 및 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "DCS",
+    "registration_date": null,
+    "application_date": null,
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": [
+      "액침",
+      "냉각",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0183",
+    "patent_number": "",
+    "title": "E3 WAVE",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "DCS",
+    "registration_date": null,
+    "application_date": "2025-03-19",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": []
+  },
+  {
+    "id": "GST0173",
+    "patent_number": "",
+    "title": "폐 가스 처리 장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2024-07-22",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 14,
+    "source_path": "폐 가스 처리 장치.pdf",
+    "inventors": [
+      "이정우",
+      "윤성철",
+      "전동근",
+      "권성안"
+    ],
+    "technical_keywords": [
+      "가스",
+      "처리",
+      "장치"
+    ]
+  },
+  {
+    "id": "GST0172",
+    "patent_number": "",
+    "title": "인터리브드 제어가 가능한 플라즈마 스크러버용 전원공급장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "전원공급장치",
+    "registration_date": null,
+    "application_date": "2025-01-24",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김기범"
+    ],
+    "technical_keywords": [
+      "인터리브드",
+      "제어가",
+      "가능한",
+      "플라즈마",
+      "스크러버용",
+      "전원공급장치"
+    ]
+  },
+  {
+    "id": "GST0171",
+    "patent_number": "",
+    "title": "열전소자 제어용 전원공급장치 및 제어방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": null,
+    "application_date": "2024-10-24",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김기범",
+      "이현진",
+      "오용재"
+    ],
+    "technical_keywords": [
+      "열전소자",
+      "제어용",
+      "전원공급장치",
+      "제어방법"
+    ]
+  },
+  {
+    "id": "GST0170",
+    "patent_number": "",
+    "title": "액침 냉각 장치 및 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "DCS",
+    "registration_date": null,
+    "application_date": "2024-11-01",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "채동준",
+      "정성민",
+      "허재석",
+      "김덕준"
+    ],
+    "technical_keywords": [
+      "액침",
+      "냉각",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0169",
+    "patent_number": "",
+    "title": "액침 냉각 장치 및 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "DCS",
+    "registration_date": null,
+    "application_date": "2024-10-23",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "채동준",
+      "정성민",
+      "허재석",
+      "김덕준"
+    ],
+    "technical_keywords": [
+      "액침",
+      "냉각",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0168",
+    "patent_number": "",
+    "title": "액침 냉각 장치 및 방법",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "DCS",
+    "registration_date": null,
+    "application_date": "2024-08-29",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 17,
+    "source_path": "액침 냉각 장치 및 방법.pdf",
+    "inventors": [
+      "채동준",
+      "정성민",
+      "허재석",
+      "김덕준"
+    ],
+    "technical_keywords": [
+      "액침",
+      "냉각",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0167",
+    "patent_number": "",
+    "title": "폐 가스 처리 장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2024-09-04",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "이정우",
+      "윤성철",
+      "전동근",
+      "권성안"
+    ],
+    "technical_keywords": [
+      "가스",
+      "처리",
+      "장치"
+    ]
+  },
+  {
+    "id": "GST0166",
+    "patent_number": "",
+    "title": "습식 스크러버",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2024-08-05",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김진남",
+      "이동우"
+    ],
+    "technical_keywords": [
+      "습식",
+      "스크러버"
+    ]
+  },
+  {
+    "id": "GST0165",
+    "patent_number": "",
+    "title": "냉매 배출 방지를 위한 흡착필터, 이를 포함하는 흄 처리장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2024-02-08",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 17,
+    "source_path": "냉매 배출 방지를 위한 흡착필터, 이를 포함하는 흄 처리장치.pdf",
+    "inventors": [
+      "남기복",
+      "황인혁",
+      "안세훈"
+    ],
+    "technical_keywords": [
+      "냉매",
+      "배출",
+      "방지를",
+      "흡착필터",
+      "포함하는",
+      "처리장치"
+    ]
+  },
+  {
+    "id": "GST0164",
+    "patent_number": "",
+    "title": "반도체 제조 설비용 수분 혼입 방지 온도 제어 장치",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": null,
+    "application_date": "2023-12-19",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최현석",
+      "윤수민",
+      "김병호",
+      "한삼권",
+      "채동준"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조",
+      "설비용",
+      "수분",
+      "혼입",
+      "방지",
+      "온도",
+      "제어",
+      "장치"
+    ]
+  },
+  {
+    "id": "GST0163",
+    "patent_number": "",
+    "title": "열전소자 제어용 전원공급장치 및 제어방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": null,
+    "application_date": "2023-10-30",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 15,
+    "source_path": "열전소자 제어용 전원공급장치 및 제어방법.pdf",
+    "inventors": [
+      "김기범",
+      "이현진",
+      "오용재"
+    ],
+    "technical_keywords": [
+      "열전소자",
+      "제어용",
+      "전원공급장치",
+      "제어방법"
+    ]
+  },
+  {
+    "id": "GST0162",
+    "patent_number": "",
+    "title": "메인연료공급부 및 아이들연료공급부를 포함하는 스크러버(가명칭:소형다챔버 멀티버닝 스크러버용 오리피스 공급시스템)",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2023-12-27",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 11,
+    "source_path": "메인연료공급부 및 아이들연료공급부를 포함하는 스크러버.pdf",
+    "inventors": [
+      "이슬",
+      "이동우. 김진남"
+    ],
+    "technical_keywords": [
+      "메인연료공급부",
+      "아이들연료공급부를",
+      "포함하는",
+      "스크러버",
+      "가명칭",
+      "소형다챔버",
+      "멀티버닝",
+      "스크러버용",
+      "오리피스",
+      "공급시스템"
+    ]
+  },
+  {
+    "id": "GST0161",
+    "patent_number": "",
+    "title": "복수의 버닝챔버를 구비한 스크러버(가명칭:소형다챔버 멀티버닝 스크러버)",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2023-12-27",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "복수의 버닝챔버를 구비한 스크러버.pdf",
+    "inventors": [
+      "이슬",
+      "이동우",
+      "김진남"
+    ],
+    "technical_keywords": [
+      "스크러버",
+      "복수의",
+      "버닝챔버를",
+      "가명칭",
+      "소형다챔버",
+      "멀티버닝"
+    ]
+  },
+  {
+    "id": "GST0157",
+    "patent_number": "",
+    "title": "스크류실린더를 이용한 가스처리설비용 파우더제거장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2021-08-11",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박종민",
+      "글로벌스탠다드테크놀로지"
+    ],
+    "technical_keywords": [
+      "스크류실린더를",
+      "이용한",
+      "가스처리설비용",
+      "파우더제거장치"
+    ]
+  },
+  {
+    "id": "GST0156",
+    "patent_number": "",
+    "title": "스크류실린더를 이용한 가스처리설비용 파우더제거장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2021-08-19",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박종민",
+      "글로벌스탠다드테크놀로지"
+    ],
+    "technical_keywords": [
+      "스크류실린더를",
+      "이용한",
+      "가스처리설비용",
+      "파우더제거장치"
+    ]
+  },
+  {
+    "id": "GST0155",
+    "patent_number": "",
+    "title": "스크류실린더를 이용한 가스처리설비용 파우더제거장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2021-08-18",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박종민",
+      "글로벌스탠다드테크놀로지"
+    ],
+    "technical_keywords": [
+      "스크류실린더를",
+      "이용한",
+      "가스처리설비용",
+      "파우더제거장치"
+    ]
+  },
+  {
+    "id": "GST0154",
+    "patent_number": "",
+    "title": "스크러버고착 파우더의 자동 세정 방법 및 자동 세정장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2022-08-08",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 12,
+    "source_path": "스크러버 고착 파우더의 자동 세정 방법 및 자동 세정장치.pdf",
+    "inventors": [
+      "권성안",
+      "한재식",
+      "신경민",
+      "장영일"
+    ],
+    "technical_keywords": [
+      "자동",
+      "스크러버고착",
+      "파우더의",
+      "세정",
+      "방법",
+      "세정장치"
+    ]
+  },
+  {
+    "id": "GST0153",
+    "patent_number": "",
+    "title": "능동형 에너지 세이빙 스크러버",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2022-08-08",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 14,
+    "source_path": "능동형 에너지 세이빙 스크러버.pdf",
+    "inventors": [
+      "권성안",
+      "강석호",
+      "이동우"
+    ],
+    "technical_keywords": [
+      "능동형",
+      "에너지",
+      "세이빙",
+      "스크러버"
+    ]
+  },
+  {
+    "id": "GST0150",
+    "patent_number": "",
+    "title": "스크러버 시스템 및 이를 이용한 습식 세정 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2021-10-15",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "노영석(삼성) 김수지(삼성) 김희섭(삼성) 박희옥(삼성) 배종용(삼성) 이선수(삼성) 주진경(삼성) 윤성철 전동근"
+    ],
+    "technical_keywords": [
+      "스크러버",
+      "시스템",
+      "이용한",
+      "습식",
+      "세정",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0146",
+    "patent_number": "",
+    "title": "폐가스 배관 장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2021-04-01",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "이정우",
+      "권성안",
+      "한재식"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "배관",
+      "장치"
+    ]
+  },
+  {
+    "id": "GST0145",
+    "patent_number": "",
+    "title": "스크러버 시스템 및 이를 이용한 습식 세정 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2021-01-19",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "노영석(삼성) 김수지(삼성) 김희섭(삼성) 박희옥(삼성) 배종용(삼성) 이선수(삼성) 주진경(삼성) 윤성철 전동근"
+    ],
+    "technical_keywords": [
+      "스크러버",
+      "시스템",
+      "이용한",
+      "습식",
+      "세정",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0141",
+    "patent_number": "",
+    "title": "히트자켓의 온도제어방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "1970-01-01",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김남돈"
+    ],
+    "technical_keywords": [
+      "히트자켓의",
+      "온도제어방법"
+    ]
+  },
+  {
+    "id": "GST0135",
+    "patent_number": "",
+    "title": "배기가스를 포함하는 유체의 흐름을 제어하기 위한 매니폴드",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2019-06-14",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최익성",
+      "정재윤",
+      "김덕준"
+    ],
+    "technical_keywords": [
+      "배기가스를",
+      "포함하는",
+      "유체의",
+      "흐름을",
+      "제어하기",
+      "매니폴드"
+    ]
+  },
+  {
+    "id": "GST0130",
+    "patent_number": "",
+    "title": "촉매를 이용한 수소 제거 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2019-05-16",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "정종국",
+      "오현석",
+      "김재환",
+      "오주형"
+    ],
+    "technical_keywords": [
+      "촉매를",
+      "이용한",
+      "수소",
+      "제거",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0126",
+    "patent_number": "",
+    "title": "플라즈마 및 유전가열 촉매 기반의 유해가스 처리 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2019-01-03",
+    "status": "출원",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "정종국",
+      "김영민"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "유전가열",
+      "촉매",
+      "기반의",
+      "유해가스",
+      "처리",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0124",
+    "patent_number": "",
+    "title": "플라즈마 및 유전가열 촉매 기반의 유해가스 처리 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2018-10-16",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "정종국",
+      "강연석",
+      "정창구",
+      "김영민",
+      "이은미"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "유전가열",
+      "촉매",
+      "기반의",
+      "유해가스",
+      "처리",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0119",
+    "patent_number": "",
+    "title": "풀브릿지 부스트 컨버터를 활용한 능동형 PFC가 적용된 컨버터 시스템",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "전원공급장치",
+    "registration_date": null,
+    "application_date": "2018-08-22",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "조은석",
+      "이현진",
+      "김기범"
+    ],
+    "technical_keywords": [
+      "풀브릿지",
+      "부스트",
+      "컨버터를",
+      "활용한",
+      "능동형",
+      "적용된",
+      "컨버터",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0117",
+    "patent_number": "",
+    "title": "플라즈마 및 유전가열 촉매 기반의 유해가스 처리 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2017-11-24",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "정종국",
+      "강연석",
+      "정창구",
+      "김영민",
+      "이은미"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "유전가열",
+      "촉매",
+      "기반의",
+      "유해가스",
+      "처리",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0115",
+    "patent_number": "",
+    "title": "반도체 제조설비의 고도화 온도제어장치",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "칠러",
+    "registration_date": null,
+    "application_date": "2017-09-21",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김종배 양승진 허재석 최치원 김제민 김형관 최용호"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조설비의",
+      "고도화",
+      "온도제어장치"
+    ]
+  },
+  {
+    "id": "GST0107",
+    "patent_number": "",
+    "title": "통합형 반도체 폐가스 정화장치 (중국 )",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2016-01-14",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김덕준",
+      "박상준",
+      "전동근",
+      "이기용",
+      "신현욱",
+      "문규동"
+    ],
+    "technical_keywords": [
+      "통합형",
+      "반도체",
+      "폐가스",
+      "정화장치",
+      "중국"
+    ]
+  },
+  {
+    "id": "GST0097",
+    "patent_number": "",
+    "title": "습식세정기능을 가지는 수봉식 진공펌프 /우선권 주장",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2015-02-09",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "전동근",
+      "신현욱",
+      "진용호",
+      "김원기",
+      "문규동",
+      "모선희"
+    ],
+    "technical_keywords": [
+      "습식세정기능을",
+      "가지는",
+      "수봉식",
+      "진공펌프",
+      "우선권",
+      "주장"
+    ]
+  },
+  {
+    "id": "GST0095",
+    "patent_number": "",
+    "title": "보조진공수단이 구비된 공정설비용 배기라인  /우선권 주장",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2015-02-09",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "전동근",
+      "신현욱",
+      "진용호",
+      "모선희"
+    ],
+    "technical_keywords": [
+      "보조진공수단이",
+      "구비된",
+      "공정설비용",
+      "배기라인",
+      "우선권",
+      "주장"
+    ]
+  },
+  {
+    "id": "GST0094",
+    "patent_number": "",
+    "title": "난분해성 유해가스의 처리공정 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2015-01-30",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "정종국",
+      "이기용"
+    ],
+    "technical_keywords": [
+      "난분해성",
+      "유해가스의",
+      "처리공정",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0093",
+    "patent_number": "",
+    "title": "난분해성 유해가스의 소각처리를 위한 배가스 전처리 장치 및 그 전처리장치를 이용한 배가스 전처리 방법",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2015-01-30",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "정종국",
+      "이기용"
+    ],
+    "technical_keywords": [
+      "배가스",
+      "전처리",
+      "난분해성",
+      "유해가스의",
+      "소각처리를",
+      "장치",
+      "전처리장치를",
+      "이용한",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0092",
+    "patent_number": "",
+    "title": "난분해성 유해가스의 처리공정 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "스크러버",
+    "registration_date": null,
+    "application_date": "2015-01-23",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "정종국",
+      "이기용"
+    ],
+    "technical_keywords": [
+      "난분해성",
+      "유해가스의",
+      "처리공정",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0087",
+    "patent_number": "",
+    "title": "예열기능을 가지는 스크러버",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2014-06-30",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박상준",
+      "전동근",
+      "이기용",
+      "김종철",
+      "모선희"
+    ],
+    "technical_keywords": [
+      "예열기능을",
+      "가지는",
+      "스크러버"
+    ]
+  },
+  {
+    "id": "GST0086",
+    "patent_number": "",
+    "title": "반응기 내벽에 수막이 형성되는 스크러버",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2014-06-30",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박상준",
+      "전동근",
+      "이기용",
+      "장순기",
+      "모선희"
+    ],
+    "technical_keywords": [
+      "반응기",
+      "내벽에",
+      "수막이",
+      "형성되는",
+      "스크러버"
+    ]
+  },
+  {
+    "id": "GST0084",
+    "patent_number": "",
+    "title": "습식세정기능을 가지는 수봉식 진공펌프",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2014-02-07",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "전동근",
+      "모선희",
+      "진용호",
+      "신현욱",
+      "김원기",
+      "문규동"
+    ],
+    "technical_keywords": [
+      "습식세정기능을",
+      "가지는",
+      "수봉식",
+      "진공펌프"
+    ]
+  },
+  {
+    "id": "GST0083",
+    "patent_number": "",
+    "title": "보조진공수단이 구비된 스크러버",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2014-02-07",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "전동근",
+      "모선희",
+      "진용호",
+      "신현욱",
+      "김원기",
+      "문규동"
+    ],
+    "technical_keywords": [
+      "보조진공수단이",
+      "구비된",
+      "스크러버"
+    ]
+  },
+  {
+    "id": "GST0082",
+    "patent_number": "",
+    "title": "보조진공수단이 구비된 반도체공정설비용 배기라인",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2014-02-07",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "전동근",
+      "모선희",
+      "진용호",
+      "신현욱"
+    ],
+    "technical_keywords": [
+      "보조진공수단이",
+      "구비된",
+      "반도체공정설비용",
+      "배기라인"
+    ]
+  },
+  {
+    "id": "GST0081",
+    "patent_number": "",
+    "title": "폐가스 정화처리용 부산물 제거유닛 및 이를 포함한 폐가스 정화처리장치",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2013-05-31",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "노완기/이성욱"
+    ],
+    "technical_keywords": [
+      "폐가스",
+      "정화처리용",
+      "부산물",
+      "제거유닛",
+      "정화처리장치"
+    ]
+  },
+  {
+    "id": "GST0080",
+    "patent_number": "",
+    "title": "공정 가스 정화장치를 구비한 누출가스 자동 제어 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2013-05-28",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "장순기/김종철/채명기"
+    ],
+    "technical_keywords": [
+      "공정",
+      "가스",
+      "정화장치를",
+      "누출가스",
+      "자동",
+      "제어",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0079",
+    "patent_number": "",
+    "title": "공정 가스 정화장치를 구비한 누출가스 자동 제어 시스템",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2013-04-03",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "장순기/김종철/채명기"
+    ],
+    "technical_keywords": [
+      "공정",
+      "가스",
+      "정화장치를",
+      "누출가스",
+      "자동",
+      "제어",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0078",
+    "patent_number": "",
+    "title": "제40류, GLOBAL STANDARD TECHNOLOGY",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2013-01-15",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": []
+  },
+  {
+    "id": "GST0077",
+    "patent_number": "",
+    "title": "제37류, GLOBAL STANDARD TECHNOLOGY",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2013-01-15",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": []
+  },
+  {
+    "id": "GST0076",
+    "patent_number": "",
+    "title": "제40류, 글로벌스탠다드테크놀로지",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2013-01-15",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": [
+      "글로벌스탠다드테크놀로지"
+    ]
+  },
+  {
+    "id": "GST0075",
+    "patent_number": "",
+    "title": "제37류, 글로벌스탠다드테크놀로지",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2013-01-15",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [],
+    "technical_keywords": [
+      "글로벌스탠다드테크놀로지"
+    ]
+  },
+  {
+    "id": "GST0074",
+    "patent_number": "",
+    "title": "과불화 화합물 처리 장치 및 방법(미국)",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2012-12-24",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "정종국",
+      "채명기",
+      "전재두",
+      "김종철"
+    ],
+    "technical_keywords": [
+      "과불화",
+      "화합물",
+      "처리",
+      "장치",
+      "방법",
+      "미국"
+    ]
+  },
+  {
+    "id": "GST0072",
+    "patent_number": "",
+    "title": "기판 합착장치 및 기판 합착방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2012-12-13",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김병극/이정보/문장수"
+    ],
+    "technical_keywords": [
+      "기판",
+      "합착장치",
+      "합착방법"
+    ]
+  },
+  {
+    "id": "GST0071",
+    "patent_number": "",
+    "title": "판재 자세 조절 장치",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2012-12-12",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박필석/김병극"
+    ],
+    "technical_keywords": [
+      "판재",
+      "자세",
+      "조절",
+      "장치"
+    ]
+  },
+  {
+    "id": "GST0070",
+    "patent_number": "",
+    "title": "판재용 평탄 유지 장치",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2012-12-12",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박필석",
+      "김병극"
+    ],
+    "technical_keywords": [
+      "판재용",
+      "평탄",
+      "유지",
+      "장치"
+    ]
+  },
+  {
+    "id": "GST0066",
+    "patent_number": "",
+    "title": "VOC 처리 시스템용 VOC 처리 로터의 소화제어 장치 및 그 방법",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2012-10-30",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "정종국",
+      "채명기",
+      "김병천",
+      "김종철",
+      "신지훈"
+    ],
+    "technical_keywords": [
+      "처리",
+      "시스템용",
+      "로터의",
+      "소화제어",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0065",
+    "patent_number": "",
+    "title": "선회류 예혼합 저공해 연소장치",
+    "abstract": "",
+    "category": "plasma",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2012-10-29",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김종철/정종국/이성욱/김선호/김원기/노완기"
+    ],
+    "technical_keywords": [
+      "선회류",
+      "예혼합",
+      "저공해",
+      "연소장치"
+    ]
+  },
+  {
+    "id": "GST0061",
+    "patent_number": "",
+    "title": "펌프의 수명 예측 방법 및 이를 이용한 수명 예측 시스템",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2012-07-18",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "이석찬/조영인/정민섭"
+    ],
+    "technical_keywords": [
+      "수명",
+      "예측",
+      "펌프의",
+      "방법",
+      "이용한",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0056",
+    "patent_number": "",
+    "title": "도포액 재활용이 용이한 슬릿코터 및 도포액 재활용 구조",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2012-03-27",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "박필석/김병극"
+    ],
+    "technical_keywords": [
+      "도포액",
+      "재활용이",
+      "용이한",
+      "슬릿코터",
+      "재활용",
+      "구조"
+    ]
+  },
+  {
+    "id": "GST0050",
+    "patent_number": "",
+    "title": "이동식 전기 자동차 충전 시스템",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2011-02-18",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김명진"
+    ],
+    "technical_keywords": [
+      "이동식",
+      "전기",
+      "자동차",
+      "충전",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0049",
+    "patent_number": "",
+    "title": "가스 분리막을 이용한 반도체 및 에씨디용 설비 가스 재생 공급장치 및 가스재생 공급방법",
+    "abstract": "",
+    "category": "gas-treatment",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2010-09-29",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "김명진"
+    ],
+    "technical_keywords": [
+      "가스",
+      "분리막을",
+      "이용한",
+      "반도체",
+      "에씨디용",
+      "설비",
+      "재생",
+      "공급장치",
+      "가스재생",
+      "공급방법"
+    ]
+  },
+  {
+    "id": "GST0048",
+    "patent_number": "",
+    "title": "PFCs 가스 분해 장치 및 방법",
+    "abstract": "",
+    "category": "gas-treatment",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2010-08-12",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "이영춘/장순기/이재복/이성욱"
+    ],
+    "technical_keywords": [
+      "가스",
+      "분해",
+      "장치",
+      "방법"
+    ]
+  },
+  {
+    "id": "GST0045",
+    "patent_number": "",
+    "title": "체중 측정이 가능한 소변기",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2010-07-20",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "이정수"
+    ],
+    "technical_keywords": [
+      "체중",
+      "측정이",
+      "가능한",
+      "소변기"
+    ]
+  },
+  {
+    "id": "GST0044",
+    "patent_number": "",
+    "title": "반도체 제조 장비의 온도조절 시스템(미국)",
+    "abstract": "",
+    "category": "temperature",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2010-04-16",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "조봉현",
+      "은창우",
+      "최현석",
+      "이상곤",
+      "이광명",
+      "이인주",
+      "최용호",
+      "안승국",
+      "박철오"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조",
+      "장비의",
+      "온도조절",
+      "시스템",
+      "미국"
+    ]
+  },
+  {
+    "id": "GST0041",
+    "patent_number": "",
+    "title": "전향연소방식의 폐가스연소장치",
+    "abstract": "",
+    "category": "plasma",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2008-08-25",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "채명기 외 8인"
+    ],
+    "technical_keywords": [
+      "전향연소방식의",
+      "폐가스연소장치"
+    ]
+  },
+  {
+    "id": "GST0038",
+    "patent_number": "",
+    "title": "반도체 제조 장비의 온도조절 시스템(PCT)",
+    "abstract": "",
+    "category": "temperature",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2007-11-09",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "조봉현 은창우 최현석 이상곤 이광명 이인주 최용호 안승국 박철오"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조",
+      "장비의",
+      "온도조절",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0036",
+    "patent_number": "",
+    "title": "히팅자켓 제어 시스템",
+    "abstract": "",
+    "category": "other",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2007-09-17",
+    "status": "거절",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "이정수"
+    ],
+    "technical_keywords": [
+      "히팅자켓",
+      "제어",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0029",
+    "patent_number": "",
+    "title": "반도체 제조장비의 칠러 시스템(PCT)",
+    "abstract": "",
+    "category": "chiller",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2007-01-18",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "송경호",
+      "조봉현"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조장비의",
+      "칠러",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0025",
+    "patent_number": "",
+    "title": "반도체 제조공정용 온도조절 시스템 (PCT)",
+    "abstract": "",
+    "category": "temperature",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2006-12-20",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "송경호"
+    ],
+    "technical_keywords": [
+      "반도체",
+      "제조공정용",
+      "온도조절",
+      "시스템"
+    ]
+  },
+  {
+    "id": "GST0024",
+    "patent_number": "",
+    "title": "플라즈마 토치를 이용한 폐가스 처리장치(일본)",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2006-07-04",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최운선"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "토치를",
+      "이용한",
+      "폐가스",
+      "처리장치",
+      "일본"
+    ]
+  },
+  {
+    "id": "GST0023",
+    "patent_number": "",
+    "title": "플라즈마 토치를 이용한 폐가스 처리장치(유럽)",
+    "abstract": "",
+    "category": "scrubber",
+    "technology_field": "",
+    "registration_date": null,
+    "application_date": "2006-06-28",
+    "status": "포기",
+    "assignee": "GST (Global Standard Technology)",
+    "priority_score": 5,
+    "page_count": 0,
+    "source_path": "",
+    "inventors": [
+      "최운선"
+    ],
+    "technical_keywords": [
+      "플라즈마",
+      "토치를",
+      "이용한",
+      "폐가스",
+      "처리장치",
+      "유럽"
+    ]
+  }
+]
