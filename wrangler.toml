@@ -1,7 +1,5 @@
 name = "gst-patents"
-main = "functions/_worker.js"
 compatibility_date = "2025-01-24"
-compatibility_flags = ["nodejs_compat"]
 
 # Cloudflare Pages 연동
 pages_build_output_dir = "./"
@@ -22,31 +20,13 @@ id = "YOUR_KV_ID"  # 선택사항
 [vars]
 ENVIRONMENT = "production"
 
-# 커스텀 도메인 설정
+# Production 환경
 [env.production]
-name = "gst-patents"
-routes = [
-  { pattern = "gst-patents.com/*", zone_name = "gst-patents.com" },
-  { pattern = "www.gst-patents.com/*", zone_name = "gst-patents.com" }
-]
+vars = { DOMAIN = "gst-patents.com" }
 
-[env.production.vars]
-DOMAIN = "gst-patents.com"
+# Preview 환경
+[env.preview]
+vars = { DOMAIN = "preview.gst-patents.pages.dev" }
 
-# 개발 환경
-[env.development]
-name = "gst-patents-dev"
-
-# 빌드 설정
-[build]
-command = "echo 'Static site, no build needed'"
-
-# 업로드 제외 파일
-[site]
-bucket = "./"
-
-# 업로드 제외 규칙
-[[rules]]
-type = "Text"
 globs = ["**/*.js", "**/*.html", "**/*.css", "**/*.json"]
 fallthrough = false

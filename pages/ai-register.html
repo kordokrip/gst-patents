@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AI 질의 가입 신청 - GST 특허관리시스템</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'korean': ['Noto Sans KR', 'sans-serif']
+                    },
+                    colors: {
+                        'gst-blue': '#1e40af',
+                        'gst-light-blue': '#3b82f6',
+                        'gst-gray': '#6b7280',
+                        'gst-dark': '#1f2937'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+    </style>
+</head>
+<body class="font-korean flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <!-- 가입 신청 카드 -->
+        <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
+            <!-- 헤더 -->
+            <div class="bg-gradient-to-r from-gst-blue to-gst-light-blue p-8 text-white text-center">
+                <div class="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-plus text-4xl text-gst-blue"></i>
+                </div>
+                <h1 class="text-2xl font-bold mb-2">AI 질의 서비스 가입</h1>
+                <p class="text-blue-100 text-sm">GST 임직원만 가입할 수 있습니다</p>
+            </div>
+            
+            <!-- 가입 폼 -->
+            <div class="p-8">
+                <form id="register-form" class="space-y-6">
+                    <!-- 이름 -->
+                    <div>
+                        <label for="fullname" class="block text-sm font-medium text-gst-gray mb-2">
+                            <i class="fas fa-user mr-2"></i>이름
+                        </label>
+                        <input 
+                            type="text" 
+                            id="fullname" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent transition-all"
+                            placeholder="홍길동"
+                            required
+                        >
+                    </div>
+                    
+                    <!-- 회사 이메일 -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gst-gray mb-2">
+                            <i class="fas fa-envelope mr-2"></i>회사 이메일
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent transition-all"
+                            placeholder="yourname@gst-in.com"
+                            pattern="[a-zA-Z0-9._%+-]+@gst-in\.com$"
+                            title="@gst-in.com 이메일만 사용 가능합니다"
+                            required
+                        >
+                        <p class="mt-2 text-xs text-gst-gray">
+                            <i class="fas fa-info-circle mr-1"></i>
+                            @gst-in.com 도메인만 가입 가능합니다
+                        </p>
+                    </div>
+                    
+                    <!-- 사용자 ID -->
+                    <div>
+                        <label for="username" class="block text-sm font-medium text-gst-gray mb-2">
+                            <i class="fas fa-id-card mr-2"></i>사용자 ID
+                        </label>
+                        <input 
+                            type="text" 
+                            id="username" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent transition-all"
+                            placeholder="영문, 숫자 조합 (4-20자)"
+                            pattern="[a-zA-Z0-9]{4,20}"
+                            minlength="4"
+                            maxlength="20"
+                            title="영문, 숫자 조합 4-20자"
+                            required
+                        >
+                    </div>
+                    
+                    <!-- 비밀번호 -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-gst-gray mb-2">
+                            <i class="fas fa-lock mr-2"></i>비밀번호
+                        </label>
+                        <div class="relative">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent transition-all pr-12"
+                                placeholder="8자 이상, 영문/숫자/특수문자 조합"
+                                pattern="(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&*]).{8,}"
+                                title="8자 이상, 영문/숫자/특수문자 포함"
+                                required
+                            >
+                            <button 
+                                type="button" 
+                                id="toggle-password"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-gst-gray hover:text-gst-dark transition-colors"
+                            >
+                                <i class="fas fa-eye" id="eye-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 비밀번호 확인 -->
+                    <div>
+                        <label for="password-confirm" class="block text-sm font-medium text-gst-gray mb-2">
+                            <i class="fas fa-lock mr-2"></i>비밀번호 확인
+                        </label>
+                        <input 
+                            type="password" 
+                            id="password-confirm" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent transition-all"
+                            placeholder="비밀번호를 다시 입력하세요"
+                            required
+                        >
+                    </div>
+                    
+                    <!-- 부서/직급 (선택) -->
+                    <div>
+                        <label for="department" class="block text-sm font-medium text-gst-gray mb-2">
+                            <i class="fas fa-building mr-2"></i>부서/직급 (선택)
+                        </label>
+                        <input 
+                            type="text" 
+                            id="department" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent transition-all"
+                            placeholder="예: 연구개발팀 / 선임연구원"
+                        >
+                    </div>
+                    
+                    <!-- 가입 사유 -->
+                    <div>
+                        <label for="reason" class="block text-sm font-medium text-gst-gray mb-2">
+                            <i class="fas fa-comment mr-2"></i>가입 사유
+                        </label>
+                        <textarea 
+                            id="reason" 
+                            rows="3"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gst-blue focus:border-transparent transition-all resize-none"
+                            placeholder="AI 특허 분석 서비스를 이용하려는 목적을 간단히 작성해주세요"
+                            required
+                        ></textarea>
+                    </div>
+                    
+                    <!-- 성공/오류 메시지 -->
+                    <div id="success-message" class="hidden bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                        <div class="flex items-start">
+                            <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                            <div class="text-sm text-green-700">
+                                <p class="font-semibold">가입 신청이 완료되었습니다!</p>
+                                <p class="mt-1">관리자 승인 후 이메일로 안내드리겠습니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="error-message" class="hidden bg-red-50 border-l-4 border-red-500 p-4 rounded">
+                        <div class="flex items-center">
+                            <i class="fas fa-exclamation-circle text-red-500 mr-3"></i>
+                            <p class="text-sm text-red-700" id="error-text"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- 가입 신청 버튼 -->
+                    <button 
+                        type="submit" 
+                        id="register-button"
+                        class="w-full bg-gradient-to-r from-gst-blue to-gst-light-blue text-white py-3 rounded-lg font-semibold hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center"
+                    >
+                        <i class="fas fa-paper-plane mr-2"></i>
+                        가입 신청
+                    </button>
+                </form>
+                
+                <!-- 안내 문구 -->
+                <div class="mt-6 pt-6 border-t border-gray-200">
+                    <div class="bg-blue-50 rounded-lg p-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-shield-alt text-blue-500 mt-1 mr-3"></i>
+                            <div class="text-sm text-blue-800">
+                                <p class="font-semibold mb-1">승인 절차 안내</p>
+                                <ul class="text-xs space-y-1 list-disc list-inside">
+                                    <li>가입 신청서가 관리자(shkang@gst-in.com)에게 전송됩니다</li>
+                                    <li>관리자 승인 후 등록하신 이메일로 안내 메일이 발송됩니다</li>
+                                    <li>승인은 영업일 기준 1-2일 소요됩니다</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 로그인 페이지로 -->
+                <div class="mt-6 text-center space-y-2">
+                    <p class="text-sm text-gst-gray">이미 계정이 있으신가요?</p>
+                    <a href="ai-login.html" class="text-gst-blue hover:text-gst-dark font-medium transition-colors">
+                        <i class="fas fa-sign-in-alt mr-2"></i>로그인하기
+                    </a>
+                </div>
+                
+                <!-- 홈으로 돌아가기 -->
+                <div class="mt-4 text-center">
+                    <a href="/" class="text-gst-gray hover:text-gst-dark text-sm transition-colors">
+                        <i class="fas fa-arrow-left mr-2"></i>홈으로 돌아가기
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 푸터 -->
+        <div class="text-center mt-8 text-white text-sm">
+            <p>&copy; 2025 글로벌 스탠다드 테크놀로지. All rights reserved.</p>
+        </div>
+    </div>
+
+    <script>
+        // 비밀번호 표시/숨김 토글
+        const togglePassword = document.getElementById('toggle-password');
+        const passwordInput = document.getElementById('password');
+        const eyeIcon = document.getElementById('eye-icon');
+        
+        togglePassword.addEventListener('click', () => {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            eyeIcon.classList.toggle('fa-eye');
+            eyeIcon.classList.toggle('fa-eye-slash');
+        });
+        
+        // 이메일 도메인 실시간 검증
+        const emailInput = document.getElementById('email');
+        emailInput.addEventListener('blur', function() {
+            const email = this.value.trim();
+            if (email && !email.endsWith('@gst-in.com')) {
+                showError('GST 이메일(@gst-in.com)만 사용 가능합니다.');
+                this.value = '';
+                this.focus();
+            }
+        });
+        
+        // 가입 신청 폼 처리
+        const registerForm = document.getElementById('register-form');
+        const successMessage = document.getElementById('success-message');
+        const errorMessage = document.getElementById('error-message');
+        const errorText = document.getElementById('error-text');
+        const registerButton = document.getElementById('register-button');
+        
+        function showError(message) {
+            errorText.textContent = message;
+            errorMessage.classList.remove('hidden');
+            successMessage.classList.add('hidden');
+            
+            setTimeout(() => {
+                errorMessage.classList.add('hidden');
+            }, 5000);
+        }
+        
+        function showSuccess() {
+            successMessage.classList.remove('hidden');
+            errorMessage.classList.add('hidden');
+            registerForm.reset();
+            
+            // 3초 후 로그인 페이지로 이동
+            setTimeout(() => {
+                window.location.href = 'ai-login.html';
+            }, 3000);
+        }
+        
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // 입력값 가져오기
+            const fullname = document.getElementById('fullname').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const passwordConfirm = document.getElementById('password-confirm').value;
+            const department = document.getElementById('department').value.trim();
+            const reason = document.getElementById('reason').value.trim();
+            
+            // 이메일 도메인 검증
+            if (!email.endsWith('@gst-in.com')) {
+                showError('GST 이메일(@gst-in.com)만 사용 가능합니다.');
+                return;
+            }
+            
+            // 비밀번호 일치 확인
+            if (password !== passwordConfirm) {
+                showError('비밀번호가 일치하지 않습니다.');
+                document.getElementById('password-confirm').focus();
+                return;
+            }
+            
+            // 비밀번호 강도 확인
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+            if (!passwordRegex.test(password)) {
+                showError('비밀번호는 8자 이상, 영문/숫자/특수문자를 포함해야 합니다.');
+                return;
+            }
+            
+            // 로딩 상태
+            registerButton.disabled = true;
+            registerButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>신청 중...';
+            errorMessage.classList.add('hidden');
+            
+            // 가입 신청 데이터 준비
+            const registrationData = {
+                fullname,
+                email,
+                username,
+                password,
+                department: department || '미입력',
+                reason,
+                requestedAt: new Date().toISOString(),
+                status: 'pending'
+            };
+            
+            // 이메일 본문 생성
+            const emailBody = `
+새로운 AI 질의 서비스 가입 신청이 있습니다.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📋 가입 신청 정보
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+👤 이름: ${fullname}
+📧 이메일: ${email}
+🆔 사용자 ID: ${username}
+🏢 부서/직급: ${department || '미입력'}
+
+📝 가입 사유:
+${reason}
+
+⏰ 신청 일시: ${new Date().toLocaleString('ko-KR')}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+승인 방법
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+이 가입 신청을 승인하시려면:
+1. 사용자 정보를 확인하세요
+2. 시스템에 계정을 등록하세요
+   - ID: ${username}
+   - 이메일: ${email}
+3. 승인 완료 이메일을 ${email}로 발송하세요
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GST 특허관리시스템
+https://gst-patents.com
+            `.trim();
+            
+            // mailto 링크로 이메일 전송 (관리자 이메일)
+            const mailtoLink = `mailto:shkang@gst-in.com?subject=${encodeURIComponent('[가입 신청] AI 질의 서비스 - ' + fullname)}&body=${encodeURIComponent(emailBody)}`;
+            
+            // 시뮬레이션 (실제로는 서버로 전송)
+            setTimeout(() => {
+                // 로컬 스토리지에 임시 저장 (데모용)
+                const pendingRegistrations = JSON.parse(localStorage.getItem('pending_registrations') || '[]');
+                pendingRegistrations.push(registrationData);
+                localStorage.setItem('pending_registrations', JSON.stringify(pendingRegistrations));
+                
+                // 이메일 클라이언트 열기
+                window.location.href = mailtoLink;
+                
+                // 성공 메시지 표시
+                registerButton.innerHTML = '<i class="fas fa-check mr-2"></i>신청 완료!';
+                registerButton.classList.remove('from-gst-blue', 'to-gst-light-blue');
+                registerButton.classList.add('bg-green-500');
+                
+                setTimeout(() => {
+                    showSuccess();
+                }, 500);
+            }, 1000);
+        });
+    </script>
+    
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+            20%, 40%, 60%, 80% { transform: translateX(10px); }
+        }
+        
+        .animate-shake {
+            animation: shake 0.5s;
+        }
+    </style>
+</body>
+</html>
