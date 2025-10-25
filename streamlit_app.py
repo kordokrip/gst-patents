@@ -33,8 +33,9 @@ from scripts.pinecone_ingest import (
 
 load_dotenv()
 
-CHAT_MODEL = os.getenv("OPENAI_CHAT_MODEL", "gpt-4.1-mini")
+CHAT_MODEL = os.getenv("OPENAI_CHAT_MODEL", "gpt-4o-mini")
 PATENT_DOC_BASE_URL = os.getenv("PATENT_DOC_BASE_URL", "http://localhost:8080/data/patents")
+WEB_SEARCH_ENABLED = os.getenv("WEB_SEARCH_ENABLED", "true").lower() == "true"
 
 @st.cache_resource(show_spinner=False)
 def init_clients():
@@ -108,27 +109,47 @@ def build_prompt(question: str, contexts: List[Dict], web_results: List[Dict]) -
 
 
 def web_search(query: str, max_results: int = 4) -> List[Dict]:
-    """간단한 DuckDuckGo 기반 웹 검색."""
+    """
+    웹 검색 기능 - DuckDuckGo 검색 (duckduckgo_search 라이브러리 사용)
+    
+    주의: 웹 검색은 특허 검색을 보완하는 용도로만 사용됩니다.
+    실제 특허 정보는 Pinecone 벡터 DB에서 가져옵니다.
+    """
+    if not WEB_SEARCH_ENABLED:
+        return []
+    
     try:
-        resp = requests.get(
-            "https://ddg-api.herokuapp.com/search",
-            params={"q": query, "max_results": max_results},
-            timeout=8,
-        )
-        if resp.status_code != 200:
-            return []
-        payload = resp.json()
-        results = []
-        for item in payload.get("results", [])[:max_results]:
-            results.append(
-                {
-                    "title": item.get("title"),
-                    "snippet": item.get("description"),
-                    "link": item.get("url"),
-                }
-            )
-        return results
-    except Exception:
+        # duckduckgo_search 라이브러리 사용 (requirements.txt에 추가 필요)
+        from duckduckgo_search import DDGS
+        
+        with DDGS() as ddgs:
+            results = []
+            search_query = f"{query} 특허 OR patent"  # 특허 관련 키워드 추가
+            
+            for idx, result in enumerate(ddgs.text(search_query, max_results=max_results)):
+                if idx >= max_results:
+                    break
+                    
+                results.append({
+                    "title": result.get("title", ""),
+                    "snippet": result.get("body", "")[:300],  # 300자로 제한
+                    "link": result.get("href", ""),
+                })
+            
+            # 검색 결과 로깅
+            if results:
+                print(f"[웹 검색] '{query}' - {len(results)}개 결과 발견")
+            else:
+                print(f"[웹 검색] '{query}' - 검색 결과 없음")
+                
+            return results
+            
+    except ImportError:
+        print("[웹 검색] duckduckgo_search 라이브러리가 설치되지 않았습니다.")
+        print("[웹 검색] pip install duckduckgo-search 실행 필요")
+        return []
+    except Exception as e:
+        print(f"[웹 검색] 오류 발생: {type(e).__name__} - {str(e)}")
         return []
 
 
@@ -165,29 +186,73 @@ def run_query(
         web_results.append(enriched)
 
     prompt = build_prompt(question, matches, web_results)
-    llm_response = client.responses.create(
+    
+    # OpenAI Chat Completion API 호출 (올바른 방식)
+    chat_response = client.chat.completions.create(
         model=CHAT_MODEL,
-        input=[
+        messages=[
+            {
+                "role": "system",
+                "content": (
+                    "당신은 GST 특허 데이터에 기반한 전문 분석 어시스턴트입니다. "
+                    "주어진 문맥만을 사용해 질문에 답변하고, 확신이 없을 경우 사실대로 부족한 점을 말씀하세요. "
+                    "항상 한국어로 응답하세요."
+                ),
+            },
             {
                 "role": "user",
                 "content": prompt,
-            }
+            },
         ],
+        temperature=0.3,  # 일관된 답변을 위해 낮은 temperature
+        max_tokens=1500,
     )
 
-    answer_text = llm_response.output_text.strip()
+    answer_text = chat_response.choices[0].message.content.strip()
+    
+    # 토큰 사용량 로깅
+    usage = chat_response.usage
+    print(f"[OpenAI] 모델: {CHAT_MODEL}, 토큰: {usage.total_tokens} "
+          f"(입력: {usage.prompt_tokens}, 출력: {usage.completion_tokens})")
+    
     return {
         "answer": answer_text,
         "matches": matches,
         "web_results": web_results,
+        "model_used": CHAT_MODEL,
+        "tokens_used": usage.total_tokens,
     }
 
 
 def sidebar_controls() -> Tuple[int, bool, int]:
     st.sidebar.header("⚙️ Control Panel")
-    include_web = st.sidebar.checkbox("웹 검색 결과 포함", value=False)
+    
+    # 웹 검색 설정
+    st.sidebar.subheader("🌐 웹 검색 설정")
+    include_web = st.sidebar.checkbox(
+        "웹 검색 결과 포함", 
+        value=WEB_SEARCH_ENABLED,
+        help="체크하면 특허 DB 검색 외에 웹 검색 결과도 포함됩니다. (duckduckgo-search 라이브러리 필요)"
+    )
     web_results_limit = st.sidebar.slider("웹 검색 결과 수", 1, 10, 3)
-    top_k = st.sidebar.slider("Pinecone 검색 결과 수", 1, 10, 3)
+    
+    if not WEB_SEARCH_ENABLED:
+        st.sidebar.warning("⚠️ 웹 검색이 비활성화되어 있습니다. (.env의 WEB_SEARCH_ENABLED=true 설정)")
+    
+    st.sidebar.markdown("---")
+    
+    # Pinecone 검색 설정
+    st.sidebar.subheader("📚 특허 DB 검색")
+    top_k = st.sidebar.slider(
+        "Pinecone 검색 결과 수", 
+        1, 10, 5,
+        help="유사도가 높은 상위 N개의 특허 청크를 가져옵니다."
+    )
+    
+    # 모델 정보 표시
+    st.sidebar.markdown("---")
+    st.sidebar.subheader("🤖 AI 모델 정보")
+    st.sidebar.info(f"**사용 모델:** {CHAT_MODEL}\n**임베딩:** {EMBEDDING_MODEL}")
 
     st.sidebar.markdown("---")
     st.sidebar.subheader("🔧 데이터 동기화")
@@ -195,10 +260,14 @@ def sidebar_controls() -> Tuple[int, bool, int]:
         with st.spinner("rag_outputs 데이터를 Pinecone에 업서트하는 중입니다..."):
             upserts, chunks, docs = sync_rag_outputs()
         st.sidebar.success(f"업서트 완료: {upserts} 벡터 (청크 {chunks}개, 문서 {docs}건)")
+    
     st.sidebar.markdown("---")
     st.sidebar.info(
-        "• `.env` 파일에 OpenAI/Pinecone 키가 설정되어 있어야 합니다.\n"
-        "• rag_outputs 폴더 내용이 변경되면 업서트를 다시 실행하세요."
+        "💡 **사용 팁**\n\n"
+        "• 특허 번호, 기술명, 발명자명 등으로 질문하세요\n"
+        "• 웹 검색은 참고용이며, 주 데이터는 특허 DB입니다\n"
+        "• `.env` 파일에 OpenAI/Pinecone 키 설정 필요\n"
+        "• rag_outputs 폴더 내용 변경 시 업서트 재실행"
     )
     return top_k, include_web, web_results_limit
 

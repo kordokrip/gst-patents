@@ -13,5 +13,8 @@ pinecone>=5.0.0
 # HTTP 요청
 requests>=2.31.0
 
+# 웹 검색 (DuckDuckGo)
+duckduckgo-search>=6.0.0
+
 # 기타 유틸리티
 pathlib>=1.0.1
