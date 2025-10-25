@@ -257,19 +257,19 @@ class ChartManager {
     initStatusDistributionChart() {
         const patents = this.getActiveDataset();
         const statusCounts = {
-            registered: 0,
-            pending: 0,
-            rejected: 0
+            'registered': 0,
+            'pending': 0,
+            'rejected': 0
         };
 
         patents.forEach(patent => {
             const status = patent.status || '';
-            if (status === '등록') {
-                statusCounts.registered++;
-            } else if (status === '출원') {
-                statusCounts.pending++;
-            } else if (status === '포기' || status === '거절') {
-                statusCounts.rejected++;
+            if (status === 'registered' || status === '등록') {
+                statusCounts['registered']++;
+            } else if (status === 'pending' || status === '출원') {
+                statusCounts['pending']++;
+            } else if (status === 'rejected' || status === '포기' || status === '거절') {
+                statusCounts['rejected']++;
             }
         });
 
@@ -278,18 +278,18 @@ class ChartManager {
         const statPending = document.getElementById('stat-pending');
         const statRejected = document.getElementById('stat-rejected');
 
-        if (statRegistered) statRegistered.textContent = statusCounts.registered;
-        if (statPending) statPending.textContent = statusCounts.pending;
-        if (statRejected) statRejected.textContent = statusCounts.rejected;
+        if (statRegistered) statRegistered.textContent = statusCounts['registered'];
+        if (statPending) statPending.textContent = statusCounts['pending'];
+        if (statRejected) statRejected.textContent = statusCounts['rejected'];
         
-        console.log('📊 특허 상태 분포:', statusCounts);
+        console.log('✅ 특허 상태 분포 업데이트됨:', statusCounts);
     }
     
     /**
      * 중요도 점수 분포 차트
      */
     initPriorityScoreChart() {
-        const patents = window.patentManager.patents;
+        const patents = this.getActiveDataset();
         const scoreData = this.getPriorityScoreDistribution(patents);
         
         const container = document.getElementById('priority-distribution');
@@ -326,7 +326,7 @@ class ChartManager {
      * 발명자별 특허 수 차트
      */
     initInventorChart() {
-        const patents = window.patentManager.patents;
+        const patents = this.getActiveDataset();
         const inventorData = this.getInventorDistribution(patents);
         
         const container = document.getElementById('inventor-list');
@@ -390,12 +390,12 @@ class ChartManager {
      * 최근 등록 트렌드 표시
      */
     initRecentTrend() {
-        const patents = window.patentManager.patents;
+        const patents = this.getActiveDataset();
         const now = new Date();
         const oneYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
         
         const recentPatents = patents.filter(p => {
-            const date = p.__registrationDate;
+            const date = this.parseRegistrationDate(p);
             return date && date >= oneYearAgo;
         });
 
@@ -403,7 +403,8 @@ class ChartManager {
         if (container) {
             const byMonth = {};
             recentPatents.forEach(p => {
-                const month = p.__registrationDate.toLocaleDateString('ko-KR', { year: 'numeric', month: 'short' });
+                const date = this.parseRegistrationDate(p);
+                const month = date.toLocaleDateString('ko-KR', { year: 'numeric', month: 'short' });
                 byMonth[month] = (byMonth[month] || 0) + 1;
             });
 
@@ -531,19 +532,132 @@ class ChartManager {
         return window.patentManager.patents || [];
     }
 
-    getCategoryDistribution(patents) {
+    /**
+     * 등록일자를 Date 객체로 변환
+     */
+    parseRegistrationDate(patent) {
+        // __registrationDate가 이미 있으면 사용
+        if (patent.__registrationDate instanceof Date) {
+            return patent.__registrationDate;
+        }
+        
+        // registration_date 문자열 파싱
+        if (patent.registration_date && typeof patent.registration_date === 'string') {
+            const date = new Date(patent.registration_date);
+            if (!Number.isNaN(date.getTime())) {
+                return date;
+            }
+        }
+        
+        // application_date 문자열 파싱
+        if (patent.application_date && typeof patent.application_date === 'string') {
+            const date = new Date(patent.application_date);
+            if (!Number.isNaN(date.getTime())) {
+                return date;
+            }
+        }
+        
+        return null;
+    }
+
+    /**
+     * 정규화된 발명자 배열
+     */
+    getNormalizedInventors(patent) {
+        const inventors = patent.inventors || patent.inventor_list || [];
+        if (!Array.isArray(inventors)) {
+            if (typeof inventors === 'string' && inventors.trim() && inventors !== '정보 없음') {
+                return [inventors.trim()];
+            }
+            return [];
+        }
+        
+        // 발명자명만 추출 (주소 정보 제거)
+        const cleaned = inventors
+            .map(inv => {
+                if (typeof inv !== 'string') return null;
+                const trimmed = inv.trim();
+                
+                // "정보 없음" 제외
+                if (trimmed === '정보 없음' || !trimmed) return null;
+                
+                // 한글 이름만 추출 (2-10자)
+                // 정규식: 한글 문자 2-10자
+                const nameMatch = trimmed.match(/^([\uAC00-\uD7AF\s]{2,10})/);
+                if (nameMatch) {
+                    return nameMatch[1].trim();
+                }
+                
+                // 영문/숫자 포함한 이름도 허용 (주소 아닌 경우)
+                if (/^\w{2,20}$/.test(trimmed) && !trimmed.match(/\d+[가-힣]|[가-힣]\d+/)) {
+                    return trimmed;
+                }
+                
+                return null;
+            })
+            .filter(name => name && name.length >= 2);
+        
+        // 중복 제거
+        return [...new Set(cleaned)];
+    }
+
+    /**
+     * 우선순위 점수 정규화
+     */
+    getNormalizedPriority(patent) {
+        let score = patent.priority_score;
+        if (typeof score === 'number' && score >= 1 && score <= 10) {
+            return score;
+        }
+        if (typeof score === 'string') {
+            const num = parseInt(score, 10);
+            if (num >= 1 && num <= 10) return num;
+        }
+        return 5; // 기본값
+    }
+
+    /**
+     * 카테고리 정규화
+     */
+    getNormalizedCategory(patent) {
         const categoryMap = {
             'scrubber': '스크러버',
             'chiller': '칠러',
             'plasma': '플라즈마',
             'temperature': '온도제어',
-            'gas-treatment': '가스처리'
+            'gas-treatment': '가스처리',
+            'other': '기타'
         };
         
+        const rawCategory = (patent.category || 'other').toLowerCase();
+        return categoryMap[rawCategory] || patent.technology_field || '기타';
+    }
+
+    /**
+     * 상태값 정규화
+     */
+    getNormalizedStatus(patent) {
+        const statusMap = {
+            'registered': '등록',
+            '등록': '등록',
+            'pending': '출원',
+            '출원': '출원',
+            'active': '등록',
+            'inactive': '출원',
+            'rejected': '거절',
+            '거절': '거절',
+            'withdrawn': '취하',
+            '취하': '취하'
+        };
+        
+        const rawStatus = (patent.status || patent.legal_status || 'registered').toLowerCase();
+        return statusMap[rawStatus] || '등록';
+    }
+
+    getCategoryDistribution(patents) {
         const distribution = {};
         patents.forEach(patent => {
-            const rawCategory = patent.category || '기타';
-            const category = categoryMap[rawCategory] || rawCategory || '기타';
+            const category = this.getNormalizedCategory(patent);
             distribution[category] = (distribution[category] || 0) + 1;
         });
         
@@ -557,8 +671,8 @@ class ChartManager {
         const yearCounts = {};
         
         patents.forEach(patent => {
-            const date = patent.__registrationDate;
-            if (!(date instanceof Date) || Number.isNaN(date.getTime())) return;
+            const date = this.parseRegistrationDate(patent);
+            if (!date) return;
             const year = date.getFullYear();
             yearCounts[year] = (yearCounts[year] || 0) + 1;
         });
@@ -571,17 +685,19 @@ class ChartManager {
     }
     
     getStatusDistribution(patents) {
-        const statusMap = {
-            'active': '활성',
-            'expired': '만료',
-            'pending': '심사중',
-            'withdrawn': '취하'
+        const distribution = {
+            '등록': 0,
+            '출원': 0,
+            '거절': 0
         };
         
-        const distribution = {};
         patents.forEach(patent => {
-            const status = statusMap[patent.status] || patent.status;
-            distribution[status] = (distribution[status] || 0) + 1;
+            const status = this.getNormalizedStatus(patent);
+            if (distribution.hasOwnProperty(status)) {
+                distribution[status]++;
+            } else {
+                distribution[status] = 1;
+            }
         });
         
         return distribution;
@@ -596,7 +712,7 @@ class ChartManager {
         };
         
         patents.forEach(patent => {
-            const score = patent.priority_score || 0;
+            const score = this.getNormalizedPriority(patent);
             if (score >= 1 && score <= 3) scoreRanges['1-3점']++;
             else if (score >= 4 && score <= 6) scoreRanges['4-6점']++;
             else if (score >= 7 && score <= 8) scoreRanges['7-8점']++;
@@ -610,11 +726,10 @@ class ChartManager {
         const inventorCounts = {};
         
         patents.forEach(patent => {
-            if (patent.inventors && Array.isArray(patent.inventors)) {
-                patent.inventors.forEach(inventor => {
-                    inventorCounts[inventor] = (inventorCounts[inventor] || 0) + 1;
-                });
-            }
+            const inventors = this.getNormalizedInventors(patent);
+            inventors.forEach(inventor => {
+                inventorCounts[inventor] = (inventorCounts[inventor] || 0) + 1;
+            });
         });
         
         // 상위 10명만 반환
@@ -648,11 +763,10 @@ class ChartManager {
         
         // 카테고리별로 데이터 그룹핑
         patents.forEach(patent => {
-            const registrationDate = patent.__registrationDate;
-            if (!(registrationDate instanceof Date) || Number.isNaN(registrationDate.getTime())) return;
+            const registrationDate = this.parseRegistrationDate(patent);
+            if (!registrationDate) return;
 
-            const rawCategory = patent.category || '기타';
-            const category = categoryMap[rawCategory] || rawCategory || '기타';
+            const category = this.getNormalizedCategory(patent);
             if (!seriesData[category]) {
                 seriesData[category] = [];
             }

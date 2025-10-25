@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>차트 데이터 테스트</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>차트 데이터 테스트 페이지</h1>
+    <p>콘솔을 열어서 (F12) 다음 명령어를 실행하세요:</p>
+    <pre>
+// 1. 데이터 확인
+window.patentManager.patents.slice(0, 3).forEach(p => {
+    console.log('ID:', p.id, 'Title:', p.title, 'Inventors:', p.inventors, 'Priority:', p.priority_score);
+});
+
+// 2. 발명자 분포 확인
+console.log('발명자 분포:', chartManager.getInventorDistribution(window.patentManager.patents));
+
+// 3. 상태 분포 확인
+console.log('상태 분포:', chartManager.getStatusDistribution(window.patentManager.patents));
+
+// 4. 카테고리 분포 확인
+console.log('카테고리 분포:', chartManager.getCategoryDistribution(window.patentManager.patents));
+
+// 5. 우선순위 점수 분포 확인
+console.log('우선순위 분포:', chartManager.getPriorityScoreDistribution(window.patentManager.patents));
+    </pre>
+    <script src="js/patents-refactored.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        // 페이지 로드 후 자동 테스트
+        window.addEventListener('load', async () => {
+            console.log('=== 차트 데이터 테스트 시작 ===');
+            
+            // 데이터 로드 대기
+            let attempts = 0;
+            while (!window.patentManager || !window.patentManager.patents || window.patentManager.patents.length === 0) {
+                await new Promise(r => setTimeout(r, 500));
+                attempts++;
+                if (attempts > 20) {
+                    console.error('❌ 데이터 로드 실패');
+                    return;
+                }
+            }
+            
+            console.log('✅ 데이터 로드 완료, 총', window.patentManager.patents.length, '건');
+            
+            // 첫 3개 특허 데이터 출력
+            console.log('\n=== 첫 3개 특허 데이터 ===');
+            window.patentManager.patents.slice(0, 3).forEach((p, i) => {
+                console.log(`\n특허 ${i+1}:`);
+                console.log('  ID:', p.id);
+                console.log('  Title:', p.title);
+                console.log('  Inventors:', p.inventors);
+                console.log('  Priority Score:', p.priority_score);
+                console.log('  Category:', p.category);
+                console.log('  Status:', p.status);
+            });
+            
+            // 분포 데이터 출력
+            console.log('\n=== 분포 데이터 ===');
+            console.log('발명자 TOP 10:', chartManager.getInventorDistribution(window.patentManager.patents));
+            console.log('상태 분포:', chartManager.getStatusDistribution(window.patentManager.patents));
+            console.log('카테고리 분포:', chartManager.getCategoryDistribution(window.patentManager.patents));
+            console.log('우선순위 분포:', chartManager.getPriorityScoreDistribution(window.patentManager.patents));
+            
+            console.log('\n=== 테스트 완료 ===');
+        });
+    </script>
+</body>
+</html>

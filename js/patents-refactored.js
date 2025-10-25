@@ -176,6 +176,9 @@ class PatentManager {
             // 날짜 파싱
             const registrationDate = this.parseDate(patent.registration_date);
             const applicationDate = this.parseDate(patent.application_date);
+            
+            // 발명자 필터링 (주소 정보 제거)
+            const inventors = this.cleanInventors(patent.inventors);
 
             return {
                 ...patent,
@@ -190,12 +193,12 @@ class PatentManager {
                 application_date: patent.application_date || null,
                 status: patent.status || 'unknown',
                 assignee: patent.assignee || 'GST',
-                priority_score: patent.priority_score || 0,
+                priority_score: this.normalizePriorityScore(patent.priority_score),
                 page_count: patent.page_count || 0,
                 source_path: patent.source_path || '',
                 
                 // 배열 필드
-                inventors: Array.isArray(patent.inventors) ? patent.inventors : [],
+                inventors: inventors,
                 technical_keywords: Array.isArray(patent.technical_keywords) ? patent.technical_keywords : [],
                 
                 // 계산된 필드
@@ -208,6 +211,63 @@ class PatentManager {
                 __statusColor: this.getStatusColor(patent.status)
             };
         });
+    }
+
+    /**
+     * 발명자 목록에서 주소 정보 제거
+     * 한글 이름만 추출 (2-10자)
+     */
+    cleanInventors(inventors) {
+        if (!Array.isArray(inventors)) {
+            if (typeof inventors === 'string' && inventors.trim() && inventors !== '정보 없음') {
+                return [inventors.trim()];
+            }
+            return [];
+        }
+        
+        // 발명자명만 추출 (주소 제거)
+        const cleaned = inventors
+            .map(inv => {
+                if (typeof inv !== 'string') return null;
+                const trimmed = inv.trim();
+                
+                // "정보 없음" 제외
+                if (trimmed === '정보 없음' || !trimmed) return null;
+                
+                // 한글 이름만 추출 (2-10자)
+                // 정규식: 한글 문자 2-10자
+                const nameMatch = trimmed.match(/^([\u AC00-\uD7AF\s]{2,10})/);
+                if (nameMatch) {
+                    return nameMatch[1].trim();
+                }
+                
+                // 영문/숫자 포함한 이름도 허용 (주소 아닌 경우)
+                if (/^\w{2,20}$/.test(trimmed) && !trimmed.match(/\d+[가-힣]|[가-힣]\d+/)) {
+                    return trimmed;
+                }
+                
+                return null;
+            })
+            .filter(name => name && name.length >= 2);
+        
+        // 중복 제거
+        return [...new Set(cleaned)];
+    }
+
+    /**
+     * 우선순위 점수 정규화 (1-10)
+     */
+    normalizePriorityScore(score) {
+        if (typeof score === 'number') {
+            return Math.max(1, Math.min(10, Math.round(score)));
+        }
+        if (typeof score === 'string') {
+            const num = parseInt(score, 10);
+            if (!isNaN(num)) {
+                return Math.max(1, Math.min(10, num));
+            }
+        }
+        return 5; // 기본값
     }
 
     /**
@@ -483,11 +543,12 @@ class PatentManager {
         
         const animationDelay = `${Math.min(index * 0.05, 0.4)}s`;
 
+        // PDF 버튼 생성
         let pdfButton = '';
-        if (patent.source_path || patent.file_path) {
-            const pdfPath = this.escapeHtml(patent.source_path || patent.file_path);
+        const pdfPath = this.getPdfPath(patent);
+        if (pdfPath) {
             pdfButton = `
-                <a href="${pdfPath}" 
+                <a href="${this.escapeHtml(pdfPath)}" 
                    class="text-sm px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors inline-flex items-center" 
                    target="_blank" 
                    rel="noopener"
@@ -675,7 +736,29 @@ class PatentManager {
     }
 
     /**
-     * 특허 상세보기 (간단한 alert, 추후 모달로 개선 가능)
+     * PDF 경로 추출 및 변환
+     */
+    getPdfPath(patent) {
+        const sourcePath = patent.source_path || patent.file_path || '';
+        if (!sourcePath) return null;
+        
+        // 절대 경로에서 파일명만 추출
+        // /Users/sungho-kang/GST_patent/data/pdf/파일명.pdf → /data/pdf/파일명.pdf
+        const match = sourcePath.match(/\/data\/pdf\/(.+\.pdf)$/i);
+        if (match) {
+            return `/data/pdf/${match[1]}`;
+        }
+        
+        // 이미 상대 경로면 그대로 반환
+        if (sourcePath.startsWith('/')) {
+            return sourcePath;
+        }
+        
+        return sourcePath;
+    }
+
+    /**
+     * 특허 상세보기 (모달 방식)
      */
     viewPatentDetail(patentId) {
         const patent = this.patents.find(p => p.id === patentId);
@@ -684,27 +767,167 @@ class PatentManager {
             return;
         }
 
-        // 간단한 상세 정보 표시 (추후 모달로 개선)
-        const info = [
-            `📋 특허번호: ${patent.patent_number || '미상'}`,
-            `📌 제목: ${patent.title || '제목 없음'}`,
-            `🏢 기술분야: ${patent.technology_field || '정보 없음'}`,
-            `📅 등록일: ${patent.registration_date ? new Date(patent.registration_date).toLocaleDateString('ko-KR') : '정보 없음'}`,
-            `👥 발명자: ${patent.inventors.join(', ') || '정보 없음'}`,
-            `📊 상태: ${patent.status || '미상'}`,
-            `⭐ 우선순위: ${patent.priority_score || 0}/10`,
-            `\n📝 요약:\n${patent.abstract || '요약 정보가 없습니다.'}`
-        ].join('\n');
-
-        alert(info);
-        
-        // PDF가 있으면 링크 제공
-        if (patent.source_path || patent.file_path) {
-            const openPDF = confirm('\nPDF 명세서를 새 창에서 여시겠습니까?');
-            if (openPDF) {
-                window.open(patent.source_path || patent.file_path, '_blank');
-            }
+        // 기존 모달 제거
+        const existingModal = document.getElementById('patent-detail-modal');
+        if (existingModal) {
+            existingModal.remove();
         }
+
+        // 모달 생성
+        const pdfPath = this.getPdfPath(patent);
+        const pdfButtonHTML = pdfPath ? `
+            <a href="${pdfPath}" 
+               target="_blank" 
+               rel="noopener" 
+               class="inline-flex items-center px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors text-sm">
+                <i class="fas fa-file-pdf mr-2"></i>
+                PDF 명세서 (새 창)
+            </a>
+        ` : '<span class="text-sm text-gst-gray">PDF 파일 없음</span>';
+
+        const modalHTML = `
+            <div id="patent-detail-modal" class="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                <div class="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+                    <!-- 헤더 -->
+                    <div class="sticky top-0 bg-gradient-to-r from-gst-blue to-gst-light-blue text-white p-6 flex justify-between items-center border-b">
+                        <div>
+                            <h2 class="text-2xl font-bold mb-1">${this.escapeHtml(patent.title || '제목 없음')}</h2>
+                            <p class="text-sm opacity-90">특허번호: ${this.escapeHtml(patent.patent_number || '미상')}</p>
+                        </div>
+                        <button onclick="document.getElementById('patent-detail-modal').remove()" 
+                                class="text-white hover:text-gray-200 text-2xl leading-none"
+                                aria-label="모달 닫기">&times;</button>
+                    </div>
+
+                    <!-- 본문 -->
+                    <div class="p-6">
+                        <!-- 기본 정보 -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gst-dark mb-3 pb-2 border-b-2 border-gst-blue">기본 정보</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <p class="text-sm text-gst-gray mb-1">특허번호</p>
+                                    <p class="font-mono text-gst-dark">${this.escapeHtml(patent.patent_number || '미상')}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gst-gray mb-1">상태</p>
+                                    <span class="inline-block px-3 py-1 rounded-full text-sm font-semibold ${this.getStatusBadgeClass(patent.status)}">${patent.status || '미상'}</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gst-gray mb-1">기술분야</p>
+                                    <p class="text-gst-dark">${this.escapeHtml(patent.technology_field || '정보 없음')}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gst-gray mb-1">카테고리</p>
+                                    <p class="text-gst-dark">${this.getCategoryLabel(patent.category)}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gst-gray mb-1">등록일</p>
+                                    <p class="text-gst-dark">${patent.registration_date ? new Date(patent.registration_date).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' }) : '정보 없음'}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm text-gst-gray mb-1">출원일</p>
+                                    <p class="text-gst-dark">${patent.application_date ? new Date(patent.application_date).toLocaleDateString('ko-KR', { year: 'numeric', month: 'long', day: 'numeric' }) : '정보 없음'}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 요약 -->
+                        ${patent.abstract ? `
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold text-gst-dark mb-3 pb-2 border-b-2 border-gst-blue">요약</h3>
+                                <div class="bg-gray-50 p-4 rounded-lg max-h-40 overflow-y-auto">
+                                    <p class="text-sm text-gst-gray whitespace-pre-line">${this.escapeHtml(patent.abstract)}</p>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- 발명자 -->
+                        ${patent.inventors && patent.inventors.length > 0 ? `
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold text-gst-dark mb-3 pb-2 border-b-2 border-gst-blue">발명자</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    ${patent.inventors.map(inv => `
+                                        <span class="inline-block px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm">
+                                            ${this.escapeHtml(inv)}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- 기술 키워드 -->
+                        ${patent.technical_keywords && patent.technical_keywords.length > 0 ? `
+                            <div class="mb-6">
+                                <h3 class="text-lg font-semibold text-gst-dark mb-3 pb-2 border-b-2 border-gst-blue">기술 키워드</h3>
+                                <div class="flex flex-wrap gap-2">
+                                    ${patent.technical_keywords.map(kw => `
+                                        <span class="inline-block px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm">
+                                            ${this.escapeHtml(kw)}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        <!-- 통계 -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-gst-dark mb-3 pb-2 border-b-2 border-gst-blue">통계 정보</h3>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="bg-blue-50 p-3 rounded-lg">
+                                    <p class="text-xs text-gst-gray mb-1">우선순위 점수</p>
+                                    <p class="text-xl font-bold text-blue-600">${patent.priority_score || 0}/10</p>
+                                </div>
+                                <div class="bg-green-50 p-3 rounded-lg">
+                                    <p class="text-xs text-gst-gray mb-1">페이지 수</p>
+                                    <p class="text-xl font-bold text-green-600">${patent.page_count || 0} 페이지</p>
+                                </div>
+                                <div class="bg-purple-50 p-3 rounded-lg">
+                                    <p class="text-xs text-gst-gray mb-1">등록기간</p>
+                                    <p class="text-sm font-bold text-purple-600">
+                                        ${patent.application_date && patent.registration_date ? 
+                                            Math.floor((new Date(patent.registration_date) - new Date(patent.application_date)) / (1000 * 60 * 60 * 24)) + '일' : 
+                                            '정보 없음'
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 푸터 -->
+                    <div class="sticky bottom-0 bg-gray-50 p-6 border-t flex justify-between items-center">
+                        <div>
+                            ${pdfButtonHTML}
+                        </div>
+                        <button onclick="document.getElementById('patent-detail-modal').remove()" 
+                                class="px-4 py-2 bg-gst-gray text-white rounded-lg hover:bg-gst-dark transition-colors">
+                            닫기
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // 모달 추가
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        // 모달 외부 클릭 시 닫기
+        const modal = document.getElementById('patent-detail-modal');
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
+            }
+        });
+
+        // ESC 키로 닫기
+        const handleEsc = (e) => {
+            if (e.key === 'Escape') {
+                modal.remove();
+                document.removeEventListener('keydown', handleEsc);
+            }
+        };
+        document.addEventListener('keydown', handleEsc);
     }
 
     /**
@@ -961,6 +1184,16 @@ class PatentManager {
      * 데이터 준비 완료 이벤트
      */
     notifyDataReady() {
+        // 레거시 이벤트 (main.js에서 사용)
+        document.dispatchEvent(new CustomEvent('gst:patents-ready', {
+            detail: {
+                patents: this.patents,
+                stats: this.stats,
+                manager: this
+            }
+        }));
+        
+        // 새로운 이벤트
         window.dispatchEvent(new CustomEvent('patents-data-ready', {
             detail: {
                 patents: this.patents,
@@ -968,7 +1201,7 @@ class PatentManager {
                 manager: this
             }
         }));
-        console.log('📢 patents-data-ready 이벤트 발생');
+        console.log('📢 gst:patents-ready & patents-data-ready 이벤트 발생');
     }
 
     /**
