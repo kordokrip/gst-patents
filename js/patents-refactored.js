@@ -83,49 +83,60 @@ class PatentManager {
         console.log('🔄 특허 데이터 로딩 시작...');
         
         try {
-            // 1️⃣ D1 API 우선 시도 (190개 특허 + 신규 필드)
-            console.log('📡 D1 API 호출 중: /api/patents?limit=1000');
-            const response = await fetch('/api/patents?limit=1000');
+            // 🚀 1️⃣ 로컬 JSON 우선 (빠른 로딩)
+            console.log('📡 로컬 JSON 호출 중: /db/patents_data.json');
+            const jsonResponse = await fetch('/db/patents_data.json');
             
-            console.log('📥 D1 응답 상태:', response.status, response.statusText);
-            
-            if (!response.ok) {
-                throw new Error(`D1 API 실패: ${response.status} ${response.statusText}`);
+            if (jsonResponse.ok) {
+                const data = await jsonResponse.json();
+                this.patents = this.normalizePatents(data);
+                this.dataSource = 'local';
+                console.log('✅ 로컬 JSON 로드 완료:', this.patents.length, '개');
+                this.updateDataSourceIndicator('local', this.patents.length);
+                
+                // 백그라운드에서 D1 동기화 시도
+                this.syncWithD1InBackground();
+                return;
             }
             
-            const data = await response.json();
-            console.log('📦 D1 응답 데이터:', data);
+        } catch (jsonError) {
+            console.warn('⚠️ 로컬 JSON 실패, D1 시도:', jsonError);
+        }
+        
+        try {
+            // 2️⃣ D1 API 폴백
+            console.log('📡 D1 API 호출 중: /api/patents?limit=1000');
+            const d1Response = await fetch('/api/patents?limit=1000');
             
+            if (!d1Response.ok) {
+                throw new Error(`D1 API 실패: ${d1Response.status}`);
+            }
+            
+            const data = await d1Response.json();
             this.patents = this.normalizePatents(data.data || data);
             this.dataSource = 'd1';
             console.log('✅ D1 로드 완료:', this.patents.length, '개');
-            
-            // 데이터 소스 표시 업데이트
             this.updateDataSourceIndicator('d1', this.patents.length);
             
-            return; // 성공 시 즉시 반환
-            
-        } catch (error) {
-            console.warn('⚠️ D1 로드 실패, 로컬 JSON 폴백:', error);
-            
-            try {
-                // 2️⃣ 로컬 JSON 폴백
-                console.log('📡 로컬 JSON 호출 중: /db/patents_data.json');
-                const response = await fetch('/db/patents_data.json');
-                if (!response.ok) throw new Error('JSON 로드 실패');
-                
+        } catch (d1Error) {
+            console.error('❌ 모든 데이터 소스 실패:', d1Error);
+            throw new Error('데이터를 불러올 수 없습니다');
+        }
+    }
+    
+    /**
+     * 백그라운드 D1 동기화 (선택적)
+     */
+    async syncWithD1InBackground() {
+        try {
+            console.log('🔄 백그라운드 D1 동기화 시도...');
+            const response = await fetch('/api/patents?limit=1000');
+            if (response.ok) {
                 const data = await response.json();
-                this.patents = this.normalizePatents(data);
-                this.dataSource = 'local';
-                console.log('📊 로컬 JSON 로드 완료:', this.patents.length, '개');
-                
-                // 데이터 소스 표시 업데이트
-                this.updateDataSourceIndicator('local', this.patents.length);
-                
-            } catch (jsonError) {
-                console.error('❌ JSON도 실패:', jsonError);
-                throw new Error('모든 데이터 소스 실패');
+                console.log('✅ D1 동기화 완료:', (data.data || data).length, '개');
             }
+        } catch (error) {
+            console.log('⚠️ D1 동기화 실패 (무시):', error.message);
         }
     }
 
