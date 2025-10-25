@@ -110,7 +110,14 @@ def build_prompt(question: str, contexts: List[Dict], web_results: List[Dict]) -
 
 def web_search(query: str, max_results: int = 4) -> List[Dict]:
     """
-    웹 검색 기능 - DuckDuckGo 검색 (duckduckgo_search 라이브러리 사용)
+    특허 전문 웹 검색 기능 - 한국/일본/미국/기타 특허청 최적화
+    
+    검색 소스:
+    - 한국특허청 (KIPRIS): patents.go.kr
+    - 일본특허청 (J-PlatPat): j-platpat.inpit.go.jp
+    - 미국특허청 (USPTO): patents.google.com, uspto.gov
+    - 유럽특허청 (EPO): espacenet.com
+    - 일반 웹 검색 (DuckDuckGo)
     
     주의: 웹 검색은 특허 검색을 보완하는 용도로만 사용됩니다.
     실제 특허 정보는 Pinecone 벡터 DB에서 가져옵니다.
@@ -118,32 +125,150 @@ def web_search(query: str, max_results: int = 4) -> List[Dict]:
     if not WEB_SEARCH_ENABLED:
         return []
     
+    all_results = []
+    
     try:
-        # duckduckgo_search 라이브러리 사용 (requirements.txt에 추가 필요)
         from duckduckgo_search import DDGS
         
+        # 특허 번호 패턴 감지
+        patent_number_patterns = {
+            'kr': re.compile(r'(KR|10-?\d{7})', re.IGNORECASE),
+            'jp': re.compile(r'(JP|特許|特開|特公)\s*[\d-]+', re.IGNORECASE),
+            'us': re.compile(r'(US|USD?)\s*[\d,]+', re.IGNORECASE),
+        }
+        
+        detected_regions = []
+        for region, pattern in patent_number_patterns.items():
+            if pattern.search(query):
+                detected_regions.append(region)
+        
+        # 검색 전략 수립
+        search_strategies = []
+        
+        # 1. 한국 특허 검색 전략
+        if not detected_regions or 'kr' in detected_regions or any(
+            keyword in query.lower() for keyword in ['스크러버', '칠러', '플라즈마', '반도체']
+        ):
+            search_strategies.append({
+                'query': f'{query} site:patents.go.kr OR site:kipris.or.kr',
+                'region': '🇰🇷 한국특허청',
+                'priority': 10
+            })
+            search_strategies.append({
+                'query': f'{query} 특허 한국',
+                'region': '🇰🇷 한국',
+                'priority': 8
+            })
+        
+        # 2. 일본 특허 검색 전략
+        if 'jp' in detected_regions or any(
+            keyword in query for keyword in ['日本', 'スクラバー', 'チラー']
+        ):
+            search_strategies.append({
+                'query': f'{query} site:j-platpat.inpit.go.jp',
+                'region': '🇯🇵 일본특허청',
+                'priority': 10
+            })
+            search_strategies.append({
+                'query': f'{query} 特許 日本',
+                'region': '🇯🇵 일본',
+                'priority': 8
+            })
+        
+        # 3. 미국 특허 검색 전략
+        if 'us' in detected_regions or any(
+            keyword in query.lower() for keyword in ['scrubber', 'chiller', 'plasma']
+        ):
+            search_strategies.append({
+                'query': f'{query} site:patents.google.com OR site:uspto.gov',
+                'region': '🇺🇸 미국특허청',
+                'priority': 10
+            })
+            search_strategies.append({
+                'query': f'{query} patent USA',
+                'region': '🇺🇸 미국',
+                'priority': 8
+            })
+        
+        # 4. 유럽 및 국제 특허 검색
+        search_strategies.append({
+            'query': f'{query} site:espacenet.com OR site:epo.org',
+            'region': '🇪🇺 유럽특허청',
+            'priority': 6
+        })
+        
+        # 5. 일반 특허 검색 (폴백)
+        search_strategies.append({
+            'query': f'{query} patent OR 特許 OR 특허',
+            'region': '🌐 글로벌',
+            'priority': 5
+        })
+        
+        # 우선순위 정렬
+        search_strategies.sort(key=lambda x: x['priority'], reverse=True)
+        
+        # 검색 실행
+        results_per_strategy = max(2, max_results // min(len(search_strategies), 3))
+        
         with DDGS() as ddgs:
-            results = []
-            search_query = f"{query} 특허 OR patent"  # 특허 관련 키워드 추가
-            
-            for idx, result in enumerate(ddgs.text(search_query, max_results=max_results)):
-                if idx >= max_results:
-                    break
+            for strategy in search_strategies[:3]:  # 상위 3개 전략만 실행
+                try:
+                    print(f"[웹 검색] {strategy['region']} - 쿼리: {strategy['query'][:50]}...")
                     
-                results.append({
-                    "title": result.get("title", ""),
-                    "snippet": result.get("body", "")[:300],  # 300자로 제한
-                    "link": result.get("href", ""),
-                })
-            
-            # 검색 결과 로깅
-            if results:
-                print(f"[웹 검색] '{query}' - {len(results)}개 결과 발견")
-            else:
-                print(f"[웹 검색] '{query}' - 검색 결과 없음")
-                
-            return results
-            
+                    for idx, result in enumerate(
+                        ddgs.text(strategy['query'], max_results=results_per_strategy)
+                    ):
+                        if idx >= results_per_strategy:
+                            break
+                        
+                        # 중복 제거
+                        url = result.get("href", "")
+                        if any(r['link'] == url for r in all_results):
+                            continue
+                        
+                        all_results.append({
+                            "title": result.get("title", ""),
+                            "snippet": result.get("body", "")[:300],
+                            "link": url,
+                            "region": strategy['region'],
+                            "priority": strategy['priority']
+                        })
+                        
+                        if len(all_results) >= max_results:
+                            break
+                    
+                    if len(all_results) >= max_results:
+                        break
+                        
+                except Exception as strategy_error:
+                    print(f"[웹 검색] {strategy['region']} 전략 실패: {strategy_error}")
+                    continue
+        
+        # 우선순위 및 관련성 기반 정렬
+        all_results.sort(key=lambda x: (
+            x.get('priority', 0),
+            # 특허청 사이트 우선
+            1 if any(domain in x['link'] for domain in [
+                'patents.go.kr', 'kipris.or.kr', 
+                'j-platpat.inpit.go.jp',
+                'patents.google.com', 'uspto.gov',
+                'espacenet.com', 'epo.org'
+            ]) else 0
+        ), reverse=True)
+        
+        # 결과 제한
+        all_results = all_results[:max_results]
+        
+        # 검색 결과 로깅
+        if all_results:
+            print(f"[웹 검색] '{query}' - {len(all_results)}개 결과 발견")
+            for idx, result in enumerate(all_results, 1):
+                print(f"  {idx}. [{result.get('region', '🌐')}] {result['title'][:50]}...")
+        else:
+            print(f"[웹 검색] '{query}' - 검색 결과 없음")
+        
+        return all_results
+        
     except ImportError:
         print("[웹 검색] duckduckgo_search 라이브러리가 설치되지 않았습니다.")
         print("[웹 검색] pip install duckduckgo-search 실행 필요")
@@ -265,7 +390,12 @@ def sidebar_controls() -> Tuple[int, bool, int]:
     st.sidebar.info(
         "💡 **사용 팁**\n\n"
         "• 특허 번호, 기술명, 발명자명 등으로 질문하세요\n"
-        "• 웹 검색은 참고용이며, 주 데이터는 특허 DB입니다\n"
+        "• 웹 검색은 한/일/미/유럽 특허청 최적화\n"
+        "  - 🇰🇷 한국: patents.go.kr, kipris.or.kr\n"
+        "  - 🇯🇵 일본: j-platpat.inpit.go.jp\n"
+        "  - 🇺🇸 미국: patents.google.com, uspto.gov\n"
+        "  - 🇪🇺 유럽: espacenet.com\n"
+        "• 특허번호 감지 시 해당 국가 우선 검색\n"
         "• `.env` 파일에 OpenAI/Pinecone 키 설정 필요\n"
         "• rag_outputs 폴더 내용 변경 시 업서트 재실행"
     )
@@ -325,12 +455,13 @@ def build_reference_block(patent_sources: List[Dict], web_sources: List[Dict]) -
             snippet = escape(item.get("snippet") or "")
             link = escape(item.get("link") or "#")
             tag = escape(item.get("tag", "웹"))
+            region = escape(item.get("region", "🌐"))
             items.append(
-                f"<li>[{tag}] <a href='{link}' target='_blank' rel='noopener'>{title}</a>"
+                f"<li>[{tag}] {region} <a href='{link}' target='_blank' rel='noopener'>{title}</a>"
                 f"{f' · {snippet}' if snippet else ''}</li>"
             )
         sections.append(
-            "<div class='reference-group'><div class='reference-title'>🌐 웹 검색</div>"
+            "<div class='reference-group'><div class='reference-title'>🌐 웹 검색 (특허청 최적화)</div>"
             f"<ul>{''.join(items)}</ul></div>"
         )
     if not sections:
