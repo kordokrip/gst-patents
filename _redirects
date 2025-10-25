@@ -25,6 +25,10 @@
 # Documentation pages
 /pages/*  /pages/:splat  200
 
+# Home page redirects
+/index.html   /             301
+/home         /             301
+
 # Legacy URL redirects (if needed)
 /patent/*     /#patents       301
 /search       /#patents       301
