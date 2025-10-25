@@ -13,14 +13,15 @@
 /api/*     /api/:splat     200!
 
 # Static asset directories (MUST NOT fallback to index.html)
-/css/*      /css/:splat      200!
-/js/*       /js/:splat       200!
-/images/*   /images/:splat   200!
-/assets/*   /assets/:splat   200!
-/fonts/*    /fonts/:splat    200!
-/data/*     /data/:splat     200!
-/db/*       /db/:splat       200!
-/pdf/*      /pdf/:splat      200!
+# Use absolute paths with status code 200! to prevent HTML fallback
+/css/:path    /css/:path      200!
+/js/:path     /js/:path       200!
+/images/:path /images/:path   200!
+/assets/:path /assets/:path   200!
+/fonts/:path  /fonts/:path    200!
+/data/:path   /data/:path     200!
+/db/:path     /db/:path       200!
+/pdf/:path    /pdf/:path      200!
 
 # HTML pages (preserve for direct access)
 /pages/*    /pages/:splat    200!

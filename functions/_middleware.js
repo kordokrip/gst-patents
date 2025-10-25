@@ -8,9 +8,33 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const path = url.pathname;
 
+  // JavaScript 파일 직접 서빙 (Content-Type 강제)
+  if (path.endsWith('.js') || path.startsWith('/js/')) {
+    try {
+      const response = await next();
+      
+      // 새로운 응답 생성 (Content-Type 강제)
+      const newResponse = new Response(response.body, {
+        status: response.status,
+        statusText: response.statusText,
+        headers: {
+          ...Object.fromEntries(response.headers),
+          'Content-Type': 'application/javascript; charset=utf-8',
+          'Cache-Control': 'no-cache, no-store, must-revalidate',
+          'X-Content-Type-Options': 'nosniff',
+        },
+      });
+      
+      return newResponse;
+    } catch (error) {
+      console.error('JS file serving error:', error);
+      return next();
+    }
+  }
+
   // 정적 파일 요청은 middleware 건너뛰기
-  const staticExtensions = ['.js', '.css', '.json', '.html', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot', '.pdf'];
-  const staticPaths = ['/js/', '/css/', '/images/', '/assets/', '/fonts/', '/data/', '/db/', '/pdf/', '/pages/'];
+  const staticExtensions = ['.css', '.json', '.html', '.png', '.jpg', '.jpeg', '.gif', '.svg', '.ico', '.woff', '.woff2', '.ttf', '.eot', '.pdf'];
+  const staticPaths = ['/css/', '/images/', '/assets/', '/fonts/', '/data/', '/db/', '/pdf/', '/pages/'];
   
   const isStaticFile = staticExtensions.some(ext => path.endsWith(ext)) || 
                        staticPaths.some(prefix => path.startsWith(prefix)) ||

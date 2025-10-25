@@ -1,0 +1,32 @@
+# Cloudflare Pages Static Assets Configuration
+# 정적 파일 우선 서빙 설정
+
+[build]
+  # 빌드 명령 없음 (정적 사이트)
+  command = ""
+  # 정적 파일 디렉토리
+  publish = "."
+
+[[redirects]]
+  from = "/js/*"
+  to = "/js/:splat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/css/*"
+  to = "/css/:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/js/*.js"
+  [headers.values]
+    Content-Type = "application/javascript; charset=utf-8"
+    Cache-Control = "no-cache, no-store, must-revalidate"
+    
+[[headers]]
+  for = "/css/*.css"
+  [headers.values]
+    Content-Type = "text/css; charset=utf-8"
+    Cache-Control = "no-cache, no-store, must-revalidate"
