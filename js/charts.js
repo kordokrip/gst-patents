@@ -42,9 +42,11 @@ class ChartManager {
             this.initStatusDistributionChart();
             this.initPriorityScoreChart();
             this.initInventorChart();
+            this.initTopCategories();
+            this.initRecentTrend();
             
             this.initialized = true;
-            console.log('📊 차트 매니저 초기화 완료');
+            console.log('📊 차트 매니저 초기화 완료 (메인 차트 + 통계 위젯)');
         } catch (error) {
             console.error('❌ 차트 초기화 오류:', error);
         }
@@ -253,12 +255,34 @@ class ChartManager {
      * 상태별 분포 차트 (추가)
      */
     initStatusDistributionChart() {
-        // 대시보드에 새로운 차트 영역이 있다면 구현
         const patents = this.getActiveDataset();
-        const statusData = this.getStatusDistribution(patents);
+        const statusCounts = {
+            registered: 0,
+            pending: 0,
+            rejected: 0
+        };
+
+        patents.forEach(patent => {
+            const status = patent.status || '';
+            if (status === '등록') {
+                statusCounts.registered++;
+            } else if (status === '출원') {
+                statusCounts.pending++;
+            } else if (status === '포기' || status === '거절') {
+                statusCounts.rejected++;
+            }
+        });
+
+        // DOM 업데이트
+        const statRegistered = document.getElementById('stat-registered');
+        const statPending = document.getElementById('stat-pending');
+        const statRejected = document.getElementById('stat-rejected');
+
+        if (statRegistered) statRegistered.textContent = statusCounts.registered;
+        if (statPending) statPending.textContent = statusCounts.pending;
+        if (statRejected) statRejected.textContent = statusCounts.rejected;
         
-        // 콘솔에 통계 출력
-        console.log('📊 특허 상태 분포:', statusData);
+        console.log('📊 특허 상태 분포:', statusCounts);
     }
     
     /**
@@ -267,6 +291,33 @@ class ChartManager {
     initPriorityScoreChart() {
         const patents = window.patentManager.patents;
         const scoreData = this.getPriorityScoreDistribution(patents);
+        
+        const container = document.getElementById('priority-distribution');
+        if (container) {
+            const total = Object.values(scoreData).reduce((a, b) => a + b, 0);
+            const html = Object.entries(scoreData).map(([range, count]) => {
+                const percentage = total > 0 ? ((count / total) * 100).toFixed(1) : 0;
+                const colors = {
+                    '1-3점': 'bg-red-500',
+                    '4-6점': 'bg-yellow-500',
+                    '7-8점': 'bg-blue-500',
+                    '9-10점': 'bg-green-500'
+                };
+                return `
+                    <div class="flex items-center gap-3">
+                        <span class="text-sm text-gst-gray min-w-[60px]">${range}</span>
+                        <div class="flex-1 bg-gray-200 rounded-full h-4">
+                            <div class="${colors[range]} h-4 rounded-full transition-all duration-500" 
+                                 style="width: ${percentage}%"></div>
+                        </div>
+                        <span class="text-sm font-semibold text-gst-dark min-w-[50px] text-right">
+                            ${count}건 (${percentage}%)
+                        </span>
+                    </div>
+                `;
+            }).join('');
+            container.innerHTML = html;
+        }
         
         console.log('📊 중요도 점수 분포:', scoreData);
     }
@@ -278,7 +329,107 @@ class ChartManager {
         const patents = window.patentManager.patents;
         const inventorData = this.getInventorDistribution(patents);
         
+        const container = document.getElementById('inventor-list');
+        if (container) {
+            const html = Object.entries(inventorData).map(([inventor, count], index) => {
+                const medal = index < 3 ? ['🥇', '🥈', '🥉'][index] : ''; 
+                return `
+                    <div class="flex items-center justify-between py-2 px-3 rounded hover:bg-gray-50 transition-colors">
+                        <div class="flex items-center gap-2">
+                            <span class="text-lg">${medal}</span>
+                            <span class="text-sm font-medium text-gst-dark">${this.escapeHtml(inventor)}</span>
+                        </div>
+                        <span class="text-sm font-bold text-gst-blue">${count}건</span>
+                    </div>
+                `;
+            }).join('');
+            container.innerHTML = html || '<div class="text-sm text-gst-gray text-center py-4">데이터 없음</div>';
+        }
+        
         console.log('📊 발명자별 특허 분포:', inventorData);
+    }
+
+    /**
+     * 주요 기술 분야 TOP 3 표시
+     */
+    initTopCategories() {
+        const patents = this.getActiveDataset();
+        const categoryData = this.getCategoryDistribution(patents);
+        
+        const sorted = Object.entries(categoryData.labels.map((label, i) => ({
+            label,
+            count: categoryData.values[i]
+        }))).sort((a, b) => b[1].count - a[1].count).slice(0, 3);
+
+        const container = document.getElementById('top-categories');
+        if (container) {
+            const colors = [
+                'bg-gradient-to-r from-yellow-400 to-orange-500',
+                'bg-gradient-to-r from-blue-400 to-indigo-500',
+                'bg-gradient-to-r from-green-400 to-teal-500'
+            ];
+
+            const html = sorted.map(([idx, {label, count}], i) => {
+                const total = categoryData.values.reduce((a, b) => a + b, 0);
+                const percentage = ((count / total) * 100).toFixed(1);
+                return `
+                    <div class="p-3 rounded-lg ${colors[i]} text-white">
+                        <div class="flex justify-between items-center mb-1">
+                            <span class="font-semibold">${label}</span>
+                            <span class="text-sm">${count}건</span>
+                        </div>
+                        <div class="text-xs opacity-90">${percentage}%</div>
+                    </div>
+                `;
+            }).join('');
+            container.innerHTML = html || '<div class="text-sm text-gst-gray text-center py-4">데이터 없음</div>';
+        }
+    }
+
+    /**
+     * 최근 등록 트렌드 표시
+     */
+    initRecentTrend() {
+        const patents = window.patentManager.patents;
+        const now = new Date();
+        const oneYearAgo = new Date(now.getFullYear() - 1, now.getMonth(), now.getDate());
+        
+        const recentPatents = patents.filter(p => {
+            const date = p.__registrationDate;
+            return date && date >= oneYearAgo;
+        });
+
+        const container = document.getElementById('recent-trend');
+        if (container) {
+            const byMonth = {};
+            recentPatents.forEach(p => {
+                const month = p.__registrationDate.toLocaleDateString('ko-KR', { year: 'numeric', month: 'short' });
+                byMonth[month] = (byMonth[month] || 0) + 1;
+            });
+
+            const sorted = Object.entries(byMonth).sort((a, b) => new Date(b[0]) - new Date(a[0])).slice(0, 5);
+            
+            const html = sorted.map(([month, count]) => `
+                <div class="flex items-center justify-between py-2">
+                    <span class="text-sm text-gst-gray">${month}</span>
+                    <div class="flex items-center gap-2">
+                        <div class="h-2 bg-indigo-200 rounded-full" style="width: ${count * 20}px"></div>
+                        <span class="text-sm font-semibold text-indigo-600">${count}건</span>
+                    </div>
+                </div>
+            `).join('');
+            
+            container.innerHTML = html || '<div class="text-sm text-gst-gray text-center py-4">최근 1년 데이터 없음</div>';
+        }
+    }
+
+    /**
+     * HTML 이스케이프
+     */
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = String(text || '');
+        return div.innerHTML;
     }
     
     /**

@@ -139,7 +139,7 @@
                 반도체 유해가스 정화장비 특허 관리 시스템
             </h1>
             <p class="text-xl text-gst-gray max-w-3xl mx-auto">
-                글로벌 스탠다드 테크놀로지의 190개 특허를 체계적으로 관리하고 분석하는 
+                글로벌 스탠다드 테크놀로지의 특허를 체계적으로 관리하고 분석하는 
                 통합 플랫폼입니다.
             </p>
         </header>
@@ -160,7 +160,7 @@
                         </div>
                         <div class="ml-4">
                             <p class="text-sm font-medium text-gst-gray">총 특허 수</p>
-                            <p class="text-2xl font-semibold text-gst-dark" id="total-patents">190</p>
+                            <p class="text-2xl font-semibold text-gst-dark" id="total-patents">75</p>
                         </div>
                     </div>
                 </div>
@@ -359,7 +359,10 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- 기술 분야별 분포 차트 -->
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-xl font-semibold text-gst-dark mb-4">기술 분야별 특허 분포</h3>
+                    <h3 class="text-xl font-semibold text-gst-dark mb-4 flex items-center">
+                        <i class="fas fa-pie-chart mr-2 text-gst-blue"></i>
+                        기술 분야별 특허 분포
+                    </h3>
                     <div style="height: 400px;">
                         <canvas id="tech-distribution-chart"></canvas>
                     </div>
@@ -367,9 +370,94 @@
                 
                 <!-- 연도별 등록 현황 -->
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h3 class="text-xl font-semibold text-gst-dark mb-4">연도별 특허 등록 현황</h3>
+                    <h3 class="text-xl font-semibold text-gst-dark mb-4 flex items-center">
+                        <i class="fas fa-chart-line mr-2 text-green-600"></i>
+                        연도별 특허 등록 현황
+                    </h3>
                     <div style="height: 400px;">
                         <canvas id="yearly-registration-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 추가 분석 차트들 -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+                <!-- 상태별 분포 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gst-dark mb-4 flex items-center">
+                        <i class="fas fa-tasks mr-2 text-purple-600"></i>
+                        특허 상태 분포
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gst-gray">등록</span>
+                            <span id="stat-registered" class="text-lg font-bold text-green-600">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gst-gray">출원</span>
+                            <span id="stat-pending" class="text-lg font-bold text-blue-600">0</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gst-gray">포기/거절</span>
+                            <span id="stat-rejected" class="text-lg font-bold text-red-600">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 기술 분야 TOP 3 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gst-dark mb-4 flex items-center">
+                        <i class="fas fa-trophy mr-2 text-yellow-600"></i>
+                        주요 기술 분야
+                    </h3>
+                    <div id="top-categories" class="space-y-3">
+                        <!-- JavaScript로 동적 생성 -->
+                        <div class="text-sm text-gst-gray text-center py-4">
+                            데이터 로딩 중...
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 최근 등록 트렌드 -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-lg font-semibold text-gst-dark mb-4 flex items-center">
+                        <i class="fas fa-chart-area mr-2 text-indigo-600"></i>
+                        최근 등록 트렌드
+                    </h3>
+                    <div id="recent-trend" class="space-y-3">
+                        <!-- JavaScript로 동적 생성 -->
+                        <div class="text-sm text-gst-gray text-center py-4">
+                            데이터 로딩 중...
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 발명자 분석 -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gst-dark mb-4 flex items-center">
+                        <i class="fas fa-users mr-2 text-blue-600"></i>
+                        주요 발명자 TOP 10
+                    </h3>
+                    <div id="inventor-list" class="space-y-2">
+                        <!-- JavaScript로 동적 생성 -->
+                        <div class="text-sm text-gst-gray text-center py-4">
+                            데이터 로딩 중...
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-semibold text-gst-dark mb-4 flex items-center">
+                        <i class="fas fa-star mr-2 text-yellow-600"></i>
+                        중요도 점수 분포
+                    </h3>
+                    <div id="priority-distribution" class="space-y-3">
+                        <!-- JavaScript로 동적 생성 -->
+                        <div class="text-sm text-gst-gray text-center py-4">
+                            데이터 로딩 중...
+                        </div>
                     </div>
                 </div>
             </div>
@@ -468,11 +556,11 @@
     <div id="ai-chat-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40" aria-hidden="true"></div>
 
     <!-- JavaScript -->
-    <script src="js/enhanced-search.js?v=3.5.0" defer></script>
-    <script src="js/main.js?v=3.5.0" defer></script>
-    <script src="js/patents-refactored.js?v=3.5.0" defer></script>
-    <script src="js/charts.js?v=3.5.0" defer></script>
-    <script src="js/timeline.js?v=3.5.0" defer></script>
+    <script src="js/enhanced-search.js?v=3.6.0" defer></script>
+    <script src="js/main.js?v=3.6.0" defer></script>
+    <script src="js/patents-refactored.js?v=3.6.0" defer></script>
+    <script src="js/charts.js?v=3.6.0" defer></script>
+    <script src="js/timeline.js?v=3.6.0" defer></script>
     
     <!-- Service Worker Registration - DISABLED -->
     <script>

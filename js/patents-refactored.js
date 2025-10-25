@@ -1,13 +1,15 @@
 /**
- * 🚀 통합 특허 데이터 매니저 (Refactored v3.0)
- * 로컬 JSON + Cloudflare D1 통합 지원
+ * 🚀 통합 특허 데이터 매니저 (Refactored v3.6)
+ * 로컬 JSON + Cloudflare D1 통합 지원 + 레거시 디자인 완전 복구
  * 
  * 특징:
- * - 270개 특허 데이터 완벽 지원
- * - 카테고리별 분류 (scrubber, chiller, plasma 등)
+ * - 75개 특허 데이터 완벽 지원
+ * - 카테고리별 분류 (scrubber, chiller, plasma, temperature, gas-treatment)
  * - 상태별 필터링 (등록, 포기, 출원, 거절)
  * - PDF 원문 연동
  * - 고급 검색 및 정렬
+ * - Tailwind CSS 기반 아름다운 카드 UI
+ * - 연도별 그룹핑 및 애니메이션
  */
 
 class PatentManager {
@@ -15,37 +17,44 @@ class PatentManager {
         this.patents = [];
         this.filteredPatents = [];
         this.currentPage = 1;
-        this.itemsPerPage = 20;
+        this.itemsPerPage = 10;
         this.totalPages = 0;
         this.dataSource = 'local'; // 'local' | 'd1'
         this.searchIndex = null;
         this.stats = {};
+        this.searchSuggestionIndex = -1;
+        this.activeSuggestions = [];
 
         // DOM 요소
         this.dom = {
             listContainer: document.getElementById('patents-list-container'),
             loading: document.getElementById('patents-loading'),
             emptyState: document.getElementById('patents-empty-state'),
+            yearGroups: document.getElementById('patent-year-groups'),
+            dataSourceIndicator: document.getElementById('data-source-indicator'),
             searchInput: document.getElementById('search-input'),
             searchButton: document.getElementById('search-button'),
             resetButton: document.getElementById('reset-button'),
             categoryFilter: document.getElementById('category-filter'),
             statusFilter: document.getElementById('status-filter'),
-            sortSelect: document.getElementById('sort-select'),
             prevPage: document.getElementById('prev-page'),
             nextPage: document.getElementById('next-page'),
             pageSize: document.getElementById('page-size'),
             totalCount: document.getElementById('total-count'),
             startCount: document.getElementById('start-count'),
-            endCount: document.getElementById('end-count')
+            endCount: document.getElementById('end-count'),
+            totalPatents: document.getElementById('total-patents'),
+            techCategories: document.getElementById('tech-categories'),
+            registrationRange: document.getElementById('registration-range'),
+            activePatents: document.getElementById('active-patents'),
+            avgPriorityScore: document.getElementById('avg-priority-score')
         };
 
         // 필터 및 정렬 상태
         this.filters = {
             search: '',
             category: '',
-            status: '',
-            hasPDF: false
+            status: ''
         };
 
         this.sorting = {
@@ -65,14 +74,18 @@ class PatentManager {
             await this.loadPatents();
             this.buildSearchIndex();
             this.calculateStats();
+            this.updateDashboardStats();
             this.bindEvents();
             this.loadStateFromURL();
             this.applyFilters();
+            this.renderYearGroups();
             this.showLoading(false);
             console.log('✅ 특허 매니저 초기화 완료:', this.patents.length, '개');
+            this.notifyDataReady();
         } catch (error) {
             console.error('❌ 초기화 실패:', error);
             this.showError('데이터를 불러올 수 없습니다.');
+            this.showLoading(false);
         }
     }
 
@@ -272,34 +285,68 @@ class PatentManager {
      * 통계 계산
      */
     calculateStats() {
+        const categories = {};
+        const statuses = {};
+        const years = {};
+        let activeCount = 0;
+        let totalPriority = 0;
+        let minYear = Infinity;
+        let maxYear = -Infinity;
+
+        this.patents.forEach(patent => {
+            // 카테고리 집계
+            const cat = patent.category || 'other';
+            categories[cat] = (categories[cat] || 0) + 1;
+
+            // 상태 집계
+            const status = patent.status || 'unknown';
+            statuses[status] = (statuses[status] || 0) + 1;
+            if (status === '등록') activeCount++;
+
+            // 연도 집계
+            if (patent.__year) {
+                years[patent.__year] = (years[patent.__year] || 0) + 1;
+                if (patent.__year < minYear) minYear = patent.__year;
+                if (patent.__year > maxYear) maxYear = patent.__year;
+            }
+
+            // 우선순위 점수
+            totalPriority += (patent.priority_score || 0);
+        });
+
         this.stats = {
             total: this.patents.length,
-            byCategory: this.groupBy(this.patents, 'category'),
-            byStatus: this.groupBy(this.patents, 'status'),
-            byYear: this.groupBy(this.patents.filter(p => p.__year), '__year'),
-            withPDF: this.patents.filter(p => p.__hasPDF).length,
-            avgPriority: this.average(this.patents, 'priority_score')
+            byCategory: categories,
+            byStatus: statuses,
+            byYear: years,
+            activeCount: activeCount,
+            avgPriority: this.patents.length > 0 ? (totalPriority / this.patents.length).toFixed(1) : 0,
+            yearRange: minYear !== Infinity && maxYear !== -Infinity ? `${minYear}~${maxYear}` : '—',
+            categoryCount: Object.keys(categories).length
         };
+
+        console.log('📊 통계 계산 완료:', this.stats);
     }
 
     /**
-     * 그룹핑 헬퍼
+     * 대시보드 통계 업데이트
      */
-    groupBy(array, key) {
-        return array.reduce((acc, item) => {
-            const value = item[key];
-            acc[value] = (acc[value] || 0) + 1;
-            return acc;
-        }, {});
-    }
-
-    /**
-     * 평균 계산
-     */
-    average(array, key) {
-        if (!array.length) return 0;
-        const sum = array.reduce((acc, item) => acc + (item[key] || 0), 0);
-        return Math.round(sum / array.length * 10) / 10;
+    updateDashboardStats() {
+        if (this.dom.totalPatents) {
+            this.dom.totalPatents.textContent = this.stats.total;
+        }
+        if (this.dom.techCategories) {
+            this.dom.techCategories.textContent = this.stats.categoryCount;
+        }
+        if (this.dom.registrationRange) {
+            this.dom.registrationRange.textContent = this.stats.yearRange;
+        }
+        if (this.dom.activePatents) {
+            this.dom.activePatents.textContent = this.stats.activeCount;
+        }
+        if (this.dom.avgPriorityScore) {
+            this.dom.avgPriorityScore.textContent = this.stats.avgPriority;
+        }
     }
 
     /**
@@ -311,10 +358,17 @@ class PatentManager {
         // 검색
         if (this.filters.search) {
             const query = this.filters.search.toLowerCase();
-            const matchedIds = this.searchIndex
-                .filter(item => item.searchText.includes(query))
-                .map(item => item.id);
-            results = results.filter(p => matchedIds.includes(p.id));
+            results = results.filter(patent => {
+                const searchText = [
+                    patent.title,
+                    patent.patent_number,
+                    patent.abstract,
+                    patent.technology_field,
+                    patent.inventors.join(' '),
+                    patent.technical_keywords.join(' ')
+                ].filter(Boolean).join(' ').toLowerCase();
+                return searchText.includes(query);
+            });
         }
 
         // 카테고리
@@ -327,26 +381,35 @@ class PatentManager {
             results = results.filter(p => p.status === this.filters.status);
         }
 
-        // PDF 있는 것만
-        if (this.filters.hasP) {
-            results = results.filter(p => p.__hasPDF);
-        }
-
         // 정렬
         results.sort((a, b) => {
-            const aVal = a[this.sorting.field];
-            const bVal = b[this.sorting.field];
-            
-            if (aVal === bVal) return 0;
-            
-            const comparison = aVal > bVal ? 1 : -1;
-            return this.sorting.order === 'asc' ? comparison : -comparison;
+            let aVal = a[this.sorting.field];
+            let bVal = b[this.sorting.field];
+
+            // 날짜 필드 처리
+            if (this.sorting.field.includes('date')) {
+                aVal = a.__registrationDate || new Date(0);
+                bVal = b.__registrationDate || new Date(0);
+            }
+
+            // 숫자/날짜 비교
+            if (typeof aVal === 'number' || aVal instanceof Date) {
+                return this.sorting.order === 'asc' ? aVal - bVal : bVal - aVal;
+            }
+
+            // 문자열 비교
+            const strA = String(aVal || '');
+            const strB = String(bVal || '');
+            return this.sorting.order === 'asc' ? 
+                strA.localeCompare(strB, 'ko') : 
+                strB.localeCompare(strA, 'ko');
         });
 
         this.filteredPatents = results;
         this.currentPage = 1;
         this.calculatePagination();
-        this.renderTable();
+        this.renderPatentCards();
+        this.renderYearGroups();
         this.updatePaginationUI();
         this.saveStateToURL();
     }
@@ -362,13 +425,14 @@ class PatentManager {
     }
 
     /**
-     * 테이블 렌더링
+     * 특허 카드 렌더링 (Tailwind UI)
      */
-    renderTable() {
+    renderPatentCards() {
         if (!this.dom.listContainer) return;
 
         if (this.filteredPatents.length === 0) {
             this.showEmpty();
+            this.updateResultCount();
             return;
         }
 
@@ -376,299 +440,357 @@ class PatentManager {
         const end = start + this.itemsPerPage;
         const pagePatents = this.filteredPatents.slice(start, end);
 
-        const html = `
-            <div class="table-responsive">
-                <table class="table table-hover table-striped align-middle">
-                    <thead class="table-dark">
-                        <tr>
-                            <th style="width: 5%">#</th>
-                            <th style="width: 12%">특허번호</th>
-                            <th style="width: 35%">명칭</th>
-                            <th style="width: 12%">카테고리</th>
-                            <th style="width: 10%">상태</th>
-                            <th style="width: 12%">등록일</th>
-                            <th style="width: 8%">PDF</th>
-                            <th style="width: 6%">상세</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${pagePatents.map((patent, idx) => this.renderPatentRow(patent, start + idx + 1)).join('')}
-                    </tbody>
-                </table>
-            </div>
-        `;
+        const cardsHTML = pagePatents.map((patent, index) => 
+            this.createPatentCard(patent, index)
+        ).join('');
 
-        this.dom.listContainer.innerHTML = html;
-        this.dom.listContainer.style.display = 'block';
-        if (this.dom.emptyState) this.dom.emptyState.style.display = 'none';
+        this.dom.listContainer.innerHTML = cardsHTML;
+        this.dom.listContainer.classList.remove('hidden');
+        if (this.dom.emptyState) {
+            this.dom.emptyState.classList.add('hidden');
+        }
+        
+        this.updateResultCount();
     }
 
     /**
-     * 특허 행 렌더링
+     * 개별 특허 카드 생성
      */
-    renderPatentRow(patent, index) {
-        const dateStr = patent.registration_date ? 
-            new Date(patent.registration_date).toLocaleDateString('ko-KR') : '-';
+    createPatentCard(patent, index) {
+        const categoryClass = this.getCategoryClass(patent.category);
+        const badgeClass = this.getCategoryBadgeClass(patent.category);
+        const statusClass = this.getStatusBadgeClass(patent.status);
+        const statusText = patent.status || '미상';
+        
+        const registrationDate = patent.__registrationDate;
+        const formattedDate = registrationDate ? 
+            registrationDate.toLocaleDateString('ko-KR', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            }) : '정보 없음';
+        
+        const relativeTime = this.getTimeAgo(registrationDate);
+        
+        const inventors = patent.inventors && patent.inventors.length > 0 ?
+            this.escapeHtml(patent.inventors.join(', ')) : '정보 없음';
+        
+        const technologyField = this.escapeHtml(patent.technology_field || '기술분야 미정');
+        const patentNumber = this.escapeHtml(patent.patent_number || '미상');
+        const title = this.escapeHtml(patent.title || '제목 정보 없음');
+        const abstract = this.escapeHtml(patent.abstract || '요약 정보가 등록되지 않았습니다.');
+        const categoryLabel = this.getCategoryLabel(patent.category);
+        
+        const animationDelay = `${Math.min(index * 0.05, 0.4)}s`;
+
+        let pdfButton = '';
+        if (patent.source_path || patent.file_path) {
+            const pdfPath = this.escapeHtml(patent.source_path || patent.file_path);
+            pdfButton = `
+                <a href="${pdfPath}" 
+                   class="text-sm px-4 py-2 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors inline-flex items-center" 
+                   target="_blank" 
+                   rel="noopener"
+                   aria-label="${title} 명세서 새 창에서 열기">
+                    <i class="fas fa-file-pdf mr-2" aria-hidden="true"></i>명세서 보기
+                </a>
+            `;
+        }
 
         return `
-            <tr>
-                <td class="text-center text-muted">${index}</td>
-                <td>
-                    <code class="small">${this.escapeHtml(patent.patent_number)}</code>
-                </td>
-                <td>
-                    <div class="patent-title">
-                        ${this.highlightSearch(patent.title)}
+            <article class="patent-item ${categoryClass} border-l-4 bg-white p-4 rounded-lg shadow-sm hover:shadow-lg transition-all duration-300" 
+                     role="listitem" 
+                     data-patent-id="${this.escapeHtml(patent.id)}" 
+                     style="animation-delay: ${animationDelay};">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="flex-1">
+                        <div class="flex flex-wrap items-center gap-2 text-sm mb-2">
+                            <span class="patent-category ${badgeClass}">${categoryLabel}</span>
+                            <span class="status-badge ${statusClass}">${statusText}</span>
+                            <span class="patent-number">${patentNumber}</span>
+                        </div>
+                        <h4 class="mt-2 text-lg font-semibold text-gst-dark hover:text-gst-blue transition-colors cursor-pointer" 
+                            onclick="window.patentManager?.viewPatentDetail('${this.escapeHtml(patent.id)}')">
+                            ${title}
+                        </h4>
+                        <p class="text-sm text-gst-gray mt-2 line-clamp-2">${abstract}</p>
+                        <div class="mt-3 flex flex-wrap gap-4 text-xs text-gst-gray">
+                            <span><i class="fas fa-calendar-alt mr-1" aria-hidden="true"></i>${formattedDate}</span>
+                            <span><i class="fas fa-microchip mr-1" aria-hidden="true"></i>${technologyField}</span>
+                            <span><i class="fas fa-user mr-1" aria-hidden="true"></i>${inventors}</span>
+                        </div>
                     </div>
-                    ${patent.inventors.length > 0 ? `
-                        <small class="text-muted">
-                            <i class="fas fa-user me-1"></i>
-                            ${patent.inventors.slice(0, 2).join(', ')}
-                            ${patent.inventors.length > 2 ? ` 외 ${patent.inventors.length - 2}명` : ''}
-                        </small>
-                    ` : ''}
-                </td>
-                <td>
-                    <span class="badge bg-info">${patent.__categoryLabel}</span>
-                    ${patent.technology_field ? `
-                        <br><small class="text-muted">${this.escapeHtml(patent.technology_field)}</small>
-                    ` : ''}
-                </td>
-                <td>
-                    <span class="badge bg-${patent.__statusColor}">${patent.__statusLabel}</span>
-                </td>
-                <td class="text-muted small">${dateStr}</td>
-                <td class="text-center">
-                    ${patent.__hasPDF ? `
-                        <i class="fas fa-file-pdf text-danger" title="PDF 있음"></i>
-                    ` : `
-                        <i class="fas fa-file-pdf text-muted" title="PDF 없음"></i>
-                    `}
-                </td>
-                <td class="text-center">
-                    <button class="btn btn-sm btn-outline-primary" 
-                            onclick="patentManager.showDetail('${patent.id}')">
-                        <i class="fas fa-eye"></i>
-                    </button>
-                </td>
-            </tr>
+                    <div class="flex flex-col items-end gap-2 min-w-[140px]">
+                        <button type="button"
+                                class="text-sm px-4 py-2 bg-gst-blue text-white rounded-lg hover:bg-gst-dark transition-colors shadow-sm inline-flex items-center"
+                                onclick="window.patentManager?.viewPatentDetail('${this.escapeHtml(patent.id)}')"
+                                aria-label="${title} 상세보기">
+                            <i class="fas fa-eye mr-2" aria-hidden="true"></i>상세보기
+                        </button>
+                        ${pdfButton}
+                        <span class="time-indicator text-xs text-gst-gray mt-2" aria-label="등록 후 경과 시간">
+                            ${relativeTime}
+                        </span>
+                    </div>
+                </div>
+            </article>
         `;
     }
 
     /**
-     * 검색어 하이라이트
+     * 카테고리 CSS 클래스
      */
-    highlightSearch(text) {
-        if (!this.filters.search || !text) return this.escapeHtml(text);
-        
-        const query = this.escapeHtml(this.filters.search);
-        const escaped = this.escapeHtml(text);
-        const regex = new RegExp(`(${query})`, 'gi');
-        
-        return escaped.replace(regex, '<mark>$1</mark>');
+    getCategoryClass(category) {
+        const classes = {
+            'scrubber': 'border-red-500',
+            'chiller': 'border-blue-500',
+            'plasma': 'border-purple-500',
+            'temperature': 'border-orange-500',
+            'gas-treatment': 'border-green-500'
+        };
+        return classes[category] || 'border-gray-400';
+    }
+
+    /**
+     * 카테고리 배지 클래스
+     */
+    getCategoryBadgeClass(category) {
+        const classes = {
+            'scrubber': 'bg-red-50 text-red-700',
+            'chiller': 'bg-blue-50 text-blue-700',
+            'plasma': 'bg-purple-50 text-purple-700',
+            'temperature': 'bg-orange-50 text-orange-700',
+            'gas-treatment': 'bg-green-50 text-green-700'
+        };
+        return classes[category] || 'bg-gray-50 text-gray-700';
+    }
+
+    /**
+     * 상태 배지 클래스
+     */
+    getStatusBadgeClass(status) {
+        const classes = {
+            '등록': 'bg-green-100 text-green-800',
+            '포기': 'bg-gray-100 text-gray-800',
+            '출원': 'bg-blue-100 text-blue-800',
+            '거절': 'bg-red-100 text-red-800',
+            '취소': 'bg-yellow-100 text-yellow-800'
+        };
+        return classes[status] || 'bg-gray-100 text-gray-800';
+    }
+
+    /**
+     * 상대 시간 표시
+     */
+    getTimeAgo(date) {
+        if (!date || !(date instanceof Date)) return '';
+
+        const now = new Date();
+        const diffMs = now - date;
+        const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+        const diffYears = Math.floor(diffDays / 365);
+        const diffMonths = Math.floor(diffDays / 30);
+
+        if (diffYears > 0) return `${diffYears}년 전`;
+        if (diffMonths > 0) return `${diffMonths}개월 전`;
+        if (diffDays > 0) return `${diffDays}일 전`;
+        return '오늘';
+    }
+
+    /**
+     * 연도별 그룹 렌더링
+     */
+    renderYearGroups() {
+        if (!this.dom.yearGroups) return;
+
+        if (this.filteredPatents.length === 0) {
+            this.dom.yearGroups.innerHTML = `
+                <div class="px-6 py-6 text-sm text-gst-gray text-center">
+                    조건에 맞는 연도별 데이터가 없습니다.
+                </div>
+            `;
+            return;
+        }
+
+        // 연도별 그룹핑
+        const yearGroups = {};
+        this.filteredPatents.forEach(patent => {
+            const year = patent.__year;
+            if (year) {
+                if (!yearGroups[year]) yearGroups[year] = [];
+                yearGroups[year].push(patent);
+            }
+        });
+
+        // 최근 5년만 표시
+        const sortedYears = Object.keys(yearGroups)
+            .sort((a, b) => Number(b) - Number(a))
+            .slice(0, 5);
+
+        const groupsHTML = sortedYears.map(year => {
+            const patents = yearGroups[year]
+                .sort((a, b) => {
+                    const dateA = a.__registrationDate || new Date(0);
+                    const dateB = b.__registrationDate || new Date(0);
+                    return dateB - dateA;
+                })
+                .slice(0, 3); // 각 연도별 최대 3개
+
+            const itemsHTML = patents.map(patent => `
+                <li class="flex items-center justify-between py-2 border-b border-gray-200 last:border-b-0 hover:bg-gray-50 transition-colors cursor-pointer"
+                    onclick="window.patentManager?.viewPatentDetail('${this.escapeHtml(patent.id)}')">
+                    <span class="text-sm text-gst-dark font-medium truncate mr-2">
+                        ${this.escapeHtml(patent.title || '제목 정보 없음')}
+                    </span>
+                    <span class="text-xs text-gst-gray whitespace-nowrap">
+                        ${this.escapeHtml(patent.patent_number || '')}
+                    </span>
+                </li>
+            `).join('');
+
+            return `
+                <section class="border-t border-gray-200">
+                    <header class="bg-gst-dark text-white px-6 py-3 flex items-center justify-between">
+                        <span class="font-semibold">${year}년</span>
+                        <span class="text-sm">${yearGroups[year].length}건</span>
+                    </header>
+                    <div class="px-6 py-4">
+                        <ul>${itemsHTML}</ul>
+                    </div>
+                </section>
+            `;
+        }).join('');
+
+        this.dom.yearGroups.innerHTML = groupsHTML;
     }
 
     /**
      * HTML 이스케이프
      */
     escapeHtml(text) {
+        if (text === undefined || text === null) return '';
         const div = document.createElement('div');
-        div.textContent = text || '';
+        div.textContent = String(text);
         return div.innerHTML;
     }
 
     /**
-     * 상세보기 모달
+     * 특허 상세보기 (간단한 alert, 추후 모달로 개선 가능)
      */
-    showDetail(patentId) {
+    viewPatentDetail(patentId) {
         const patent = this.patents.find(p => p.id === patentId);
-        if (!patent) return;
+        if (!patent) {
+            alert('특허 정보를 찾을 수 없습니다.');
+            return;
+        }
 
-        const modal = new bootstrap.Modal(document.getElementById('patent-detail-modal') || this.createDetailModal());
-        this.renderDetailContent(patent);
-        modal.show();
-    }
+        // 간단한 상세 정보 표시 (추후 모달로 개선)
+        const info = [
+            `📋 특허번호: ${patent.patent_number || '미상'}`,
+            `📌 제목: ${patent.title || '제목 없음'}`,
+            `🏢 기술분야: ${patent.technology_field || '정보 없음'}`,
+            `📅 등록일: ${patent.registration_date ? new Date(patent.registration_date).toLocaleDateString('ko-KR') : '정보 없음'}`,
+            `👥 발명자: ${patent.inventors.join(', ') || '정보 없음'}`,
+            `📊 상태: ${patent.status || '미상'}`,
+            `⭐ 우선순위: ${patent.priority_score || 0}/10`,
+            `\n📝 요약:\n${patent.abstract || '요약 정보가 없습니다.'}`
+        ].join('\n');
 
-    /**
-     * 상세 모달 생성
-     */
-    createDetailModal() {
-        const modalHtml = `
-            <div class="modal fade" id="patent-detail-modal" tabindex="-1">
-                <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">특허 상세정보</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                        </div>
-                        <div class="modal-body" id="patent-detail-content"></div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        document.body.insertAdjacentHTML('beforeend', modalHtml);
-        return document.getElementById('patent-detail-modal');
-    }
-
-    /**
-     * 상세 내용 렌더링
-     */
-    renderDetailContent(patent) {
-        const content = document.getElementById('patent-detail-content');
-        if (!content) return;
-
-        content.innerHTML = `
-            <div class="row g-4">
-                <div class="col-md-8">
-                    <h4 class="border-bottom pb-2 mb-3">
-                        ${this.escapeHtml(patent.title)}
-                    </h4>
-                    
-                    <div class="mb-4">
-                        <h6 class="text-muted mb-2">기본 정보</h6>
-                        <table class="table table-sm">
-                            <tr>
-                                <th style="width: 150px">특허번호</th>
-                                <td><code>${this.escapeHtml(patent.patent_number)}</code></td>
-                            </tr>
-                            <tr>
-                                <th>카테고리</th>
-                                <td>${patent.__categoryLabel}</td>
-                            </tr>
-                            <tr>
-                                <th>기술분류</th>
-                                <td>${this.escapeHtml(patent.technology_field)}</td>
-                            </tr>
-                            <tr>
-                                <th>상태</th>
-                                <td><span class="badge bg-${patent.__statusColor}">${patent.__statusLabel}</span></td>
-                            </tr>
-                            <tr>
-                                <th>등록일</th>
-                                <td>${patent.registration_date ? new Date(patent.registration_date).toLocaleDateString('ko-KR') : '-'}</td>
-                            </tr>
-                            <tr>
-                                <th>출원일</th>
-                                <td>${patent.application_date ? new Date(patent.application_date).toLocaleDateString('ko-KR') : '-'}</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    ${patent.abstract ? `
-                        <div class="mb-4">
-                            <h6 class="text-muted mb-2">요약</h6>
-                            <p class="text-justify">${this.escapeHtml(patent.abstract)}</p>
-                        </div>
-                    ` : ''}
-
-                    ${patent.inventors.length > 0 ? `
-                        <div class="mb-4">
-                            <h6 class="text-muted mb-2">발명자</h6>
-                            <div class="d-flex flex-wrap gap-2">
-                                ${patent.inventors.map(inv => `
-                                    <span class="badge bg-secondary">${this.escapeHtml(inv)}</span>
-                                `).join('')}
-                            </div>
-                        </div>
-                    ` : ''}
-
-                    ${patent.technical_keywords.length > 0 ? `
-                        <div class="mb-4">
-                            <h6 class="text-muted mb-2">기술 키워드</h6>
-                            <div class="d-flex flex-wrap gap-2">
-                                ${patent.technical_keywords.map(kw => `
-                                    <span class="badge bg-info">${this.escapeHtml(kw)}</span>
-                                `).join('')}
-                            </div>
-                        </div>
-                    ` : ''}
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h6 class="mb-0">통계</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="mb-3">
-                                <small class="text-muted d-block">우선순위 점수</small>
-                                <div class="progress" style="height: 20px">
-                                    <div class="progress-bar" style="width: ${patent.priority_score * 10}%">
-                                        ${patent.priority_score}/10
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <small class="text-muted d-block">페이지 수</small>
-                                <h5>${patent.page_count || 0} 페이지</h5>
-                            </div>
-                            ${patent.__hasPDF ? `
-                                <div class="mb-3">
-                                    <small class="text-muted d-block">PDF 원문</small>
-                                    <button class="btn btn-sm btn-danger w-100">
-                                        <i class="fas fa-file-pdf me-1"></i>
-                                        PDF 보기
-                                    </button>
-                                </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        alert(info);
+        
+        // PDF가 있으면 링크 제공
+        if (patent.source_path || patent.file_path) {
+            const openPDF = confirm('\nPDF 명세서를 새 창에서 여시겠습니까?');
+            if (openPDF) {
+                window.open(patent.source_path || patent.file_path, '_blank');
+            }
+        }
     }
 
     /**
      * 페이지네이션 UI 업데이트
      */
     updatePaginationUI() {
-        const start = (this.currentPage - 1) * this.itemsPerPage + 1;
+        const start = this.filteredPatents.length > 0 ? 
+            (this.currentPage - 1) * this.itemsPerPage + 1 : 0;
         const end = Math.min(start + this.itemsPerPage - 1, this.filteredPatents.length);
 
-        if (this.dom.totalCount) this.dom.totalCount.textContent = this.filteredPatents.length;
-        if (this.dom.startCount) this.dom.startCount.textContent = start;
-        if (this.dom.endCount) this.dom.endCount.textContent = end;
+        if (this.dom.totalCount) {
+            this.dom.totalCount.textContent = this.filteredPatents.length;
+        }
+        if (this.dom.startCount) {
+            this.dom.startCount.textContent = start;
+        }
+        if (this.dom.endCount) {
+            this.dom.endCount.textContent = end;
+        }
 
         if (this.dom.prevPage) {
             this.dom.prevPage.disabled = this.currentPage <= 1;
+            this.dom.prevPage.setAttribute('aria-disabled', this.currentPage <= 1 ? 'true' : 'false');
         }
+        
         if (this.dom.nextPage) {
             this.dom.nextPage.disabled = this.currentPage >= this.totalPages;
+            this.dom.nextPage.setAttribute('aria-disabled', this.currentPage >= this.totalPages ? 'true' : 'false');
         }
+
+        if (this.dom.pageSize && String(this.itemsPerPage) !== this.dom.pageSize.value) {
+            this.dom.pageSize.value = String(this.itemsPerPage);
+        }
+    }
+
+    /**
+     * 결과 카운트 업데이트
+     */
+    updateResultCount() {
+        const total = this.filteredPatents.length;
+        const start = total > 0 ? (this.currentPage - 1) * this.itemsPerPage + 1 : 0;
+        const end = Math.min(this.currentPage * this.itemsPerPage, total);
+
+        if (this.dom.totalCount) this.dom.totalCount.textContent = total;
+        if (this.dom.startCount) this.dom.startCount.textContent = start;
+        if (this.dom.endCount) this.dom.endCount.textContent = end;
     }
 
     /**
      * 이벤트 바인딩
      */
     bindEvents() {
-        // 검색
+        // 검색 버튼
         if (this.dom.searchButton) {
             this.dom.searchButton.addEventListener('click', () => {
-                this.filters.search = this.dom.searchInput?.value || '';
+                this.filters.search = this.dom.searchInput?.value.trim() || '';
                 this.applyFilters();
             });
         }
 
+        // 검색 입력 (Enter 키)
         if (this.dom.searchInput) {
             this.dom.searchInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    this.filters.search = e.target.value;
+                    this.filters.search = e.target.value.trim();
+                    this.applyFilters();
+                }
+            });
+
+            // 실시간 검색 (선택사항)
+            this.dom.searchInput.addEventListener('input', (e) => {
+                if (e.target.value.trim().length === 0) {
+                    this.filters.search = '';
                     this.applyFilters();
                 }
             });
         }
 
-        // 리셋
+        // 리셋 버튼
         if (this.dom.resetButton) {
             this.dom.resetButton.addEventListener('click', () => {
                 this.resetFilters();
             });
         }
 
-        // 필터
+        // 카테고리 필터
         if (this.dom.categoryFilter) {
             this.dom.categoryFilter.addEventListener('change', (e) => {
                 this.filters.category = e.target.value;
@@ -676,6 +798,7 @@ class PatentManager {
             });
         }
 
+        // 상태 필터
         if (this.dom.statusFilter) {
             this.dom.statusFilter.addEventListener('change', (e) => {
                 this.filters.status = e.target.value;
@@ -683,31 +806,41 @@ class PatentManager {
             });
         }
 
-        // 페이지네이션
+        // 이전 페이지
         if (this.dom.prevPage) {
             this.dom.prevPage.addEventListener('click', () => {
                 if (this.currentPage > 1) {
                     this.currentPage--;
-                    this.renderTable();
+                    this.renderPatentCards();
                     this.updatePaginationUI();
+                    this.saveStateToURL();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
         }
 
+        // 다음 페이지
         if (this.dom.nextPage) {
             this.dom.nextPage.addEventListener('click', () => {
                 if (this.currentPage < this.totalPages) {
                     this.currentPage++;
-                    this.renderTable();
+                    this.renderPatentCards();
                     this.updatePaginationUI();
+                    this.saveStateToURL();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
         }
 
+        // 페이지 크기 변경
         if (this.dom.pageSize) {
             this.dom.pageSize.addEventListener('change', (e) => {
-                this.itemsPerPage = parseInt(e.target.value) || 20;
-                this.applyFilters();
+                this.itemsPerPage = parseInt(e.target.value) || 10;
+                this.currentPage = 1;
+                this.calculatePagination();
+                this.renderPatentCards();
+                this.updatePaginationUI();
+                this.saveStateToURL();
             });
         }
     }
@@ -719,15 +852,16 @@ class PatentManager {
         this.filters = {
             search: '',
             category: '',
-            status: '',
-            hasDF: false
+            status: ''
         };
 
         if (this.dom.searchInput) this.dom.searchInput.value = '';
         if (this.dom.categoryFilter) this.dom.categoryFilter.value = '';
         if (this.dom.statusFilter) this.dom.statusFilter.value = '';
 
+        this.currentPage = 1;
         this.applyFilters();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     /**
@@ -779,10 +913,14 @@ class PatentManager {
      */
     showLoading(show) {
         if (this.dom.loading) {
-            this.dom.loading.style.display = show ? 'block' : 'none';
+            this.dom.loading.classList.toggle('hidden', !show);
+            this.dom.loading.setAttribute('aria-hidden', show ? 'false' : 'true');
         }
-        if (this.dom.listContainer) {
-            this.dom.listContainer.style.display = show ? 'none' : 'block';
+        if (this.dom.listContainer && show) {
+            this.dom.listContainer.classList.add('hidden');
+        }
+        if (this.dom.emptyState && show) {
+            this.dom.emptyState.classList.add('hidden');
         }
     }
 
@@ -790,8 +928,12 @@ class PatentManager {
      * 빈 상태 표시
      */
     showEmpty() {
-        if (this.dom.listContainer) this.dom.listContainer.style.display = 'none';
-        if (this.dom.emptyState) this.dom.emptyState.style.display = 'block';
+        if (this.dom.listContainer) {
+            this.dom.listContainer.classList.add('hidden');
+        }
+        if (this.dom.emptyState) {
+            this.dom.emptyState.classList.remove('hidden');
+        }
     }
 
     /**
@@ -800,12 +942,33 @@ class PatentManager {
     showError(message) {
         if (this.dom.listContainer) {
             this.dom.listContainer.innerHTML = `
-                <div class="alert alert-danger">
-                    <i class="fas fa-exclamation-triangle me-2"></i>
-                    ${message}
+                <div class="bg-red-50 border-l-4 border-red-500 text-red-900 px-4 py-3 rounded" role="alert">
+                    <div class="flex">
+                        <div class="flex-shrink-0">
+                            <i class="fas fa-exclamation-triangle text-red-500" aria-hidden="true"></i>
+                        </div>
+                        <div class="ml-3">
+                            <p class="text-sm font-medium">${message}</p>
+                        </div>
+                    </div>
                 </div>
             `;
+            this.dom.listContainer.classList.remove('hidden');
         }
+    }
+
+    /**
+     * 데이터 준비 완료 이벤트
+     */
+    notifyDataReady() {
+        window.dispatchEvent(new CustomEvent('patents-data-ready', {
+            detail: {
+                patents: this.patents,
+                stats: this.stats,
+                manager: this
+            }
+        }));
+        console.log('📢 patents-data-ready 이벤트 발생');
     }
 
     /**
@@ -816,15 +979,17 @@ class PatentManager {
     }
 
     /**
-     * 데이터 변경 알림
+     * 전체 특허 데이터 조회
      */
-    notifyDataReady() {
-        window.dispatchEvent(new CustomEvent('patents-data-ready', {
-            detail: {
-                patents: this.patents,
-                stats: this.stats
-            }
-        }));
+    getAllPatents() {
+        return this.patents;
+    }
+
+    /**
+     * 필터링된 특허 데이터 조회
+     */
+    getFilteredPatents() {
+        return this.filteredPatents;
     }
 }
 
@@ -833,5 +998,6 @@ window.patentManager = null;
 
 // DOM 로드 후 초기화
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 PatentManager 초기화 시작...');
     window.patentManager = new PatentManager();
 });
