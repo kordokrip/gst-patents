@@ -63,10 +63,13 @@ export async function onRequest(context) {
   try {
     // API 라우팅
     if (path.startsWith('/api/patents')) {
+      console.log('📡 API 요청:', path, request.method);
       return handlePatentsAPI(request, env, corsHeaders);
     } else if (path.startsWith('/api/search')) {
+      console.log('🔍 검색 API 요청:', path);
       return handleSearchAPI(request, env, corsHeaders);
     } else if (path.startsWith('/api/stats')) {
+      console.log('📊 통계 API 요청:', path);
       return handleStatsAPI(request, env, corsHeaders);
     } else if (path.startsWith('/api/auth')) {
       return handleAuthAPI(request, env, corsHeaders);
@@ -79,7 +82,12 @@ export async function onRequest(context) {
     // 다른 요청은 다음 핸들러로 전달
     return next();
   } catch (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
+    console.error('❌ Middleware 에러:', error);
+    return new Response(JSON.stringify({ 
+      error: error.message,
+      stack: error.stack,
+      timestamp: new Date().toISOString()
+    }), {
       status: 500,
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     });

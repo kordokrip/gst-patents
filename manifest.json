@@ -2,7 +2,7 @@
   "name": "GST 특허관리시스템",
   "short_name": "GST Patents",
   "description": "글로벌 스탠다드 테크놀로지의 반도체 유해가스 정화장비 특허 관리 및 분석 시스템",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait-primary",

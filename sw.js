@@ -3,9 +3,9 @@
  * Cloudflare 배포 최적화 및 오프라인 지원
  */
 
-const CACHE_NAME = 'gst-patents-v3.1.0';
-const STATIC_CACHE = 'gst-static-v3.1.0';
-const DYNAMIC_CACHE = 'gst-dynamic-v3.1.0';
+const CACHE_NAME = 'gst-patents-v3.2.0';
+const STATIC_CACHE = 'gst-static-v3.2.0';
+const DYNAMIC_CACHE = 'gst-dynamic-v3.2.0';
 
 // 캐시할 정적 리소스
 const STATIC_ASSETS = [

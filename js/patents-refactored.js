@@ -80,24 +80,37 @@ class PatentManager {
      * 특허 데이터 로딩 (D1 우선, JSON 폴백)
      */
     async loadPatents() {
+        console.log('🔄 특허 데이터 로딩 시작...');
+        
         try {
             // 1️⃣ D1 API 우선 시도 (190개 특허 + 신규 필드)
+            console.log('📡 D1 API 호출 중: /api/patents?limit=1000');
             const response = await fetch('/api/patents?limit=1000');
-            if (!response.ok) throw new Error(`D1 API 실패: ${response.status}`);
+            
+            console.log('📥 D1 응답 상태:', response.status, response.statusText);
+            
+            if (!response.ok) {
+                throw new Error(`D1 API 실패: ${response.status} ${response.statusText}`);
+            }
             
             const data = await response.json();
+            console.log('📦 D1 응답 데이터:', data);
+            
             this.patents = this.normalizePatents(data.data || data);
             this.dataSource = 'd1';
-            console.log('📊 D1 로드 완료:', this.patents.length, '개');
+            console.log('✅ D1 로드 완료:', this.patents.length, '개');
             
             // 데이터 소스 표시 업데이트
             this.updateDataSourceIndicator('d1', this.patents.length);
+            
+            return; // 성공 시 즉시 반환
             
         } catch (error) {
             console.warn('⚠️ D1 로드 실패, 로컬 JSON 폴백:', error);
             
             try {
                 // 2️⃣ 로컬 JSON 폴백
+                console.log('📡 로컬 JSON 호출 중: /db/patents_data.json');
                 const response = await fetch('/db/patents_data.json');
                 if (!response.ok) throw new Error('JSON 로드 실패');
                 
