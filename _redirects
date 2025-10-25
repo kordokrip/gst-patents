@@ -1,26 +1,27 @@
 # Cloudflare Pages Redirects Configuration
 # GST Patent Management System
 
-# SPA Routing - Redirect all non-existent routes to index.html
-# But preserve API routes and static assets
+# IMPORTANT: Order matters! More specific rules must come FIRST
 
-# API Routes (preserve these)
-/tables/*  /tables/:splat  200
-/api/*     /api/:splat     200
-
-# Static assets (preserve these)
-/css/*     /css/:splat     200
-/js/*      /js/:splat      200  
-/images/*  /images/:splat  200
-/assets/*  /assets/:splat  200
-/fonts/*   /fonts/:splat   200
-
-# Specific files (preserve these)
+# Specific static files (highest priority)
 /sw.js          /sw.js          200
 /manifest.json  /manifest.json  200
 /favicon.ico    /favicon.ico    200
 /robots.txt     /robots.txt     200
 /sitemap.xml    /sitemap.xml    200
+
+# API Routes
+/tables/*  /tables/:splat  200
+/api/*     /api/:splat     200
+
+# Static asset directories (MUST preserve exact paths)
+/css/*     /css/:splat     200!
+/js/*      /js/:splat      200!
+/images/*  /images/:splat  200!
+/assets/*  /assets/:splat  200!
+/fonts/*   /fonts/:splat   200!
+/data/*    /data/:splat    200!
+/db/*      /db/:splat      200!
 
 # Documentation pages
 /pages/*  /pages/:splat  200
@@ -29,13 +30,13 @@
 /index.html   /             301
 /home         /             301
 
-# Legacy URL redirects (if needed)
+# Legacy URL redirects
 /patent/*     /#patents       301
 /search       /#patents       301
 /docs/*       /pages/:splat   301
 
-# Remove trailing slashes
-/*/ /:splat 301
+# Remove trailing slashes (before catch-all)
+/*/ /:splat 301!
 
 # HTTPS redirect (for custom domains)
 http://gst-patents.pages.dev/* https://gst-patents.pages.dev/:splat 301!
