@@ -4,29 +4,33 @@ compatibility_date = "2025-01-24"
 # Cloudflare Pages 연동
 pages_build_output_dir = "./"
 
-# D1 데이터베이스 바인딩
+# D1 데이터베이스 바인딩 (전역)
 [[d1_databases]]
 binding = "DB"
 database_name = "gst_patents_db"
 database_id = "3497fe7d-998f-4f1c-8bc4-912eb4b05028"
 migrations_dir = "migrations"
 
-# KV 네임스페이스 (캐싱용, 선택사항)
-[[kv_namespaces]]
-binding = "CACHE"
-id = "YOUR_KV_ID"  # 선택사항
-
-# 환경 변수
+# 환경 변수 (전역)
 [vars]
 ENVIRONMENT = "production"
 
 # Production 환경
 [env.production]
-vars = { DOMAIN = "gst-patents.com" }
+vars = { DOMAIN = "gst-patents.com", ENVIRONMENT = "production" }
+
+# Production 환경에 D1 바인딩 명시적 추가
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "gst_patents_db"
+database_id = "3497fe7d-998f-4f1c-8bc4-912eb4b05028"
 
 # Preview 환경
 [env.preview]
-vars = { DOMAIN = "preview.gst-patents.pages.dev" }
+vars = { DOMAIN = "preview.gst-patents.pages.dev", ENVIRONMENT = "preview" }
 
-globs = ["**/*.js", "**/*.html", "**/*.css", "**/*.json"]
-fallthrough = false
+# Preview 환경에 D1 바인딩 명시적 추가
+[[env.preview.d1_databases]]
+binding = "DB"
+database_name = "gst_patents_db"
+database_id = "3497fe7d-998f-4f1c-8bc4-912eb4b05028"
