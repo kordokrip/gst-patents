@@ -10,7 +10,7 @@ pages_build_output_dir = "./"
 [[d1_databases]]
 binding = "DB"
 database_name = "gst_patents_db"
-database_id = "YOUR_DATABASE_ID"  # wrangler d1 create 후 여기에 입력
+database_id = "3497fe7d-998f-4f1c-8bc4-912eb4b05028"
 migrations_dir = "migrations"
 
 # KV 네임스페이스 (캐싱용, 선택사항)
