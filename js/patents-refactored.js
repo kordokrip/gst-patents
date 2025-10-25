@@ -77,32 +77,57 @@ class PatentManager {
     }
 
     /**
-     * 특허 데이터 로딩 (JSON 우선, D1 폴백)
+     * 특허 데이터 로딩 (D1 우선, JSON 폴백)
      */
     async loadPatents() {
         try {
-            // 로컬 JSON 시도
-            const response = await fetch('/db/patents_data.json');
-            if (!response.ok) throw new Error('JSON 로드 실패');
+            // 1️⃣ D1 API 우선 시도 (190개 특허 + 신규 필드)
+            const response = await fetch('/api/patents?limit=1000');
+            if (!response.ok) throw new Error(`D1 API 실패: ${response.status}`);
             
             const data = await response.json();
-            this.patents = this.normalizePatents(data);
-            this.dataSource = 'local';
-            console.log('📊 로컬 JSON 로드 완료:', this.patents.length, '개');
+            this.patents = this.normalizePatents(data.data || data);
+            this.dataSource = 'd1';
+            console.log('📊 D1 로드 완료:', this.patents.length, '개');
+            
+            // 데이터 소스 표시 업데이트
+            this.updateDataSourceIndicator('d1', this.patents.length);
+            
         } catch (error) {
-            console.warn('⚠️ 로컬 JSON 실패, D1 시도:', error);
+            console.warn('⚠️ D1 로드 실패, 로컬 JSON 폴백:', error);
             
             try {
-                // D1 API 폴백
-                const response = await fetch('/api/patents?limit=1000');
+                // 2️⃣ 로컬 JSON 폴백
+                const response = await fetch('/db/patents_data.json');
+                if (!response.ok) throw new Error('JSON 로드 실패');
+                
                 const data = await response.json();
-                this.patents = this.normalizePatents(data.data || data);
-                this.dataSource = 'd1';
-                console.log('📊 D1 로드 완료:', this.patents.length, '개');
-            } catch (d1Error) {
-                console.error('❌ D1도 실패:', d1Error);
+                this.patents = this.normalizePatents(data);
+                this.dataSource = 'local';
+                console.log('📊 로컬 JSON 로드 완료:', this.patents.length, '개');
+                
+                // 데이터 소스 표시 업데이트
+                this.updateDataSourceIndicator('local', this.patents.length);
+                
+            } catch (jsonError) {
+                console.error('❌ JSON도 실패:', jsonError);
                 throw new Error('모든 데이터 소스 실패');
             }
+        }
+    }
+
+    /**
+     * 데이터 소스 표시 업데이트
+     */
+    updateDataSourceIndicator(source, count) {
+        const indicator = document.getElementById('data-source-indicator');
+        if (indicator) {
+            const sourceLabels = {
+                'd1': '☁️ Cloudflare D1',
+                'local': '💾 로컬 JSON'
+            };
+            indicator.textContent = `${sourceLabels[source]} (${count}개)`;
+            indicator.className = source === 'd1' ? 'text-green-600 font-semibold' : 'text-blue-600';
         }
     }
 
